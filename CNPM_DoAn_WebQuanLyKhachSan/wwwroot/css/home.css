@@ -1,0 +1,293 @@
+﻿/* ------------------------ Body ------------------------ */
+/* Body: chung */
+.body-container {
+    padding: 0 15px;
+}
+
+.body-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+/* Body image */
+.body__image {
+    background-image: url(../../images/header/slider-2.jpg);
+    width: 100%;
+    height: 700px;
+    background-position: center;
+    background-size: cover;
+}
+
+.image__room-lookup-container {
+    flex: 1;
+}
+
+/* Tra cứu phòng */
+.image__room-lookup {
+    width: 380px;
+    height: 564px;
+    padding: 20px 20px;
+    background-color: var(--primary-color);
+    float: right;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.image__room-lookup-title {
+    color: var(--white-color);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-align: center;
+    font-size: 2.6rem;
+}
+
+.image__room-lookup-form {
+}
+
+.image__room-lookup-item {
+    color: var(--white-color);
+    padding: 5px 5px 14px 5px;
+}
+
+.image__room-lookup-label {
+    font-size: 1.44rem;
+    font-weight: bold;
+    display: block;
+    margin: 0 0 8px;
+}
+
+.image__room-lookup-input {
+    width: 100%;
+    padding: 10px 12px;
+    outline: 0;
+    border: 1px solid var(--white-color);
+    background-color: transparent;
+    color: var(--white-color);
+    font-size: 1.6rem;
+}
+
+.image__room-lookup-button {
+    text-align: center;
+    padding: 14px;
+}
+
+.image__room-lookup-btn {
+    width: 160px;
+    background-color: #242424;
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: none;
+    text-transform: uppercase;
+}
+
+/* Hiện thị tìm kiếm */
+.image__room-lookup-display {
+    flex: 2;
+    background-color: var(--white-color);
+}
+
+/* Body: dịch vụ */
+.body__service {
+    background-color: var(--white-color);
+}
+
+.service__content {
+    padding: 0 15px 30px;
+    width: 820px;
+    text-align: center;
+}
+
+.service__content-title {
+    font-size: 3.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+    .service__content-title span {
+        color: var(--primary-color);
+    }
+
+.service__content-text {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-bottom: 21px;
+}
+
+.service__image {
+    padding-bottom: 30px;
+}
+
+.service__image-item {
+    position: relative;
+    height: 314px;
+}
+
+.service__image-img {
+    width: 100%;
+    height: 100%;
+}
+
+.service__image-name {
+    position: absolute;
+    color: var(--white-color);
+    font-weight: bold;
+    font-size: 2.3rem;
+    bottom: 22.5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Body: room */
+.body-room {
+    background-color: #F6F6F6;
+}
+
+.room__content {
+    display: flex;
+    padding-bottom: 30px;
+    justify-content: space-between;
+}
+
+.room__content-title h1 {
+    font-size: 3.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+    .room__content-title h1 span {
+        color: var(--primary-color);
+    }
+
+.room__content-title p {
+    color: var(--gray89-color);
+    font-size: 1.6rem;
+    margin-bottom: 21px;
+}
+
+.room__content-button {
+    padding: 15px;
+}
+
+.room__content-link {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.8rem;
+    padding: 14px 22px;
+}
+
+.room__container {
+    padding-bottom: 30px;
+}
+
+.room__container-item {
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.2);
+}
+
+.room__container-img {
+    width: 100%;
+    height: 303px;
+    display: block;
+}
+
+.room__container-info {
+    padding: 44px 29px;
+}
+
+.room__container-info-name {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    color: var(--heading-color);
+    margin-bottom: 12px;
+    position: relative;
+}
+
+    .room__container-info-name::after {
+        position: absolute;
+        display: inline-block;
+        content: "";
+        width: 53px;
+        height: 2.5px;
+        bottom: -10px;
+        left: 7px;
+        background-color: #ede9e9;
+    }
+
+.room__container-info-expense {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+}
+
+    .room__container-info-expense p {
+        font-size: 1.92rem;
+        color: var(--gray89-color);
+    }
+
+.room__container-info-price {
+    color: var(--black-color);
+    font-weight: bold;
+}
+
+/* Body banner */
+.body__banner {
+    line-height: 1.4;
+}
+
+.banner-img {
+    --height-banner-img: 400px;
+    background-image: url(../../images/banner/banner.png);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: var(--height-banner-img);
+}
+
+.banner-img-text {
+    text-align: center;
+    color: var(--white-color);
+    width: 820px;
+}
+
+    .banner-img-text h1 {
+        font-size: 4.64rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 10px 0;
+    }
+
+    .banner-img-text p {
+        font-size: 1.6rem;
+        margin: 16px 0;
+    }
+
+.banner-content {
+    background-color: var(--primary-color);
+    padding: 30px 0;
+}
+
+.banner-content__list {
+}
+
+.banner-content__list-item {
+    text-align: center;
+    color: var(--white-color);
+}
+
+    .banner-content__list-item span {
+        font-size: 4.8rem;
+        font-weight: bold;
+    }
+
+    .banner-content__list-item p {
+        font-size: 1.9rem;
+    }

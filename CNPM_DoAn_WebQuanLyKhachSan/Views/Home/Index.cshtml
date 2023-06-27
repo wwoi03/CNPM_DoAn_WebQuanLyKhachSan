@@ -1,0 +1,248 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+     Layout = "~/Views/Shared/_HeaderFooterLayout.cshtml";
+}
+
+<body class="body">
+    <!-- Body: image -->
+    <div class="body__image">
+        <div class="grid wide">
+            <div class="body-container">
+                <!-- Tra cứu phòng -->
+                <div class="image__room-lookup">
+                    <div class="image__room-lookup-container">
+                        <h1 class="image__room-lookup-title">
+                            Tra cứu phòng
+                        </h1>
+        
+                        <div class="image__room-lookup-form">
+                            <div class="image__room-lookup-item">
+                                <label for="room-type" class="image__room-lookup-label">Loại phòng</label>
+                                <input placeholder="__" id="room-type" name="" type="" class="image__room-lookup-input">
+                            </div>
+        
+                            <div class="image__room-lookup-item">
+                                <label for="bed-number" class="image__room-lookup-label">Số giường</label>
+                                <input placeholder="__" id="bed-number" name="bedNumber" type="number" class="image__room-lookup-input">
+                            </div>
+    
+                                        
+                            <div class="image__room-lookup-button image__room-lookup-item">
+                                <button class="image__room-lookup-btn btn-hover">
+                                    Tra cứu
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="image__room-lookup-display"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body: dịch vụ -->
+    <div class="body__service">
+        <div class="grid wide">
+            <div class="body-container">
+                <div class="body-content">
+                    <!-- service content -->
+                    <div class="service__content">
+                        <h1 class="service__content-title">
+                            <span>Dịch vụ </span>
+                            Hấp dẫn
+                        </h1>
+    
+                        <p class="service__content-text">
+                            Đến với Khu nghỉ dưỡng Premier Village Mona Media, quý khách sẽ được trải 
+                            nghiệm dịch vụ Spa cao cấp, trung tâm thể hình hiện đại và các hoạt động 
+                            giải trí trên biển
+                        </p> 
+                    </div>
+                </div>
+
+                <!-- service image -->
+                <div class="service__image row">
+                    <div class="col l-4 service__image-item">
+                        <img class="service__image-img img-hover-brightness" src="../../images/service/service-1.jpg" alt="">
+
+                        <h2 class="service__image-name">
+                            Nhà hàng
+                        </h2>
+                    </div>
+
+                    <div class="col l-4 service__image-item">
+                        <img class="service__image-img img-hover-brightness" src="../../images/service/service-2.jpg" alt="">
+
+                        <h2 class="service__image-name">
+                            Spa & Massage
+                        </h2>
+                    </div>
+
+                    <div class="col l-4 service__image-item">
+                        <img class="service__image-img img-hover-brightness" src="../../images/service/service-3.jpg" alt="">
+
+                        <h2 class="service__image-name">
+                            Dù lượn
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gap-element-50"></div>
+    </div>
+
+    <!-- Body: phòng -->
+    <div class="body-room">
+        <div class="gap-element-70"></div>
+
+        <div class="grid wide">
+            <div class="body-container">
+                <!-- room content -->
+                <div class="room__content">
+                    <div class="room__content-title">
+                        <h1>
+                            <span>Phòng nghỉ </span> Hiện đại
+                        </h1>
+
+                        <p>Chọn phòng phù hợp với bạn</p>
+                    </div>
+
+                    <div class="room__content-button">
+                        <a class="room__content-link btn-hover" href="">Xem tất cả</a>
+                    </div>
+                </div> 
+
+                <!-- room container -->
+                <div class="room__container row">
+                    <div class="col l-4">
+                        <div class="room__container-item">
+                            <div class="overflow-hidden">
+                                <img class="room__container-img img-hover-zoom" src="../../images/room/room-1.jpg" alt="">
+                            </div>
+                                        
+                            <div class="room__container-info">
+                                <h3 class="room__container-info-name">Silver room</h3>
+    
+                                <div class="room__container-info-expense">
+                                    <p>
+                                        Giá: <span class="room__container-info-price">$50</span> / 1 đêm
+                                    </p>
+    
+                                    <div class="room__container-button">
+                                        <a class="btn-primary btn-hover" href="">
+                                            <span>Xem chi tiết</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col l-4">
+                        <div class="room__container-item">
+                            <div class="overflow-hidden">
+                                <img class="room__container-img img-hover-zoom" src="../../images/room/room-2.jpg" alt="">
+                            </div>
+                                        
+                            <div class="room__container-info">
+                                <h3 class="room__container-info-name">Silver room</h3>
+    
+                                <div class="room__container-info-expense">
+                                    <p>
+                                        Giá: <span class="room__container-info-price">$50</span> / 1 đêm
+                                    </p>
+    
+                                    <div class="room__container-button">
+                                        <a class="btn-primary btn-hover" href="">
+                                            <span>Xem chi tiết</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col l-4">
+                        <div class="room__container-item">
+                            <div class="overflow-hidden">
+                                <img class="room__container-img img-hover-zoom" src="../../images/room/room-3.jpg" alt="" />
+                            </div>
+                                        
+                            <div class="room__container-info">
+                                <h3 class="room__container-info-name">Silver room</h3>
+    
+                                <div class="room__container-info-expense">
+                                    <p>
+                                        Giá: <span class="room__container-info-price">$50</span> / 1 đêm
+                                    </p>
+    
+                                    <div class="room__container-button">
+                                        <a class="btn-primary btn-hover" href="">
+                                            <span>Xem chi tiết</span>
+                                        </a>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="gap-element-50"></div>
+    </div>
+                
+    <!-- Body: banner -->
+    <div class="body__banner">
+        <!-- banner: hình ảnh -->
+        <div class="banner-img">
+            <div class="grid wide height-full">
+                <div class="body-container f-d-flex f-j-center f-a-center height-full">
+                    <div class="banner-img-text">
+                        <h1>
+                            Thiên đường nghỉ dưỡng
+                        </h1>
+    
+                        <p>
+                            Quý khách sẽ được ngắm ánh bình minh và chiều hoàng hôn trên bãi biển của khu nghỉ dưỡng, và tận hưởng những tiện nghi sang trọng bậc nhất tại đây. Đến với Khu nghỉ dưỡng Premier Village Đà Nẵng, quý khách sẽ được trải nghiệm dịch vụ Spa cao cấp, trung tâm thể hình hiện đại và các hoạt động giải trí trên biển.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- banner: thông số khách sạn và đánh giá -->
+        <div class="banner-content">
+            <div class="grid wide">
+                <div class="row body-container banner-content__list">
+                    <div class="col l-3 banner-content__list-item">
+                        <span>712</span>
+
+                        <p>Khách mời</p>
+                    </div>
+
+                    <div class="col l-3 banner-content__list-item">
+                        <span>254</span>
+
+                        <p>Khách quốc tế</p>
+                    </div>
+
+                    <div class="col l-3 banner-content__list-item">
+                        <span>430</span>
+
+                        <p>Đánh giá 5 sao</p>
+                    </div>
+
+                    <div class="col l-3 banner-content__list-item">
+                        <span>50</span>
+
+                        <p>Nhân viên phục vụ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

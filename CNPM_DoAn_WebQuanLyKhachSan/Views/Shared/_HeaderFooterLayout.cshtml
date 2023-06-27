@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Del Luna</title>
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="~/css/grid.css">
+    <link rel="stylesheet" href="~/css/base.css">
+    <link rel="stylesheet" href="~/font/fontawesome-free-6.4.0-web/fontawesome-free-6.4.0-web/css/all.css">
+    <link rel="stylesheet" href="~/css/header_main.css">
+    <link rel="stylesheet" href="~/css/footer_main.css">
+    <link rel="stylesheet" href="~/css/home.css">
+</head>
+<body>
+    <div class="main">
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="grid wide">
+                    <div class="header-container">
+                        <!-- Header liên hệ -->
+                        <div class="header-content header-contact">
+                            <ul class="header__list">
+                                <!-- Số điện thoại -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-solid fa-phone header__list-icon"></i>
+                                        <span>0909 900 009</span>
+                                    </a>
+                                </li>
+
+                                <!-- Email -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-regular fa-envelope header__list-icon"></i>
+                                        <span>tuandao8826848@gmail.com</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="header__list header__list-icon-light-color">
+                                <!-- Facebook -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-brands fa-facebook-f header__list-icon"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Twitter -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-brands fa-twitter header__list-icon"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Pinterest -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-brands fa-pinterest header__list-icon"></i>
+                                    </a>
+                                </li>
+
+                                <!-- LinkedIn -->
+                                <li class="header__list-item">
+                                    <a href="" class="header__list-link">
+                                        <i class="fa-brands fa-linkedin header__list-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Header mục lục -->
+                        <div class="header-content header-page">
+                            <div class="grid wide">
+                                <div class="header-content">
+                                    <!-- image -->
+                                    <div class="header__img f-d-flex f-a-center">
+                                        <img src="../../images/logo.png" alt="">
+                                    </div>
+        
+                                    <!-- mục lục -->
+                                    <ul class="header__list header__list-icon-light-color">
+                                        <!-- Trang chủ -->
+                                        <li class="header__list-item active">
+                                            <a href="" class="header__list-link">
+                                                Trang chủ
+                                            </a>
+                                        </li>
+        
+                                        <!-- Giới thiệu -->
+                                        <li class="header__list-item">
+                                            <a href="" class="header__list-link">
+                                                Giới thiệu
+                                            </a>
+                                        </li>
+        
+                                        <!-- Phòng -->
+                                        <li class="header__list-item">
+                                            <a href="" class="header__list-link">
+                                                Phòng
+                                            </a>
+                                        </li>
+        
+                                        <!-- Tin tức -->
+                                        <li class="header__list-item">
+                                            <a href="" class="header__list-link">
+                                                Tin tức
+                                            </a>
+                                        </li>
+        
+                                        <!-- Liên hệ -->
+                                        <li class="header__list-item">
+                                            <a href="" class="header__list-link">
+                                                Liên hệ
+                                            </a>
+                                        </li>
+        
+                                        <!-- Tìm kiếm -->
+                                        <li class="header__list-item">
+                                            <a href="" class="header__list-link">
+                                                <i class="fa-solid fa-magnifying-glass header__list-icon"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Body -->
+            <div class="container-main">
+                @RenderBody()
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="grid wide">
+                    <div class="footer-container">
+                        <div class="row footer__list">
+                            <!-- giới thiệu -->
+                            <div class="col l-3 footer__list-item footer__introduce">
+                                <div class="footer__introduce-img">
+                                    <img src="../../images/logo_footer.png" alt="">
+                                </div>
+
+                                <p class="footer-text" style="text-align: justify">
+                                    Đến với Khu nghỉ dưỡng Premier Village Mona Media, quý khách sẽ được trải nghiệm dịch vụ Spa cao cấp, trung tâm thể hình hiện đại và các hoạt động giải trí trên biển
+                                </p>
+
+                                <div class="footer__introduce-icon">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <i class="fa-brands fa-twitter"></i>
+                                </div>
+                            </div>
+
+                            <!-- Liên hệ -->
+                            <div class="col l-3 footer__list-item footer__contact">
+                                <h3 class="footer__item-title">
+                                    Liên hệ
+                                </h3>
+
+                                <div class="footer__item-content">
+                                    <ul class="footer__contact-list">
+                                        <li class="footer__contact-item">
+                                            <a class="footer__contact-link">
+                                                <i class="fa-solid fa-location-dot footer__contact-icon"></i>
+    
+                                                <span class="footer-text">
+                                                    828 Đ. Sư Vạn Hạnh, Quận 10, Tp.HCM
+                                                </span>
+                                            </a>
+                                        </li>
+    
+                                        <li class="footer__contact-item">
+                                            <a class="footer__contact-link">
+                                                <i class="fa-solid fa-phone-volume footer__contact-icon"></i>
+    
+                                                <span class="footer-text">
+                                                    0909 900 009
+                                                </span>
+                                            </a>
+                                        </li>
+    
+                                        <li class="footer__contact-item">
+                                            <a class="footer__contact-link">
+                                                <i class="fa-solid fa-envelope-open-text footer__contact-icon"></i>
+    
+                                                <span class="footer-text">
+                                                    tuandao8826848@gmail.com
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Liên kết -->
+                            <div class="col l-3 footer__list-item footer__link">
+                                <h3 class="footer__item-title">
+                                    Liên kết
+                                </h3>
+
+                                <div class="footer__item-content">
+                                    <ul class="footer__link-list">
+                                        <li class="footer__link-item active">
+                                            <a class="footer__link-link" href="">
+                                                <span class="footer-text">Trang chủ</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="footer__link-item">
+                                            <a class="footer__link-link" href="">
+                                                <span class="footer-text">giới thiệu</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="footer__link-item">
+                                            <a class="footer__link-link" href="">
+                                                <span class="footer-text">Phòng</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="footer__link-item">
+                                            <a class="footer__link-link" href="">
+                                                <span class="footer-text">Tin tức</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="footer__link-item">
+                                            <a class="footer__link-link" href="">
+                                                <span class="footer-text">Liên hệ</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="footer__link-btn">
+                                    <button class="btn-hover btn-primary">
+                                        Tra cứu phòng
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Hình ảnh -->
+                            <div class="col l-3 footer__list-item footer__image">
+                                <h3 class="footer__item-title">
+                                    Hình ảnh
+                                </h3>
+
+                                <div class="footer__item-content">
+                                    <ul class="footer__image-list">
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-1.jpg" alt="">
+                                        </li>
+
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-2.jpg" alt="">
+                                        </li>
+
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-3.jpg" alt="">
+                                        </li>
+
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-4.jpg" alt="">
+                                        </li>
+
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-5.jpg" alt="">
+                                        </li>
+
+                                        <li class="footer__image-item">
+                                            <img class="footer__image-img" src="../../images/room/room-6.jpg" alt="">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

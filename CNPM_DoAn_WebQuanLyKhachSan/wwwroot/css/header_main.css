@@ -1,0 +1,103 @@
+﻿/* ------------------------ Header ------------------------ */
+.header {
+    background-color: var(--white-color);
+    /* height: calc(var(--header-contact-height) + var(--header-page-height)); */
+}
+
+.header-container {
+    padding: 0 15px;
+}
+
+/* Header contact */
+.header-contact {
+    height: var(--header-contact-height);
+    border-bottom: 1px solid var(--line-color);
+}
+
+/* Header content */
+.header-content,
+.header__list,
+.header__list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__list {
+}
+
+.header__list-item {
+    padding: 10px 0;
+}
+
+.header__list-link {
+}
+
+    .header__list-link > span {
+        font-size: 1.5rem;
+        color: var(--gray89-color);
+    }
+
+.header__list:first-child .header__list-icon {
+    display: inline-block;
+    font-size: 1.8rem;
+    margin-right: 10px;
+    color: var(--black-color);
+}
+
+.header__list:first-child .header__list-item:first-child {
+    margin-right: 8.4px;
+}
+
+.header__list:first-child .header__list-item:last-child {
+    margin-left: 8.4px;
+}
+
+.header__list:last-child .header__list-icon {
+    color: var(--gray89-color);
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+
+/* header-list-item hover */
+.header__list-item.active .header__list-link {
+    color: var(--primary-color);
+}
+
+.header__list-item:hover .header__list-link {
+    color: var(--primary-color);
+    transition: all 0.22s linear;
+}
+
+/* header page */
+.header-page {
+    /* position: fixed; */
+    background-color: var(--white-color);
+    height: var(--header-page-height);
+    left: 0;
+    right: 0;
+    /* box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.2); */
+    z-index: 999;
+}
+
+.header__img img {
+    width: 250px;
+    height: 61.41px;
+}
+
+.header-page .header__list-link {
+    margin: 0 20px;
+    font-size: 1.28rem;
+    color: var(--black-color);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.header-page .header__list-item:last-child a {
+    margin-right: 0;
+}
+
+.header-page .header__list-link .header__list-icon {
+    font-size: 2rem;
+    color: var(--black-color);
+}

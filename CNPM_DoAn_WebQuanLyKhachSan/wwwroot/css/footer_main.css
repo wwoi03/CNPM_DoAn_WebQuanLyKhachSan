@@ -1,0 +1,127 @@
+﻿/* ------------------------ Footer ------------------------ */
+.footer {
+    padding: 30px 0;
+    background-color: var(--bg-footer-color);
+}
+
+.footer-container {
+    padding: 40px 15px;
+}
+
+.footer-text {
+    color: #a4a4aa;
+    font-size: 1.4rem;
+}
+
+.footer-introduce {
+}
+
+.footer-contact {
+}
+
+.footer-link {
+}
+
+.footer-image {
+}
+
+.footer__item-title {
+    --margin-bottom: 10px;
+    font-size: 2rem;
+    color: var(--white-color);
+    text-transform: uppercase;
+    margin-bottom: var(--margin-bottom);
+    position: relative;
+}
+
+    .footer__item-title::after {
+        position: absolute;
+        display: block;
+        content: "";
+        height: 1px;
+        width: 40px;
+        background-color: var(--primary-color);
+        bottom: calc(-1 * var(--margin-bottom));
+        left: 0;
+    }
+
+.footer__item-content {
+    padding-top: 22px;
+}
+
+.footer__introduce-img img {
+    width: 100%;
+    height: 68px;
+}
+
+/* footer introduce */
+.footer__introduce-icon i {
+    font-size: 2.6rem;
+    color: #A4A4A4;
+    padding: 0 6px;
+    margin-top: 20px;
+}
+
+/* footer contact */
+.footer__contact-list {
+}
+
+.footer__contact-item {
+    padding: 5px 0;
+}
+
+.footer__contact-link {
+    display: flex;
+}
+
+.footer__contact-icon {
+    color: var(--white-color);
+    width: 30px;
+    font-size: 1.4rem;
+    margin-top: 5px;
+}
+
+/* footer liên hệ */
+.footer__link-list {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.footer__link-item {
+    padding: 6px 0;
+}
+
+    .footer__link-item.active .footer__link-link * {
+        color: var(--primary-color);
+    }
+
+    .footer__link-item:hover .footer__link-link * {
+        color: var(--primary-color);
+    }
+
+.footer__link-link {
+}
+
+.footer__link-btn {
+    margin-top: 20px;
+}
+
+    .footer__link-btn button {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+/* footer image */
+.footer__image-list {
+    display: grid;
+    grid-template-columns: repeat(3, calc(100% / 3));
+}
+
+.footer__image-item {
+    margin: 2.5px;
+}
+
+.footer__image-img {
+    width: 100%;
+    height: 100%;
+}
