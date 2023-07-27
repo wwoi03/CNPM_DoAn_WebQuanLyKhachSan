@@ -6,6 +6,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["PapeTitle"] = "Đặt Phòng";
             return View();
         }
     }

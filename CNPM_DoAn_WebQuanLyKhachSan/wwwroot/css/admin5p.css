@@ -1,4 +1,59 @@
-﻿.main-container {
+﻿/* Thêm dấu "+" khi hover vào ô */
+.fc-day:hover {
+    position: relative;
+}
+
+.fc-day:hover::before {
+    content: '+';
+    position: absolute;
+    top: 0%;
+    padding: 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.fc-scroller {
+    overflow:unset !important;
+}
+
+.fc-event-title-container {
+    text-align: left;
+}
+
+.fc-list-event {
+    color: #000 !important;
+}
+
+.fc-list-event-title {
+    text-align: left;
+}
+
+/* --------------------------------- AdminLayout --------------------------------- */
+.title-pape {
+    text-transform: uppercase;
+    font-size: 22px;
+    margin: 0 15px;
+    height: 77px;
+    line-height: 77px;
+    display: inline-block
+}
+
+.btn-page {
+    margin-left: 50px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.btn-page i {
+    font-size: 20px;
+    color: #009688;
+    margin-right: 5px;
+}
+
+.btn-page span {
+    color: #009688;
+    font-size: 17px;
 }
 
 /* --------------------------------- Đặt phòng --------------------------------- */
@@ -11,6 +66,7 @@
 
 .panel-navbar {
     border-bottom: 1px solid var(--line-color);
+    position: relative;
 }
 
 .panel-navbar ul {
@@ -18,7 +74,22 @@
 }
 
 .nav-item {
+    width: calc(100% / 4);
+    height: 44px;
     padding: 10px 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.nav-line {
+    position: absolute;
+    left: 2;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: #3F51B5;
+    transition: all 0.2s ease;
 }
 
 .nav-item span {
@@ -27,14 +98,19 @@
     color: var(--text-color);
 }
 
-.panel-navbar-icon {
-
+.nav-icon {
+    font-size: 20px;
+    margin-right: 10px;
 }
-
 /* Right panel */
 .right-panel {
     padding-top: 14px;
     min-height: calc(100vh - 80px);
+    display: none;
+}
+
+.right-panel.active {
+    display: block;
 }
 
 .panel-save {
