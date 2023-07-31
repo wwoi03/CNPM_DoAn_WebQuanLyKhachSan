@@ -219,7 +219,7 @@ document.getElementById('account-edit').addEventListener('click', function (e) {
 			var employeeDetailsHtml = `
                         <!-- Lưu đặt phòng -->
 						<div class="panel-save d-flex justify-content-between align-items-center">
-							<span>Thêm mới</span>
+							<span>Thêm mới ${data}</span>
 
 							<div class="">
 								<a asp-controller="" asp-action="">Lưu</a>
