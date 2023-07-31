@@ -3,11 +3,13 @@
     public class BookRoomDetails
     {
         [key]
-        public int BookRoomDetailsID { get; set; }
-        public int? BookRoomID { get; set; }
-        public int? RoomID { get; set; }
-        public DateTime CheckinDate { get; set; }
-        public DateTime CheckoutDate { get; set;}
-        public string StatusRented { get; set; }
+        public int BookRoomDetailsId { get; set; }
+        public int BookRoomId { get; set; }
+        public BookRoom BookRoom { get; set; }
+        public int RoomID { get; set; }
+        public Room Room { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set;}
+        public int? StatusRented { get; set; }
     }
 }

@@ -3,15 +3,15 @@
     public class MenuOrder
     {
         [key]
-        public int MenuID { get; set; }
+        public int MenuId { get; set; }
         [key]
-        public int StaffID { get; set; }
+        public int StaffId { get; set; }
         [key]
-        public int BookRoomDetails { get; set; }
+        public int BookRoomDetailsId { get; set; }
         [key]
         public DateTime OrderTime { get; set; }
         public int Quantity { get; set; }
         public double TotalPrice { get; set; }
-        public string note { get; set; }
+        public string? note { get; set; }
     }
 }

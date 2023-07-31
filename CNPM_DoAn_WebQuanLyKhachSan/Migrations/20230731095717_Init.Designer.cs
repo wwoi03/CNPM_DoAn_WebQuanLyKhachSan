@@ -4,6 +4,7 @@ using CNPM_DoAn_WebQuanLyKhachSan.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230731095717_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,23 +44,29 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<DateTime>("WorkDate")
                         .HasColumnType("datetime2");
 
+                    b.HasKey("AssignmentId");
 
                     b.ToTable("Assignment");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.AssignmentDetails", b =>
                 {
+                    b.Property<int>("AssginmentDetailsId")
                         .HasColumnType("int");
 
                     b.Property<int>("StaffID")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
+                    b.Property<int>("WorkingHours")
+                        .HasColumnType("int");
 
+                    b.HasKey("AssginmentDetailsId", "StaffID");
 
                     b.HasIndex("StaffID");
 
@@ -72,17 +81,23 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
 
+                    b.Property<int>("BookRoomDetailsId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MenuOrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
+                    b.Property<double>("PriceRoom")
+                        .HasColumnType("float");
 
+                    b.Property<double>("TotalPriceBill")
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalPriceMenu")
                         .HasColumnType("float");
@@ -96,42 +111,56 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoom", b =>
                 {
+                    b.Property<int>("BookRoomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookRoomId"));
 
+                    b.Property<int>("CardId")
                         .HasColumnType("int");
 
                     b.Property<double>("PrePayment")
                         .HasColumnType("float");
 
+                    b.Property<double>("PriceAgreement")
                         .HasColumnType("float");
 
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("BookRoomId");
 
                     b.ToTable("BookRooms");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoomDetails", b =>
                 {
+                    b.Property<int>("BookRoomDetailsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookRoomDetailsId"));
 
+                    b.Property<int>("BookRoomId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("RoomID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StatusRented")
+                        .HasColumnType("int");
 
+                    b.HasKey("BookRoomDetailsId");
 
                     b.HasIndex("BookRoomId");
 
@@ -142,28 +171,35 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Customer", b =>
                 {
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("CardId");
 
                     b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Menu", b =>
                 {
+                    b.Property<int>("MenuId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuId"));
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -172,6 +208,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("Importil")
                         .HasColumnType("float");
 
+                    b.Property<int>("MenuTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -184,6 +221,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("SalePrice")
                         .HasColumnType("float");
 
+                    b.HasKey("MenuId");
 
                     b.HasIndex("MenuTypeId");
 
@@ -192,10 +230,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.MenuOrder", b =>
                 {
+                    b.Property<int>("MenuId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
+                    b.Property<int>("BookRoomDetailsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderTime")
@@ -208,49 +249,59 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("MenuId", "StaffId", "BookRoomDetailsId", "OrderTime");
 
                     b.ToTable("MenuOrder");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.MenuType", b =>
                 {
+                    b.Property<int>("MenuTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuTypeId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("MenuTypeId");
 
                     b.ToTable("MenuType");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Payment", b =>
                 {
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("PaymentId");
 
                     b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Position", b =>
                 {
+                    b.Property<int>("PositionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PositionId"));
 
+                    b.Property<int?>("BonusCoefficient")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CoefficientsSalary")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -261,41 +312,56 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("PositionId");
 
                     b.ToTable("Position");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Room", b =>
                 {
+                    b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
+                    b.Property<int?>("CleanRoom")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Staus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("RoomId");
 
+                    b.HasIndex("RoomTypeId");
+
+                    b.HasIndex("StaffId");
 
                     b.ToTable("Room");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.RoomType", b =>
                 {
+                    b.Property<int>("RoomTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomTypeId"));
 
                     b.Property<int>("BedNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ListImage")
@@ -309,6 +375,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.HasKey("RoomTypeId");
 
                     b.ToTable("RoomType");
                 });
@@ -322,9 +389,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StaffId"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -343,8 +410,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PositionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("StaffId");

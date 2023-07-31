@@ -5,7 +5,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
     public class MenuType
     {
         [Key]
-        public int MenuTypeID { get; set; }
+        public int MenuTypeId { get; set; }
 
         public string Name { get; set; }
     }

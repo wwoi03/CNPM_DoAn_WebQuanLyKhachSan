@@ -2,12 +2,15 @@
 {
     public class Room
     {
-        public int RoomID { get; set; }
-        public int? RoomTypeID { get; set; }
-        public int? StaffID { get; set; }
-        public string Staus { get; set; }
-        public int image { get; set; }
-        public int CleanRoom { get; set; }
+        [key]
+        public int RoomId { get; set; }
+        public int RoomTypeId { get; set; }
+        public RoomType RoomType { get; set; }
+        public int StaffId { get; set; }
+        public Staff Staff { get; set; }
+        public int? Staus { get; set; }
+        public string image { get; set; }
+        public int? CleanRoom { get; set; }
 
     }
 }
