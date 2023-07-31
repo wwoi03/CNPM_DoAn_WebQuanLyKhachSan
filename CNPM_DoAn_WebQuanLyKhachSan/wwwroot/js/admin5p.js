@@ -200,8 +200,99 @@
 
 	$('.btn-page').click(function (e) {
 		$('.right-panel').toggleClass("active");
-    })
+	})
+
+	
 })
+
+// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+document.getElementById('account-edit').addEventListener('click', function (e) {
+	//var employeeId = $(this).data("employee-id");
+	console.log("fkjsdhfsk");
+	// Gọi Action GetEmployee bằng AJAX
+	$.ajax({
+		type: "GET",
+		url: "/Staff/Edit", // Đường dẫn tới Action GetEmployee
+		//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+		success: function (data) {
+			// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+			var employeeDetailsHtml = `
+                        <!-- Lưu đặt phòng -->
+						<div class="panel-save d-flex justify-content-between align-items-center">
+							<span>Thêm mới</span>
+
+							<div class="">
+								<a asp-controller="" asp-action="">Lưu</a>
+							</div>
+						</div>
+
+						<!-- Form -->
+						<form class="panel-form">
+							<!-- Thông tin -->
+							<div class="panel-form-info">
+								<!-- Tên tài khoản -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Tên tài khoản</h5>
+									<input class="panel-form-input" type="text" value="tuandao8826" readonly/>
+								</div>
+
+								<div class="setting-account">
+									<div class="setting-account-title">
+										<i class="fa-solid fa-gear"></i>
+										<span>Thiết lập quyền hạn</span>
+									</div>
+
+									<div class="setting-account-power">
+										<div class="setting-account-list">
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Thuê trả phòng</label>
+											</div>
+
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Quản lý loại phòng</label>
+											</div>
+
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Quản lý tài khoản phụ</label>
+											</div>
+
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Quản lý tài Menu</label>
+											</div>
+										</div>
+
+										<div class="setting-account-list">
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Đặt phòng</label>
+											</div>
+
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Xem lịch sử</label>
+											</div>
+
+											<div class="setting-account-item">
+												<input type="checkbox" id="" value="" />
+												<label for="">Quản lý menu</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+                    `;
+			$(".right-panel").html(employeeDetailsHtml);
+		},
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông tin nhân viên.");
+		}
+	});
+});
 
 const showOptionsButton = document.getElementById('showOptionsButton');
 const options = document.querySelectorAll('.options');
