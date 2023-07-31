@@ -1,8 +1,11 @@
+using CNPM_DoAn_WebQuanLyKhachSan.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<DatabaseContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DbContext")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
