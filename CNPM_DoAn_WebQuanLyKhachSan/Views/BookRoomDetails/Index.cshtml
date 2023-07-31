@@ -1,0 +1,130 @@
+﻿@{
+Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="main-container d-flex">
+	<!-- Nội dung bên trái -->
+	<div class="left-panel col-8 pl-0 pr-0">
+		<!-- Thanh navbar -->
+		<nav class="panel-navbar">
+			<ul class="d-flex flex-row justify-content-between nav-container">
+				<li class="nav-item active" id="WaitRoom">
+					<i class="fa-solid fa-door-open nav-icon" style="color: #009688;"></i>
+					<span class="">Phòng chờ</span>
+				</li>
+
+				<li class="nav-item" id="RentRoom">
+					<i class="fa-solid fa-door-closed nav-icon" style="color: #66C0B8;"></i>
+					<span class="">Phòng đang thuê</span>
+				</li>
+
+				<li class="nav-item" id="CleanRoom">
+					<i _ngcontent-c5="" class="fas fa-broom fa-lg text-danger ng-star-inserted nav-icon"></i>
+					<span class="">Phòng cần dọn</span>
+				</li>
+
+				<li class="nav-item">
+					<i class="fa-solid fa-clock-rotate-left nav-icon" style="color: #68CBF8;"></i>
+					<span class="">Lịch sử</span>
+				</li>
+			</ul>
+
+			<div class="nav-line">
+
+			</div>
+		</nav>
+
+		<!-- Main content -->
+		<section id="WaitRoom" class="ren-content">
+			<div class="ren-title">
+				<p>Phòng đơn</p>
+			</div>
+
+			<div class="d-flex">
+				<div class="row">
+					<div class="col-3">
+						<div class=card>
+							<div class="ren-number-room">
+								<p>101</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Nội dung bên phải -->
+	<div class="right-panel col-4 pl-0 pr-0">
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Thêm mới</span>
+
+			<div class="">
+				<a asp-controller="" asp-action="">Lưu</a>
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<!-- Thông tin -->
+			<div class="panel-form-info">
+				<!-- Tên khách hàng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Họ và tên khách hàng</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Số điện thoại -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số điện thoại</h5>
+					<input class="panel-form-input" type="number" value="" />
+				</div>
+
+				<!-- CCCD -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Căn cước công dân</h5>
+					<input class="panel-form-input" type="number" value="" />
+				</div>
+
+				<!-- Ngày -->
+				<div class="panel-form-item">
+					<div class="panel-form-height">
+						<div class="panel-form-height-item">
+							<h5 class="panel-form-title">Ngày nhận phòng</h5>
+							<input class="panel-form-input" type="date" value="" />
+						</div>
+
+						<div class="panel-form-height-item">
+							<h5 class="panel-form-title">Ngày trả phòng</h5>
+							<input class="panel-form-input" type="date" value="" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Tiền trả trước -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tiền trả trước</h5>
+					<input class="panel-form-input" type="number" value="" placeholder="0.000 đ" />
+				</div>
+
+				<!-- Ghi chú -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Ghi chú</h5>
+					<input class="panel-form-input" type="text" value="" placeholder="" />
+				</div>
+			</div>
+
+			<!-- Phòng -->
+			<div class="panel-form-room">
+				<div class="panel-form-room-item">
+					<h5 class="panel-form-title">Thêm phòng</h5>
+
+					<button class="panel-form-room-btn">Thêm phòng</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

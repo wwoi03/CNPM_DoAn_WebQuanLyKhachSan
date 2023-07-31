@@ -6,44 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Hotel Dashboard Template</title>
     <link rel="stylesheet" href="~/assets/css/base.css">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/feathericon.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.png">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/css/feathericon.min.css">
     <link rel="stylehseet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">
-    <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/plugins/morris/morris.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="/css/admin5p.css">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets2/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/assets2/plugins/fontawesome-free/css/all.min.css">
     <!-- fullCalendar -->
-    <link rel="stylesheet" href="assets2/plugins/fullcalendar/main.css">
+    <link rel="stylesheet" href="~/assets/assets2/plugins/fullcalendar/main.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="assets2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/assets/assets2/dist/css/adminlte.min.css">
 
+    <!-- Fontawesome -->
     <link rel="stylesheet" href="~/fonts/fontawesome-free-6.4.0-web/fontawesome-free-6.4.0-web/css/all.css">
+    @*<link rel="stylesheet" href="~/css/admin.css">*@
 </head>
 
 <body>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left" style="border-right: 1px solid #E5E5E5">
-                <a href="index.html" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70"
+                <a href="index.html" class="logo"> <img src="~/assets/img/hotel_logo.png" width="50" height="70"
                         alt="logo"> <span class="logoclass">HOTEL DEL LUNA</span> </a>
-                <a href="index.html" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30"
+                <a href="index.html" class="logo logo-small"> <img src="~/assets/img/hotel_logo.png" alt="Logo" width="30"
                         height="30"> </a>
             </div>
+
             <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
+
 			<span class="title-pape">@ViewData["PapeTitle"]</span>
-			<div class="btn-page">
+
+            <div class="btn-page">
                 <i class="fa-solid fa-file-circle-plus"></i>
 				<span>Thêm mới</span>
             </div>
+			
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
+
             <ul class="nav user-menu">
                 <li class="nav-item dropdown noti-dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i>
@@ -57,7 +64,7 @@
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-02.jpg">
+                                                    src="~/assets/img/profiles/avatar-02.jpg">
                                             </span>
                                             <div class="media-body">
                                                 <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
@@ -72,7 +79,7 @@
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-11.jpg">
+                                                    src="~/assets/img/profiles/avatar-11.jpg">
                                             </span>
                                             <div class="media-body">
                                                 <p class="noti-details"><span class="noti-title">International Software
@@ -88,7 +95,7 @@
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-17.jpg">
+                                                    src="~/assets/img/profiles/avatar-17.jpg">
                                             </span>
                                             <div class="media-body">
                                                 <p class="noti-details"><span class="noti-title">John Hendry</span> sent
@@ -104,7 +111,7 @@
                                     <a href="#">
                                         <div class="media"> <span class="avatar avatar-sm">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-13.jpg">
+                                                    src="~/assets/img/profiles/avatar-13.jpg">
                                             </span>
                                             <div class="media-body">
                                                 <p class="noti-details"><span class="noti-title">Mercury Software
@@ -123,11 +130,11 @@
                 </li>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
-                                class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31"
+                                class="rounded-circle" src="~/assets/img/profiles/avatar-01.jpg" width="31"
                                 alt="Soeng Souy"></span> </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
-                            <div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.jpg" alt="User Image"
+                            <div class="avatar avatar-sm"> <img src="~/assets/img/profiles/avatar-01.jpg" alt="User Image"
                                     class="avatar-img rounded-circle"> </div>
                             <div class="user-text">
                                 <h6>Soeng Souy</h6>
@@ -139,6 +146,7 @@
                     </div>
                 </li>
             </ul>
+
             <div class="top-nav-search">
                 <form>
                     <input type="text" class="form-control" placeholder="Search here">
@@ -244,7 +252,7 @@
                                 <li><a href="edit-blog.html">Edit Blog </a></li>
                             </ul>
                         </li>
-                        <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
+                        <li> <a href="~/assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
                         <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
                         <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span
                                     class="menu-arrow"></span></a>
@@ -307,8 +315,8 @@
                     </ul>*@
 
                     <ul>
-                        <li class="active"> 
-                            <a href="pricing.html">
+                        <li > 
+                            <a asp-controller="Admin" asp-action="Index">
                                 <i class="fas fa-tachometer-alt"></i> 
                                 <span>Trang chính</span>
                             </a> 
@@ -316,29 +324,29 @@
 
                         <li class="list-divider"></li>
 
-                        <li> 
-                            <a href="pricing.html">
+                        <li class="active"> 
+                            <a asp-controller="BookRoom" asp-action="Index">
                                 <i class="fas fa-suitcase"></i> 
                                 <span>Đặt phòng</span>
                             </a> 
                         </li>
 
-                        <li> 
-                            <a href="pricing.html">
+                        <li > 
+                            <a asp-controller="BookRoomDetails" asp-action="Index">
                                 <i class="fas fa-key"></i> 
                                 <span>Thuê - trả phòng</span>
                             </a> 
                         </li>
 
-                        <li> 
-                            <a href="pricing.html">
+                        <li > 
+                            <a asp-controller="Admin" asp-action="SystemManagementPage">
                                 <i class="fas fa-cog"></i> 
                                 <span>Quản lý hệ thống</span>
                             </a> 
                         </li>
 
-                        <li> 
-                            <a href="pricing.html">
+                        <li > 
+                            <a >
                                 <i class="fas fa-user"></i> 
                                 <span>Tài khoản</span>
                             </a> 
@@ -355,32 +363,32 @@
         </div>
     </div>
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.5.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/raphael/raphael.min.js"></script>
-    <script src="assets/plugins/morris/morris.min.js"></script>
-    <script src="assets/js/chart.morris.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="~/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/raphael/raphael.min.js"></script>
+    <script src="~/assets/plugins/morris/morris.min.js"></script>
+    <script src="~/assets/js/chart.morris.js"></script>
+    <script src="~/assets/js/script.js"></script>
 	@*<script src="~/assets/js/admin5p.js"></script>*@
 
 
     <!-- jQuery -->
-    <script src="assets2/plugins/jquery/jquery.min.js"></script>
+    <script src="~/assets/assets2/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="assets2/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/assets2/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery UI -->
-    <script src="assets2/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/assets2/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="assets2/dist/js/adminlte.min.js"></script>
+    <script src="~/assets/assets2/dist/js/adminlte.min.js"></script>
     <!-- fullCalendar 2.2.5 -->
-    <script src="assets2/plugins/moment/moment.min.js"></script>
-    <script src="assets2/plugins/fullcalendar/main.js"></script>
+    <script src="~/assets/assets2/plugins/moment/moment.min.js"></script>
+    <script src="~/assets/assets2/plugins/fullcalendar/main.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="assets2/dist/js/demo.js"></script>
+    <script src="~/assets/assets2/dist/js/demo.js"></script>
     <!-- Page specific script -->
-    <script src="assets2/plugins/fullcalendar/locales/vi.js"></script>
+    <script src="~/assets/assets2/plugins/fullcalendar/locales/vi.js"></script>
 
     <!-- Admin5p -->
     <script src="js/admin5p.js"></script>

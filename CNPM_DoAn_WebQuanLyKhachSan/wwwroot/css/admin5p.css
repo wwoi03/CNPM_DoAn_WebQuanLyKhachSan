@@ -3,17 +3,17 @@
     position: relative;
 }
 
-.fc-day:hover::before {
-    content: '+';
-    position: absolute;
-    top: 0%;
-    padding: 0 8px;
-    font-size: 20px;
-    font-weight: bold;
-}
+    .fc-day:hover::before {
+        content: '+';
+        position: absolute;
+        top: 0%;
+        padding: 0 8px;
+        font-size: 20px;
+        font-weight: bold;
+    }
 
 .fc-scroller {
-    overflow:unset !important;
+    overflow: unset !important;
 }
 
 .fc-event-title-container {
@@ -45,16 +45,16 @@
 }
 
 
-.btn-page i {
-    font-size: 20px;
-    color: #009688;
-    margin-right: 5px;
-}
+    .btn-page i {
+        font-size: 20px;
+        color: #009688;
+        margin-right: 5px;
+    }
 
-.btn-page span {
-    color: #009688;
-    font-size: 17px;
-}
+    .btn-page span {
+        color: #009688;
+        font-size: 17px;
+    }
 
 /* --------------------------------- Đặt phòng --------------------------------- */
 /* Left panel */
@@ -69,9 +69,9 @@
     position: relative;
 }
 
-.panel-navbar ul {
-    margin: 0;
-}
+    .panel-navbar ul {
+        margin: 0;
+    }
 
 .nav-item {
     width: calc(100% / 4);
@@ -102,6 +102,7 @@
     font-size: 20px;
     margin-right: 10px;
 }
+
 /* Right panel */
 .right-panel {
     padding-top: 14px;
@@ -109,27 +110,26 @@
     display: none;
 }
 
-.right-panel.active {
-    display: block;
-}
+    .right-panel.active {
+        display: block;
+    }
 
 .panel-save {
     padding: 0 16px;
     border-bottom: 1px solid var(--line-color);
 }
 
-.panel-save span,
-.panel-save a {
-    font-size: 16px;
-    padding: 10px 0;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 400;
-}
+    .panel-save span,
+    .panel-save a {
+        font-size: 16px;
+        padding: 10px 0;
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
 
 /* form đặt phòng */
 .panel-form {
-
 }
 
 .panel-form-info {
@@ -163,13 +163,13 @@
     width: 50%;
 }
 
-.panel-form-height-item:first-child {
-    padding-right: 8px;
-}
+    .panel-form-height-item:first-child {
+        padding-right: 8px;
+    }
 
-.panel-form-height-item:last-child {
-    padding-left: 8px;
-}
+    .panel-form-height-item:last-child {
+        padding-left: 8px;
+    }
 
 .panel-form-room {
     padding: 16px 0;
@@ -183,10 +183,117 @@
     padding: 8px 16px;
 }
 
-.panel-form-room-item .panel-form-title {
-    margin: 0;
-}
+    .panel-form-room-item .panel-form-title {
+        margin: 0;
+    }
 
 .panel-form-room-btn {
     border: none;
+}
+
+.panel-form-add-room {
+    display: flex;
+    align-items: center;
+}
+
+    .panel-form-add-room i {
+        color: #FF5722;
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    .panel-form-add-room p {
+        background-color: transparent;
+        color: #FF5722;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+    }
+
+/*--------------------------------------------Thuê trả - Phòng ------------------------------*/
+.roomtype {
+    height: auto;
+    background: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+    border: 0.5px solid #808080;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.roomtype-name {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+}
+
+.mat-card {
+    border-radius: 5px;
+    border: 0.5px solid #808080;
+    width: 20%;
+    position: relative;
+    z-index: 1;
+}
+
+    .mat-card i {
+        right: 0;
+    }
+
+.option-icon {
+    margin-right: 8px;
+}
+
+.options {
+    display: none;
+    background-color: #f1f1f1;
+    padding: 5px;
+    margin-top: 5px;
+    width: 200px;
+    position: absolute;
+    z-index: 2;
+    /* Đưa lên trên */
+    border-radius: 3px;
+    right: -100%;
+    bottom: -50%;
+}
+
+/*-------------------------------------------- Quản lý hệ thống ------------------------------*/
+.sys-container {
+    padding: 20px 24px;
+}
+
+.sys-card {
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    width: 144px;
+    text-align: end;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 15px;
+    margin: 0 16px 16px 0;
+}
+
+.sys-card-icon {
+    text-align: center;
+    line-height: 68px;
+}
+
+.sys-card-icon i {
+    font-size: 25px;
+    color: #03A9F4;
+}
+
+.sys-card-title p {
+    color: #66615b;
+    font-size: 14px;
+    margin: 0;
+    padding: 14px 0 0 0;
+    text-align: center;
+    border-top: 1px solid #D1CFCD;
 }

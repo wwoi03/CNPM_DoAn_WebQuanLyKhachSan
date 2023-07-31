@@ -202,3 +202,22 @@
 		$('.right-panel').toggleClass("active");
     })
 })
+
+const showOptionsButton = document.getElementById('showOptionsButton');
+const options = document.querySelectorAll('.options');
+
+let isOptionsVisible = false;
+
+showOptionsButton.addEventListener('click', function () {
+	if (isOptionsVisible) {
+		options.forEach(option => {
+			option.style.display = 'none';
+		});
+	} else {
+		options.forEach(option => {
+			option.style.display = 'block';
+		});
+	}
+
+	isOptionsVisible = !isOptionsVisible;
+});
