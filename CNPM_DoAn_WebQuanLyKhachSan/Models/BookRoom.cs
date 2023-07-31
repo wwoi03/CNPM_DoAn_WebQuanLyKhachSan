@@ -3,13 +3,13 @@
     public class BookRoom
     {
         [key]
-        public int BookRoomID { get; set; }
+        public int BookRoomId { get; set; }
         [key]
-        public int CardID { get; set; }
+        public int CardId { get; set; }
         [key]
-        public int StaffID { get; set; }
+        public int StaffId { get; set; }
         public double PrePayment { get; set; }
-        public double PriceaGreement { get; set; }
-        public string note { get; set; }
+        public double PriceAgreement { get; set; }
+        public string? note { get; set; }
     }
 }

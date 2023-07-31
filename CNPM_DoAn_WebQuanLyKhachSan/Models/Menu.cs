@@ -3,8 +3,9 @@
     public class Menu
     {
         [key]
-        public int MenuID { get; set; }
-        public int? MenuTypeID { get; set; }
+        public int MenuId { get; set; }
+        public int MenuTypeId { get; set; }
+        public MenuType MenuType { get; set; }
         public string Name { get; set; }  
 
         public double Importil { get; set; }

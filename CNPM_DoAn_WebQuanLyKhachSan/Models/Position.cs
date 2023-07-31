@@ -3,11 +3,11 @@
     public class Position
     {
         [key]
-        public int PositionID { get; set; }
+        public int PositionId { get; set; }
         public string Name { get; set; }
         public string PositionType { get; set; }
-        public int CoefficientsSlary { get; set; }
-        public int BonusCoefficient { get; set; }
+        public int? CoefficientsSalary { get; set; }
+        public int? BonusCoefficient { get; set; }
 
     }
 }

@@ -3,7 +3,7 @@
     public class Payment
     {
         [key]
-        public int PaymentID { get; set; }
+        public int PaymentId { get; set; }
         public string Name { get; set; }
 
     }
