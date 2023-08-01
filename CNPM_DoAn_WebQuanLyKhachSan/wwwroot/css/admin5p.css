@@ -84,7 +84,7 @@
 
 .nav-line {
     position: absolute;
-    left: 2;
+    left: 0;
     bottom: 0;
     width: 0;
     height: 3px;
@@ -107,7 +107,6 @@
 .right-panel {
     padding-top: 14px;
     min-height: calc(100vh - 80px);
-    //display: none;
 }
 
 

@@ -9,5 +9,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             ViewData["PapeTitle"] = "Đặt Phòng";
             return View();
         }
+
+        public IActionResult Create()
+        {
+            ViewData["PapeTitle"] = "Đặt Phòng";
+            return Json("fsdfs");
+        }
     }
 }

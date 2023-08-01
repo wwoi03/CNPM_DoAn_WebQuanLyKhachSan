@@ -10,9 +10,19 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             return View();
         }
 
+        public IActionResult Create()
+        {
+            return Json("dsdf");
+        }
+
         public IActionResult Edit()
         {
             return Json("dsdf");
+        }
+
+        public IActionResult Details()
+        {
+            return Json("dsfffdf");
         }
     }
 }
