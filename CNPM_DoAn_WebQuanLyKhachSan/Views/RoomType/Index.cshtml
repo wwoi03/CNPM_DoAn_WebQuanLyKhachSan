@@ -24,10 +24,10 @@
 								<table class="datatable table table-stripped table table-hover table-center mb-0">
 									<thead>
 										<tr>
-											<th style="width: 10%">Mã Loại Phòng</th>
-											<th style="width: 20%">Tên Loại Phòng</th>
+											<th style="width: 10%">Mã dịch vụ</th>
+											<th style="width: 20%">Tên</th>
 											<th style="width: 20%">Giá</th>
-											<th style="width: 10%">Số Giường</th>
+											<th style="width: 10%">Số Lượng</th>
 											<th style="width: 40%">Chức năng</th>
 										</tr>
 									</thead>
@@ -47,41 +47,9 @@
 													<i class="fas fa-pencil-alt"></i>
 													Chỉnh sửa
 												</a>
-											</td>
-										</tr>
-
-										<tr>
-											<td>1</td>
-											<td>Phòng siêu vip</td>
-											<td>1.000.000đ</td>
-											<td>2</td>
-											<td>
-												<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" style="width: 100px" >
-													<i class="fas fa-folder"></i>
-													Chi tiết
-												</a>
-
-												<a asp-controller="" asp-action="" class="btn btn-info btn-sm" style="width: 100px" >
+												<a asp-controller="" asp-action="" class="btn btn-danger btn-sm" style="width: 100px">
 													<i class="fas fa-pencil-alt"></i>
-													Chỉnh sửa
-												</a>
-											</td>
-										</tr>
-
-										<tr>
-											<td>1</td>
-											<td>Phòng siêu vip</td>
-											<td>1.000.000đ</td>
-											<td>2</td>
-											<td>
-												<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" style="width: 100px" >
-													<i class="fas fa-folder"></i>
-													Chi tiết
-												</a>
-
-												<a asp-controller="" asp-action="" class="btn btn-info btn-sm" style="width: 100px" >
-													<i class="fas fa-pencil-alt"></i>
-													Chỉnh sửa
+													Xóa
 												</a>
 											</td>
 										</tr>
@@ -94,9 +62,107 @@
 			</div>
 		</div>
 	</div>
+	<!-- Xóa -->
+	<div class="right-panel-delete col-4 pl-0 pr-0">
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Xóa</span>
 
-	<!-- Nội dung bên phải -->
-	<div class="right-panel col-4 pl-0 pr-0">
+			<div class="">
+				<a asp-controller="" asp-action="">Lưu</a>
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<!-- Thông tin -->
+			<div class="panel-form-info">
+				<!-- Mã dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="1" readonly />
+				</div>
+
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
+					<input class="panel-form-input" type="text" value="Phòng siêu Vip" readonly />
+				</div>
+
+				<!-- Giá dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="1.000.000đ" readonly />
+				</div>
+
+				<!-- Số lượng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="2" readonly />
+				</div>
+				<div>
+				<div class="" style="text-align:right">
+					<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+				</div>
+			</div>
+			</div>
+			@*<div>
+				<div class="" style="text-align:right">
+					<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+				</div>
+			</div>*@
+		</form>
+	</div>
+	<!-- Chỉnh sửa -->
+	<div class="right-panel-edit col-4 pl-0 pr-0">
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Chỉnh sửa</span>
+
+			<div class="">
+				<a asp-controller="" asp-action="">Lưu</a>
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<div class="panel-form-info">
+				<!-- Mã dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Giá dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Số lượng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+			</div>
+			<div>
+				<div class="" style="text-align:center">
+					<a class="btn btn-info btn-sm" asp-controller="" style="margin-right:50px" asp-action="">Lưu</a>
+					<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Them -->
+	<div class="right-panel-create col-4 pl-0 pr-0">
 		<!-- Lưu đặt phòng -->
 		<div class="panel-save d-flex justify-content-between align-items-center">
 			<span>Thêm mới</span>
@@ -110,58 +176,29 @@
 		<form class="panel-form">
 			<!-- Thông tin -->
 			<div class="panel-form-info">
-				<!-- Tên khách hàng -->
+				<!-- Mã dịch vụ -->
 				<div class="panel-form-item">
-					<h5 class="panel-form-title">Họ và tên khách hàng</h5>
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="" readonly />
+				</div>
+				
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
 					<input class="panel-form-input" type="text" value="" />
 				</div>
 
-				<!-- Số điện thoại -->
+				<!-- Giá dịch vụ -->
 				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số điện thoại</h5>
-					<input class="panel-form-input" type="number" value="" />
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="" />
 				</div>
 
-				<!-- CCCD -->
+				<!-- Số lượng -->
 				<div class="panel-form-item">
-					<h5 class="panel-form-title">Căn cước công dân</h5>
-					<input class="panel-form-input" type="number" value="" />
-				</div>
-
-				<!-- Ngày -->
-				<div class="panel-form-item">
-					<div class="panel-form-height">
-						<div class="panel-form-height-item">
-							<h5 class="panel-form-title">Ngày nhận phòng</h5>
-							<input class="panel-form-input" type="date" value="" />
-						</div>
-
-						<div class="panel-form-height-item">
-							<h5 class="panel-form-title">Ngày trả phòng</h5>
-							<input class="panel-form-input" type="date" value="" />
-						</div>
-					</div>
-				</div>
-
-				<!-- Tiền trả trước -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tiền trả trước</h5>
-					<input class="panel-form-input" type="number" value="" placeholder="0.000 đ" />
-				</div>
-
-				<!-- Ghi chú -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Ghi chú</h5>
-					<input class="panel-form-input" type="text" value="" placeholder="" />
-				</div>
-			</div>
-
-			<!-- Phòng -->
-			<div class="panel-form-room">
-				<div class="panel-form-room-item">
-					<h5 class="panel-form-title">Thêm phòng</h5>
-
-					<button class="panel-form-room-btn">Thêm phòng</button>
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="" />
 				</div>
 			</div>
 		</form>

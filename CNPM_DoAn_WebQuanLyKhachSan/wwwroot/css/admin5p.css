@@ -375,3 +375,15 @@
     text-align: center;
     border-top: 1px solid #D1CFCD;
 }
+
+/*-------------------------------------------- Menu ------------------------------*/
+.right-panel.menu-create {
+    display: block
+}
+
+.right-panel.menu-edit {
+    display: block
+}
+.right-panel.menu-delete {
+    display: block
+}
