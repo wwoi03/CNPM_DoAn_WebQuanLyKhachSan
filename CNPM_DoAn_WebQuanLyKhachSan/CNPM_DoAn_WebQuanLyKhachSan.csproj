@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\ViewModel\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
 

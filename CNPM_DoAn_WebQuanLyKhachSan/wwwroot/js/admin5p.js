@@ -928,3 +928,191 @@ if (accountDetails != null) {
 		});
 	});
 }
+/* --------------------------------- Menu --------------------------------- */
+/*-------------------Create-----------------*/
+if (document.getElementById('menu-create') != null) {
+	document.getElementById('menu-create').addEventListener('click', function (e) {
+		console.log("Quan");
+		$.ajax({
+			type: "GET",
+			url: "/Menu/Create",
+			success: function (data) {
+				var employeeCrateHtml = `
+					<form method="post" action="Menu/Create">
+					<!-- Them -->
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Thêm mới</span>
+
+			<div class="">
+				<input class="panel-save-submit" type="submit" value="lưu" />
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<!-- Thông tin -->
+			<div class="panel-form-info">
+				<!-- Mã dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Giá dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Số lượng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+			</div>
+		</form>
+	<form/>
+				`;
+				$(".right-panel").html(employeeCrateHtml);
+			},
+			error: function () {
+				alert("Đã xảy ra lỗi khi lấy thông tin")
+			}
+		});
+	});
+}
+/*-------------------delete-----------------*/
+if (document.getElementById('menu-delete') != null) {
+	document.getElementById('menu-delete').addEventListener('click', function (e) {
+		console.log("Quan");
+		$.ajax({
+			type: "GET",
+			url: "/Menu/Delete",
+			success: function (data) {
+				var employeeDeleteHtml = `
+					<form method="post" action="Menu/Delete">
+					<!-- Xóa -->
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Xóa</span>
+
+			<div class="">
+				<input class="panel-save-submit" type="submit" value="lưu" />
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<!-- Thông tin -->
+			<div class="panel-form-info">
+				<!-- Mã dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="1" readonly />
+				</div>
+
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
+					<input class="panel-form-input" type="text" value="Phòng siêu Vip" readonly />
+				</div>
+
+				<!-- Giá dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="1.000.000đ" readonly />
+				</div>
+
+				<!-- Số lượng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="2" readonly />
+				</div>
+				<div>
+					<div class="" style="text-align:right">
+						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+					</div>
+				</div>
+		</form>
+	<form/>
+				`;
+				$(".right-panel").html(employeeDeleteHtml);
+			},
+			error: function () {
+				alert("Đã xảy ra lỗi khi lấy thông tin")
+			}
+		});
+	});
+}
+/*-------------------edit-----------------*/
+if (document.getElementById('menu-edit') != null) {
+	document.getElementById('menu-edit').addEventListener('click', function (e) {
+		console.log("Quan");
+		$.ajax({
+			type: "GET",
+			url: "/Menu/Edit",
+			success: function (data) {
+				var employeeEditHtml = `
+					<form method="post" action="Menu/Edit">
+					<!-- Xóa -->
+		<!-- Lưu đặt phòng -->
+		<div class="panel-save d-flex justify-content-between align-items-center">
+			<span>Chỉnh sửa</span>
+
+			<div class="">
+				<input class="panel-save-submit" type="submit" value="lưu" />
+			</div>
+		</div>
+
+		<!-- Form -->
+		<form class="panel-form">
+			<div class="panel-form-info">
+				<!-- Mã dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Mã dịch vụ</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+
+				<!-- Tên dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Tên</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Giá dịch vụ -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Giá</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+
+				<!-- Số lượng -->
+				<div class="panel-form-item">
+					<h5 class="panel-form-title">Số lượng</h5>
+					<input class="panel-form-input" type="text" value="" />
+				</div>
+				<div>
+					<div class="" style="text-align:right">
+						<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+					</div>
+				</div>
+		</form>
+	<form/>
+				`;
+				$(".right-panel").html(employeeEditHtml);
+			},
+			error: function () {
+				alert("Đã xảy ra lỗi khi lấy thông tin")
+			}
+		});
+	});
+}

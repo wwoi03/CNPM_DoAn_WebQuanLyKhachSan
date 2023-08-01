@@ -10,8 +10,8 @@
 				<div class="row align-items-center">
 					<div class="col">
 						<div class="">
-							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả loại phòng</h4> 
-							<a class="btn btn-primary float-right veiwbutton">Thêm loại phòng</a>
+							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả loại phòng</h4>
+							<a class="btn btn-primary float-right veiwbutton" id="menu-create">Thêm loại phòng</a>
 						</div>
 					</div>
 				</div>
@@ -38,16 +38,16 @@
 											<td>1.000.000đ</td>
 											<td>2</td>
 											<td>
-												<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" style="width: 100px" >
+												<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" id="menu-details" style="width: 100px">
 													<i class="fas fa-folder"></i>
 													Chi tiết
 												</a>
 
-												<a asp-controller="" asp-action="" class="btn btn-info btn-sm" style="width: 100px" >
+												<a  class="btn btn-info btn-sm" id="menu-edit" style="width: 100px">
 													<i class="fas fa-pencil-alt"></i>
 													Chỉnh sửa
 												</a>
-												<a asp-controller="" asp-action="" class="btn btn-danger btn-sm" style="width: 100px">
+												<a  class="btn btn-danger btn-sm " id="menu-delete" style="width: 100px">
 													<i class="fas fa-pencil-alt"></i>
 													Xóa
 												</a>
@@ -62,14 +62,14 @@
 			</div>
 		</div>
 	</div>
-	<!-- Them -->
-	<div class="right-panel-create col-4 pl-0 pr-0">
+	@*<!-- Them -->
+	<div class="right-panel-create col-4 pl-0 pr-0" >
 		<!-- Lưu đặt phòng -->
 		<div class="panel-save d-flex justify-content-between align-items-center">
 			<span>Thêm mới</span>
 
 			<div class="">
-				<a asp-controller="" asp-action="">Lưu</a>
+				<input class="panel-save-submit" type="submit" value="Lưu" />
 			</div>
 		</div>
 
@@ -103,15 +103,15 @@
 				</div>
 			</div>
 		</form>
-	</div>
-	<!-- Xóa -->
+	</div>*@
+	@*<!-- Xóa -->
 	<div class="right-panel-delete col-4 pl-0 pr-0">
 		<!-- Lưu đặt phòng -->
 		<div class="panel-save d-flex justify-content-between align-items-center">
 			<span>Xóa</span>
 
 			<div class="">
-				<a asp-controller="" asp-action="">Lưu</a>
+				<input class="panel-save-submit" type="submit" value="Lưu" />
 			</div>
 		</div>
 
@@ -144,10 +144,10 @@
 					<input class="panel-form-input" type="text" value="2" readonly />
 				</div>
 				<div>
-				<div class="" style="text-align:right">
-					<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+					<div class="" style="text-align:right">
+						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+					</div>
 				</div>
-			</div>
 		</form>
 	</div>
 	<!-- Chỉnh sửa -->
@@ -157,7 +157,7 @@
 			<span>Chỉnh sửa</span>
 
 			<div class="">
-				<a asp-controller="" asp-action="">Lưu</a>
+				<input class="panel-save-submit" type="submit" value="Lưu" />
 			</div>
 		</div>
 
@@ -196,6 +196,8 @@
 				</div>
 			</div>
 		</form>
+	</div>*@
+	<div class="right-panel col-4 pl-0 pr-0">
+
 	</div>
-	
 </div>
