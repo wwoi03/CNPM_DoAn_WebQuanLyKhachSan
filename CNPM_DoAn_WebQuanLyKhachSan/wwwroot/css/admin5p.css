@@ -1,4 +1,4 @@
-﻿/* Thêm dấu "+" khi hover vào ô */
+﻿ /* Thêm dấu "+" khi hover vào ô */
 .fc-day:hover {
     position: relative;
 }
@@ -84,7 +84,7 @@
 
 .nav-line {
     position: absolute;
-    left: 2;
+    left: 0;
     bottom: 0;
     width: 0;
     height: 3px;
@@ -107,8 +107,8 @@
 .right-panel {
     padding-top: 14px;
     min-height: calc(100vh - 80px);
-    display: none;
 }
+
 
     .right-panel.active {
         display: block;
@@ -209,6 +209,11 @@
         margin: 0;
         padding: 0;
     }
+    /* --------------------form room-----------------*/
+    .right-panel.panel-form {
+    display:block
+    } 
+
 
 /*--------------------------------------------Thuê trả - Phòng ------------------------------*/
 .roomtype {
@@ -265,7 +270,7 @@
 }
 
 .container1 {
-    margin: 20px;
+    margin: 20px 7.5px;
 }
 
 .container-title1 {
@@ -344,7 +349,7 @@
 
 /*-------------------------------------------- Quản lý hệ thống ------------------------------*/
 .sys-container {
-    padding: 20px 24px;
+    padding: 20px 7.5px;
 }
 
 .sys-card {

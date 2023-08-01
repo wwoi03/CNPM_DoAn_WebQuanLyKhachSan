@@ -4,9 +4,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 {
 	public class AdminController : Controller
 	{
-        public IActionResult Index()
+        public IActionResult Index(string mS)
         {
-            ViewData["PapeTitle"] = "Thông tin hệ thống";
+            ViewData["PapeTitle"] = mS;
             return View();
         }
 
