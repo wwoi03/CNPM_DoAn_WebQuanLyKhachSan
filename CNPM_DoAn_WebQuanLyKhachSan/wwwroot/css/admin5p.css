@@ -381,6 +381,63 @@
     border-top: 1px solid #D1CFCD;
 }
 
+/*-------------------------------------------- Tài khoản phụ ------------------------------*/
+.right-panel.account-edit {
+    display: block;
+}
+
+.right-panel.account-details {
+    display: block;
+}
+
+.setting-account {
+}
+
+.setting-account-title {
+    font-size: 16px;
+    display: felx;
+    align-items: center;
+    padding: 16px 0;
+}
+
+    .setting-account-title i {
+        color: #009688;
+        font-size: 20px;
+    }
+
+    .setting-account-title span {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+.setting-account-power {
+    display: flex;
+}
+
+.setting-account-list {
+    width: 50%;
+}
+
+.setting-account-item {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+    .setting-account-item input {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+
+    .setting-account-item label {
+        font-weight: 500 !important;
+        padding: 0;
+        margin: 0;
+    }
+
 /*-------------------------------------------- Menu ------------------------------*/
 .right-panel.menu-create {
     display: block
