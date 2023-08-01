@@ -1,0 +1,102 @@
+﻿@{
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-container d-flex">
+	<!-- Nội dung bên trái -->
+	<div class="left-panel col-8 pl-0 pr-0">
+		<div class="content container-fluid">
+			<div class="page-header">
+				<div class="row align-items-center">
+					<div class="col">
+						<div class="">
+							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả nhân viên</h4> 
+							<a class="btn btn-primary float-right veiwbutton" style="background-color: #009688">Thêm tài khoản phụ</a>
+						</div>
+					</div>
+				</div>
+
+				@*<div class="row align-items-center" style="margin-top: 20px;">
+					<div class="col">
+						<form>
+							<div class="row p-0 m-0">
+								<div class="col-10 m-0 p-0">
+									<div class="form-group m-0 p-0">
+										<input class="form-control" type="text" placeholder="Tìm kiếm"> 
+									</div>
+								</div>
+								
+								<div class="col-2 m-0 p-0" style="text-align: right">
+									<div class="form-group m-0 p-0">
+										<a class="btn btn-success btn-block mt-0 search_button" style="background-color: #009688"> Search </a> 
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>*@
+
+				<div class="row align-items-center" style="margin-top: 20px;">
+					<div class="col">
+						<form style="position: relative">
+							<input type="text" class="form-control" placeholder="Search here">
+							<button class="btn" type="submit" style="position: absolute; top: 0; right: 0"><i class="fas fa-search"></i></button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-table">
+						<div class="card-body booking_card">
+							<div class="table-responsive">
+								<table class="datatable table table-stripped table table-hover table-center mb-0">
+									<thead>
+										<tr>
+											<th style="width: 30%">Tên đăng nhập</th>
+											<th style="width: 30%">Trạng thái</th>
+											<th style="width: 40%">Chức năng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>tuandao8826</td>
+
+											<td>
+												<i class="fa-solid fa-circle" style="color: #42B72A; margin-right: 5px; font-size: 12px;"></i>
+												<i class="fa-solid fa-circle" style="color: #85817C; margin-right: 5px; font-size: 12px;"></i>
+												Đang hoạt động
+											</td>
+
+											<td class="justify-content-between">
+												<a id="account-details" class="btn btn-info btn-sm">
+													<i class="fas fa-folder"></i>
+													Chi tiết
+												</a>
+
+												<a id="account-edit" class="btn btn-primary btn-sm" >
+													<i class="fas fa-pencil-alt"></i>
+													Chỉnh sửa
+												</a>
+
+												<a asp-controller="" asp-action="" class="btn btn-danger btn-sm">
+													<i class="fa-solid fa-key"></i>
+													Đổi mật khẩu
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="right-panel col-4 pl-0 pr-0">
+						
+	</div>
+</div>

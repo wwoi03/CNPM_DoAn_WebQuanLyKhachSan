@@ -1,4 +1,4 @@
-﻿/* Thêm dấu "+" khi hover vào ô */
+﻿ /* Thêm dấu "+" khi hover vào ô */
 .fc-day:hover {
     position: relative;
 }
@@ -84,7 +84,7 @@
 
 .nav-line {
     position: absolute;
-    left: 2;
+    left: 0;
     bottom: 0;
     width: 0;
     height: 3px;
@@ -107,8 +107,8 @@
 .right-panel {
     padding-top: 14px;
     min-height: calc(100vh - 80px);
-    display: none;
 }
+
 
     .right-panel.active {
         display: block;
@@ -270,7 +270,7 @@
 }
 
 .container1 {
-    margin: 20px;
+    margin: 20px 7.5px;
 }
 
 .container-title1 {
@@ -349,7 +349,7 @@
 
 /*-------------------------------------------- Quản lý hệ thống ------------------------------*/
 .sys-container {
-    padding: 20px 24px;
+    padding: 20px 7.5px;
 }
 
 .sys-card {
@@ -380,3 +380,61 @@
     text-align: center;
     border-top: 1px solid #D1CFCD;
 }
+
+/*-------------------------------------------- Tài khoản phụ ------------------------------*/
+.right-panel.account-edit {
+    display: block;
+}
+
+.right-panel.account-details {
+    display: block;
+}
+
+.setting-account {
+    
+}
+
+.setting-account-title {
+    font-size: 16px;
+    display: felx;
+    align-items: center;
+    padding: 16px 0;
+}
+
+    .setting-account-title i {
+        color: #009688;
+        font-size: 20px;
+    }
+
+    .setting-account-title span {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+.setting-account-power {
+    display: flex;
+}
+
+.setting-account-list {
+    width: 50%;
+}
+
+.setting-account-item {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+    .setting-account-item input {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+
+    .setting-account-item label {
+        font-weight: 500 !important;
+        padding: 0;
+        margin: 0;
+    }
