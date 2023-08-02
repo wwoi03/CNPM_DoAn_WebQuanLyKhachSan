@@ -170,7 +170,6 @@ function SwitchTabs() {
 function AddBookRoomDetails() {
 	var addRoom = document.querySelector('.panel-form-add-room');
 	var panelFormRoomType = document.querySelector('.panel-form-roomtype');
-	console.log(addRoom);
 
 	if (addRoom != null) {
 		addRoom.addEventListener('click', function () {
@@ -182,24 +181,20 @@ function AddBookRoomDetails() {
 // M: xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
 function AddRoom(listRoom) {
 	var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
+	var listRoomString = document.getElementById('list-room-string')
 
 	// duyệt từng roomItem
 	roomItem.forEach((item, index) => {
 		item.addEventListener('click', function (e) {
-			console.log(item);
 			if (item.classList.contains('active')) {
 				item.classList.remove('active');
 				listRoom.splice(listRoom.indexOf(item.getAttribute('value')), 1);
-
-				console.log(listRoom);
 			} else {
 				item.classList.add('active');
 				listRoom.push(item.getAttribute('value'));
-				item.setAttribute('name', 'listRoom[' + listRoom.indexOf(item.getAttribute('value')) + ']');
-				console.log(listRoom);
 			}
 
-			document.getElementById('list-room-string').setAttribute('value', listRoom.join(','));
+			listRoomString.setAttribute('value', listRoom.join(','));
 		});
 	});
 
@@ -214,7 +209,6 @@ function MoreMenu() {
 
 	if (showOptionsButton != null) {
 		showOptionsButton.addEventListener('click', function () {
-			console.log("ấn");
 			if (isOptionsVisible) {
 				options.forEach(option => {
 					option.style.display = 'none';
@@ -393,6 +387,7 @@ function CreateBookRoom() {
 
 					// render giao diện
 					$(".right-panel").html(employeeDetailsHtml);
+
 					// xử lý các sự kiện
 					AddBookRoomDetails();
 					AddRoom(listRoom);
@@ -434,150 +429,139 @@ function RenderUIBookRoom(clickDate) {
 	var checkInDate = clickDate.year + '-' + clickDate.month + '-' + clickDate.day;
 	var checkOutDate = nextDateConvert.year + '-' + nextDateConvert.month + '-' + nextDateConvert.day;
 
-	$.ajax({
-		type: "GET",
-		url: "/RoomType/Create", // Đường dẫn tới Action GetEmployee
-		//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
-		success: function (data) {
-			// xử lý các sự kiện
-			AddBookRoomDetails();
-			var listRoom = [];
-			AddRoom(listRoom);
-
-			// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-			var employeeDetailsHtml =
-				`
-					<form method="post" action="BookRoom/Create">
-						<!-- Lưu đặt phòng -->
-						<div class="panel-save d-flex justify-content-between align-items-center">
-							<span>Thêm mới</span>
-
-							<div class="">
-								<input type="submit" value="Lưu"/>
-							</div>
-						</div>
-
-						<!-- Form -->
-						<div class="panel-form">
-							<!-- Thông tin -->
-							<div class="panel-form-info">
-								<!-- Tên khách hàng -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Họ và tên khách hàng</h5>
-									<input class="panel-form-input" name="nameCustomer" type="text" value="" />
-								</div>
-
-								<!-- Số điện thoại -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Số điện thoại</h5>
-									<input class="panel-form-input" name="phoneCustomer" type="number" value="" />
-								</div>
-
-								<!-- CCCD -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Căn cước công dân</h5>
-									<input class="panel-form-input" name="CardId" type="number" value="" />
-								</div>
-
-								<!-- Ngày -->
-								<div class="panel-form-item">
-									<div class="panel-form-height">
-										<div class="panel-form-height-item">
-											<h5 class="panel-form-title">Ngày nhận phòng</h5>
-											<input class="panel-form-input" name="checkInDate" type="date" value="${checkInDate}" />
-										</div>
-
-										<div class="panel-form-height-item">
-											<h5 class="panel-form-title">Ngày trả phòng</h5>
-											<input class="panel-form-input" name="checkOutDate" type="date" value="${checkOutDate}" />
-										</div>
-									</div>
-								</div>
-
-								<!-- Tiền trả trước -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Tiền trả trước</h5>
-									<input class="panel-form-input" type="number" name="PrePayment" placeholder="0.000 đ"/>
-								</div>
-
-								<!-- Ghi chú -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Ghi chú</h5>
-									<input class="panel-form-input" type="text" name="Note" value="" placeholder=""/>
-								</div>
-							</div>
-
-							<!-- Phòng -->
-							<div class="panel-form-room">
-								<div class="panel-form-room-item">
-									<h5 class="panel-form-title">Thêm phòng</h5>
-
-									<div class="panel-form-add-room">
-										<i class="fa-solid fa-square-plus"></i>
-										<p class="panel-form-room-btn">Thêm phòng</p>
-									</div>
-								</div>
-							</div>
-
-							<!-- Danh sách phòng theo loại-->
-							<div class="panel-form-roomtype">
-								<div class="panel-form-roomtype-item">
-									<div class="panel-form-roomtype-title">Phòng siêu vip</div>
-
-									<div class="panel-form-roomtype-render">
-										<div class="d-flex">
-											<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-												<div value="101" class="col-2 panel-form-roomtype-render-item">
-													101
-												</div>
-
-												<div value="102" class="col-2 panel-form-roomtype-render-item">
-													102
-												</div>
-
-												<div value="103" class="col-2 panel-form-roomtype-render-item">
-													103
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="panel-form-roomtype-item">
-									<div class="panel-form-roomtype-title">Phòng siêu vip</div>
-
-									<div class="panel-form-roomtype-render">
-										<div class="d-flex">
-											<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-												<div value="104" class="col-2 panel-form-roomtype-render-item">
-													104
-												</div>
-
-												<div value="105" class="col-2 panel-form-roomtype-render-item">
-													105
-												</div>
-
-												<div value="106" class="col-2 panel-form-roomtype-render-item">
-													106
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				`;
-
-			// render giao diện
-			$(".right-panel").html(employeeDetailsHtml);
-
+	var listRoom = [];
 			
-		},
-		error: function () {
-			alert("Đã xảy ra lỗi khi lấy thông t");
-		}
-	});
+	// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+	var employeeDetailsHtml =
+		`
+			<form method="post" action="BookRoom/Create">
+				<!-- Lưu đặt phòng -->
+				<div class="panel-save d-flex justify-content-between align-items-center">
+					<span>Thêm mới</span>
+
+					<div class="">
+						<input type="submit" value="Lưu"/>
+					</div>
+				</div>
+
+				<!-- Form -->
+				<div class="panel-form">
+					<!-- Thông tin -->
+					<div class="panel-form-info">
+						<!-- Tên khách hàng -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Họ và tên khách hàng</h5>
+							<input class="panel-form-input" name="nameCustomer" type="text" value="" />
+						</div>
+
+						<!-- Số điện thoại -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Số điện thoại</h5>
+							<input class="panel-form-input" name="phoneCustomer" type="number" value="" />
+						</div>
+
+						<!-- CCCD -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Căn cước công dân</h5>
+							<input class="panel-form-input" name="CardId" type="number" value="" />
+						</div>
+
+						<!-- Ngày -->
+						<div class="panel-form-item">
+							<div class="panel-form-height">
+								<div class="panel-form-height-item">
+									<h5 class="panel-form-title">Ngày nhận phòng</h5>
+									<input class="panel-form-input" name="checkInDate" type="date" value="${checkInDate}" />
+								</div>
+
+								<div class="panel-form-height-item">
+									<h5 class="panel-form-title">Ngày trả phòng</h5>
+									<input class="panel-form-input" name="checkOutDate" type="date" value="${checkOutDate}" />
+								</div>
+							</div>
+						</div>
+
+						<!-- Tiền trả trước -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Tiền trả trước</h5>
+							<input class="panel-form-input" type="number" name="PrePayment" placeholder="0.000 đ"/>
+						</div>
+
+						<!-- Ghi chú -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Ghi chú</h5>
+							<input class="panel-form-input" type="text" name="Note" value="" placeholder=""/>
+						</div>
+					</div>
+
+					<!-- Phòng -->
+					<div class="panel-form-room">
+						<div class="panel-form-room-item">
+							<h5 class="panel-form-title">Thêm phòng</h5>
+
+							<div class="panel-form-add-room">
+								<i class="fa-solid fa-square-plus"></i>
+								<p class="panel-form-room-btn">Thêm phòng</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Danh sách phòng theo loại-->
+					<div class="panel-form-roomtype">
+						<div class="panel-form-roomtype-item">
+							<div class="panel-form-roomtype-title">Phòng siêu vip</div>
+
+							<div class="panel-form-roomtype-render">
+								<div class="d-flex">
+									<div class="row p-0 container-fluid panel-form-roomtype-render-list">
+										<div value="101" class="col-2 panel-form-roomtype-render-item">
+											101
+										</div>
+
+										<div value="102" class="col-2 panel-form-roomtype-render-item">
+											102
+										</div>
+
+										<div value="103" class="col-2 panel-form-roomtype-render-item">
+											103
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel-form-roomtype-item">
+							<div class="panel-form-roomtype-title">Phòng siêu vip</div>
+
+							<div class="panel-form-roomtype-render">
+								<div class="d-flex">
+									<div class="row p-0 container-fluid panel-form-roomtype-render-list">
+										<div value="104" class="col-2 panel-form-roomtype-render-item">
+											104
+										</div>
+
+										<div value="105" class="col-2 panel-form-roomtype-render-item">
+											105
+										</div>
+
+										<div value="106" class="col-2 panel-form-roomtype-render-item">
+											106
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		`;
+
+	// render giao diện
+	$(".right-panel").html(employeeDetailsHtml);
+
+	// xử lý các sự kiện
+	AddBookRoomDetails();
+	AddRoom(listRoom);
 }
 
 /* --------------------------------- RoomType --------------------------------- */
@@ -587,9 +571,7 @@ function CreateRoomType() {
 	if (roomTypeCreate != null) {
 		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
 		roomTypeCreate.addEventListener('click', function (e) {
-			//var employeeId = $(this).data("employee-id");
 			// Gọi Action GetEmployee bằng AJAX
-			console.log("mofff");
 			$.ajax({
 				type: "GET",
 				url: "/RoomType/Create", // Đường dẫn tới Action GetEmployee
@@ -671,7 +653,6 @@ function DeleteRoomType() {
 				url: "/RoomType/Delete?roomTypeId=" + employeeId, // Đường dẫn tới Action GetEmployee
 				//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
 				success: function (data) {
-					console.log(data);
 					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 					var employeeDetailsHtml =
 						`
@@ -734,7 +715,6 @@ if (document.getElementById('account-edit') != null) {
 	document.getElementById('account-edit').addEventListener('click', function (e) {
     //var employeeId = $(this).data("employee-id");
     // Gọi Action GetEmployee bằng AJAX
-	console.log("mofff");
     $.ajax({
         type: "GET",
         url: "/Staff/Edit", // Đường dẫn tới Action GetEmployee
@@ -827,7 +807,6 @@ if (accountDetails != null) {
 	accountDetails.addEventListener('click', function (e) {
 		//var employeeId = $(this).data("employee-id");
 		// Gọi Action GetEmployee bằng AJAX
-		console.log("mofff");
 		$.ajax({
 			type: "GET",
 			url: "/Staff/Details", // Đường dẫn tới Action GetEmployee
@@ -969,7 +948,6 @@ if (accountCreate != null) {
 	accountCreate.addEventListener('click', function (e) {
 		//var employeeId = $(this).data("employee-id");
 		// Gọi Action GetEmployee bằng AJAX
-		console.log("mofff");
 		$.ajax({
 			type: "GET",
 			url: "/Staff/Create", // Đường dẫn tới Action GetEmployee
