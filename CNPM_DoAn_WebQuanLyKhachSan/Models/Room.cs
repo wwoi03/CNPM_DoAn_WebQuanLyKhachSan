@@ -8,7 +8,7 @@
         public RoomType RoomType { get; set; }
         public int StaffId { get; set; }
         public Staff Staff { get; set; }
-        public int? Staus { get; set; }
+        public int? Status { get; set; }
         public string image { get; set; }
         public int? CleanRoom { get; set; }
 

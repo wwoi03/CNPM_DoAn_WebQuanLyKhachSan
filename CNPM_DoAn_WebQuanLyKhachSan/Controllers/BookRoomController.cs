@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 {
@@ -14,6 +15,17 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         {
             ViewData["PapeTitle"] = "Đặt Phòng";
             return Json("fsdfs");
+        }
+
+        [HttpPost]
+        public IActionResult Create(BookRoomVM bookRoomVM,  string listRoomString, string nameCustomer, string phoneCustomer, string CardId, DateTime checkInDate, DateTime checkOutDate)
+        {
+            ViewData["PapeTitle"] = "Đặt Phòng";
+            string[] listRoomNum = listRoomString.Split(',');
+
+
+
+            return RedirectToAction("Index");
         }
     }
 }

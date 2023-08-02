@@ -1,4 +1,6 @@
-﻿namespace CNPM_DoAn_WebQuanLyKhachSan.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 {
     public class DBHelper
     {
@@ -9,6 +11,12 @@
             this.dbContext = _dbContext;
         }
 
+        /* ------------------------------------- Room ------------------------------------- */
+        // M: Lấy danh sách phòng
+        public List<Room> GetUnusedRoom()
+        {
+            return dbContext.Rooms.Include(p => p.RoomType).Where(p => p.Status == 0).ToList();
+        }
 
 
         /* ------------------------------------- RoomType ------------------------------------- */
