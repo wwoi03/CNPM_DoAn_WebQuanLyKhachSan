@@ -190,25 +190,27 @@ function MoreMenu() {
 
 	let isOptionsVisible = false;
 
-	showOptionsButton.addEventListener('click', function () {
-		console.log("ấn");
-		if (isOptionsVisible) {
-			options.forEach(option => {
-				option.style.display = 'none';
-			});
-		} else {
-			options.forEach(option => {
-				option.style.display = 'block';
-			});
-		}
+	if (showOptionsButton != null) {
+		showOptionsButton.addEventListener('click', function () {
+			console.log("ấn");
+			if (isOptionsVisible) {
+				options.forEach(option => {
+					option.style.display = 'none';
+				});
+			} else {
+				options.forEach(option => {
+					option.style.display = 'block';
+				});
+			}
 
-		isOptionsVisible = !isOptionsVisible;
-	});
-	const showdialog = document.getElementById('dialog-bt');
-	const tagdialog = document.getElementById("dialog");
-	showdialog.addEventListener('click', function () {
-		tagdialog.style.display = "block";
-	});
+			isOptionsVisible = !isOptionsVisible;
+		});
+		const showdialog = document.getElementById('dialog-bt');
+		const tagdialog = document.getElementById("dialog");
+		showdialog.addEventListener('click', function () {
+			tagdialog.style.display = "block";
+		});
+    }
 
 	function closeDialog() {
 		document.getElementById("dialog").style.display = "none";
