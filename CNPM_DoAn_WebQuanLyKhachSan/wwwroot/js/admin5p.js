@@ -143,14 +143,25 @@ function SwitchTabs() {
     }
 }
 
+// M: Xử lý các chức năng của BookRoom
+function BookRoom() {
+	
+}
+
 // M: Xử lý các chức năng của RoomType
 function RoomType() {
 	CreateRoomType();
 	DeleteRoomType();
 }
 
+/* --------------------------------- BookRoom --------------------------------- */
+// M: Create BookRoom
+function CreateBookRoom() {
+
+}
+
 /* --------------------------------- RoomType --------------------------------- */
-// Create RoomType
+// M: Create RoomType
 function CreateRoomType() {
 	var roomTypeCreate = document.getElementById('roomType-create')
 	if (roomTypeCreate != null) {
@@ -225,7 +236,7 @@ function CreateRoomType() {
 	}
 }
 
-// Delete RoomType
+// M: Delete RoomType
 function DeleteRoomType() {
 	var roomTypeDelete = document.querySelectorAll('.roomType-delete')
 	if (roomTypeDelete != null) {
