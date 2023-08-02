@@ -373,6 +373,7 @@
     border: 1px solid #E1E1E1;
     background-color: white;
     box-shadow: 0 2px 4px rgba(198, 179, 179, 0.1);
+    padding: 8px 0;
 }
 
     .more-menu button {
@@ -382,14 +383,14 @@
         cursor: pointer;
         border: none;
         background-color: white;
-        padding: 5px;
+        padding: 6px 10px;
         text-align: left;
         cursor: pointer;
         width: 100%;
     }
 
         .more-menu button:hover {
-            background-color: wheat;
+            background-color: #F5F5F5;
         }
 
     .more-menu span {
@@ -397,7 +398,7 @@
     }
 
     .more-menu i {
-        font-size: 14px;
+        font-size: 16px;
         margin-right: 5px;
     }
 
