@@ -109,6 +109,11 @@ Main();
 function Main() {
 	SwitchTabs();
 	RoomType();
+	AddBookRoomDetails();
+	MoreMenu();
+
+	var listRoom = [];
+	AddRoom(listRoom);
 }
 
 /* --------------------------------- Hàm xử lý sự kiện --------------------------------- */
@@ -143,6 +148,73 @@ function SwitchTabs() {
     }
 }
 
+// M: Xử lý khi bấm vào nút thêm phòng
+function AddBookRoomDetails() {
+	var addRoom = document.querySelector('.panel-form-add-room');
+	var panelFormRoomType = document.querySelector('.panel-form-roomtype');
+
+	if (addRoom != null) {
+		addRoom.addEventListener('click', function () {
+			panelFormRoomType.classList.toggle('active');
+		});
+    }
+}
+
+// M: xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
+function AddRoom(listRoom) {
+	var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
+
+	// duyệt từng roomItem
+	roomItem.forEach((item, index) => {
+		item.addEventListener('click', function (e) {
+			console.log(item);
+			if (item.classList.contains('active')) {
+				item.classList.remove('active');
+				listRoom.splice(listRoom.indexOf(item.getAttribute('value')), 1);
+				console.log(listRoom);
+			} else {
+				item.classList.add('active');
+
+				listRoom.push(item.getAttribute('value'));
+				console.log(listRoom);
+            }
+		});
+	});
+
+}
+
+// menu mở rộng
+function MoreMenu() {
+	const showOptionsButton = document.getElementById('show-menu');
+	const options = document.querySelectorAll('.more-menu');
+
+	let isOptionsVisible = false;
+
+	showOptionsButton.addEventListener('click', function () {
+		console.log("ấn");
+		if (isOptionsVisible) {
+			options.forEach(option => {
+				option.style.display = 'none';
+			});
+		} else {
+			options.forEach(option => {
+				option.style.display = 'block';
+			});
+		}
+
+		isOptionsVisible = !isOptionsVisible;
+	});
+	const showdialog = document.getElementById('dialog-bt');
+	const tagdialog = document.getElementById("dialog");
+	showdialog.addEventListener('click', function () {
+		tagdialog.style.display = "block";
+	});
+
+	function closeDialog() {
+		document.getElementById("dialog").style.display = "none";
+	}
+}
+
 // M: Xử lý các chức năng của BookRoom
 function BookRoom() {
 	
@@ -157,7 +229,29 @@ function RoomType() {
 /* --------------------------------- BookRoom --------------------------------- */
 // M: Create BookRoom
 function CreateBookRoom() {
-
+	var bookRoomCreate = document.querySelector('.btn-page')
+	if (bookRoomCreate != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		bookRoomCreate.addEventListener('click', function (e) {
+			// Gọi Action GetEmployee bằng AJAX
+			$.ajax({
+				type: "GET",
+				url: "/RoomType/Create", // Đường dẫn tới Action GetEmployee
+				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+				success: function (data) {
+					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+					var employeeDetailsHtml =
+						`
+							
+						`;
+					$(".right-panel").html(employeeDetailsHtml);
+				},
+				error: function () {
+					alert("Đã xảy ra lỗi khi lấy thông t");
+				}
+			});
+		});
+	}
 }
 
 /* --------------------------------- RoomType --------------------------------- */
