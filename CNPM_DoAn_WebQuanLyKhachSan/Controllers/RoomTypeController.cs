@@ -31,6 +31,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult Create(RoomTypeVM roomTypeVM)
         {
             IFormFile imageFile = roomTypeVM.ImageFile;
+            ModelState.Remove("Image");
 
             if (ModelState.IsValid)
             {
