@@ -9,6 +9,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AssignmentDetails>()
@@ -17,19 +18,19 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
                 .HasKey(o => new { o.MenuId, o.StaffId, o.BookRoomDetailsId, o.OrderTime });
         }
         
-        public DbSet<Assignment> Assignment { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
         public DbSet<AssignmentDetails> AssignmentDetails { get; set; }
         public DbSet<Bill> Bill { get; set; }
         public DbSet<BookRoom> BookRooms { get; set; }
-        public DbSet<BookRoomDetails    > BookRoomDetails { get; set; }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Menu> Menu { get; set; }
-        public DbSet<MenuOrder> MenuOrder { get; set; }
-        public DbSet<MenuType> MenuType { get; set; }
-        public DbSet<Payment> Payment { get; set; }
-        public DbSet<Position> Position { get; set; }
-        public DbSet<Room> Room { get; set; }
-        public DbSet<RoomType> RoomType { get; set; }
-        public DbSet<Staff> Staff { get; set; }
+        public DbSet<BookRoomDetails> BookRoomDetails { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<MenuOrder> MenuOrders { get; set; }
+        public DbSet<MenuType> MenuTypes { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
     }
 }
