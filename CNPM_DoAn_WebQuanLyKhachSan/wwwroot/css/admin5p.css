@@ -462,13 +462,11 @@
 }
 /*dialog ở đây*/
 .dialog {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    display: block;
+    position:relative;
+    z-index:1400;
+    height:100vh;
+   
 }
 
 .dialog-content {
@@ -479,17 +477,33 @@
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
+   z-index:1500;
 }
-
+.dialog-over {
+    position:absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0
+    
+}
 .dialog-bt{
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
-.dialog-bt-confirm{
-
+.dialog-bt-confirm {
+    padding-right: 10px;
 }
-.dialog-bt-cancel{
-
+.dialog-bt-confirm:hover {
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+.dialog-bt-cancel:hover{
+    background-color: antiquewhite;
+    cursor: pointer;
 }
 
 /*-------------------------------------------- Quản lý hệ thống ------------------------------*/

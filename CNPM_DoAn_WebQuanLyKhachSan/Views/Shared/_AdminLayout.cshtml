@@ -34,20 +34,21 @@
 	<div id="dialog" class="dialog">
 		<div class="dialog-content">
 			<h2>xác nhận đặt phòng @ViewData["PapeTitle"]</h2>
-		</div>
-		<div lass="dialog-over"></div>
-		<div class="dialog-bt">
+			<div class="dialog-bt">
 			<div class="dialog-bt-confirm">
 				<span>
 					XÁC NHẬN
 				</span>
 			</div>
-			<div class="dialog-bt-cancel">
+			<div class="dialog-bt-cancel" onclick="closeDialog()">
 				TỪ CHỐI
 			</div>
 		</div>
+		</div>
+		<div class="dialog-over" onclick="closeDialog()"></div>
+		
 	</div>
-	</div>
+	
 	<div class="main-wrapper">
 		<div class="header">
 			<div class="header-left" style="border-right: 1px solid #E5E5E5">
