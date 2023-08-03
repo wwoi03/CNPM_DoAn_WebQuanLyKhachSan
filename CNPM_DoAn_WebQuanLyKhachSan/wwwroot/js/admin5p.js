@@ -1,125 +1,129 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-	// Khởi tạo fullcalendar
-	var calendarEl = document.getElementById('calendar');
+﻿var clickBookRoom = document.getElementById('click-book-room')
 
-	// Ngày cho các sự kiện trên lịch
-	var date = new Date();
-	var d = date.getDate(),
-		m = date.getMonth(),
-		y = date.getFullYear();
+var calendarEl = document.getElementById('calendar');
 
-	var Calendar = FullCalendar.Calendar;
-	var Draggable = FullCalendar.Draggable;
+if (calendarEl != null) {
+	$.ajax({
+		type: "GET",
+		url: "/BookRoom/GetDataIndex",
+		success: function (data) {
+			// Khởi tạo fullcalendar
 
-	var containerEl = document.getElementById("external-events");
-	var checkbox = document.getElementById("drop-remove");
-	var calendarEl = document.getElementById("calendar");
+			// Ngày cho các sự kiện trên lịch
+			var date = new Date();
+			var d = date.getDate(),
+				m = date.getMonth(),
+				y = date.getFullYear();
 
-	// Sự kiện trên lịch
-	var events = [
-		{
-			id: 101,
-			title: "Phòng 101 - Đào Công Tuấn",
-			start: new Date(y, m, 17, 10, 20),
-			end: new Date(y, m, 19, 22, 30),
-			backgroundColor: "#42A5F5",
-			textColor: "#fff",
-			allDay: false,
+			var Calendar = FullCalendar.Calendar;
+			var Draggable = FullCalendar.Draggable;
+
+			var containerEl = document.getElementById("external-events");
+			var checkbox = document.getElementById("drop-remove");
+			var calendarEl = document.getElementById("calendar");
+
+			// Sự kiện trên lịch
+			var events = [
+				/*{
+					id: 101,
+					title: "Phòng 101 - Đào Công Tuấn",
+					start: new Date(y, m, 17, 10, 20),
+					end: new Date(y, m, 19, 22, 30),
+					backgroundColor: "#42A5F5",
+					textColor: "#fff",
+					allDay: false,
+				},*/
+				
+			];
+
+			function addEvent(_id, _tittle, _start, _end) {
+				var newEvent = {
+					id: _id,
+					title: _tittle,
+					start: _start,
+					end: _end,
+					allDay: false,
+					backgroundColor: "#42A5F5",
+					textColor: "#fff"
+				};
+
+				return newEvent;
+			};
+
+			data.forEach(function (item) {
+				console.log(item);
+				events.push(addEvent(item.bookRoomId, item.customer.Name,));
+			});
+
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				headerToolbar: {
+					left: "prev,next today",
+					right: "title",
+					// right: 'dayGridMonth,timeGridWeek,timeGridDay'
+				},
+
+				themeSystem: "bootstrap",
+
+				locale: "vi",
+
+				events: events,
+
+				editable: true,
+
+				droppable: true,
+
+				dateClick: function (info) {
+					var clickedDate = info.date;
+
+					RenderUIBookRoom(PadDate(clickedDate.getDate(), clickedDate.getMonth(), clickedDate.getFullYear()));
+				},
+
+				eventClick: function (info) {
+					// Lấy thông tin về sự kiện được chọn
+					var eventId = info.event.id;
+					var eventTitle = info.event.title;
+					var eventStart = info.event.start;
+					var eventEnd = info.event.end;
+
+					// Hiển thị thông tin sự kiện trong console (hoặc xử lý theo ý muốn)
+					console.log('ID: ' + eventId);
+					console.log('Tiêu đề sự kiện: ' + eventTitle);
+					console.log('Thời gian bắt đầu: ' + eventStart.getDate());
+					console.log('Thời gian kết thúc: ' + eventEnd);
+				},
+
+				drop: function (info) {
+					if (checkbox.checked) {
+						info.draggedEl.parentNode.removeChild(info.draggedEl);
+					}
+				},
+			});
+
+			// render giao diện calendar
+			calendar.render();
+
+			// Bắt sự kiện click của các item trong navbar
+			$(".nav-container li").click(function () {
+				// Lấy id của item được click
+				var view = $(this).attr("id");
+
+				// Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
+				if (view === "month-view") {
+					calendar.changeView("dayGridMonth");
+				} else if (view === "week-view") {
+					calendar.changeView("dayGridWeek");
+				} else if (view === "day-view") {
+					calendar.changeView("listDay");
+				}
+			});
 		},
-		{
-			id: 102,
-			title: "Phòng 102 - Nguyễn Thành An",
-			start: new Date(y, m, d - 5, 10, 20),
-			end: new Date(y, m, d, 22, 30),
-			backgroundColor: "#42A5F5",
-			textColor: "#fff",
-			allDay: false,
-		},
-		{
-			id: 103,
-			title: "Phòng 103 - Bùi Thanh Tùng",
-			start: new Date(y, m, 20, 10, 20),
-			end: new Date(y, m, 22, 22, 30),
-			backgroundColor: "#42A5F5",
-			textColor: "#fff",
-			allDay: false,
-		},
-		{
-			id: 104,
-			title: "Phòng 104 - Diệp Minh Quân",
-			start: new Date(y, m, d, 10, 20),
-			end: new Date(y, m, d + 3, 22, 30),
-			backgroundColor: "#42A5F5",
-			textColor: "#fff",
-			allDay: false,
-		},
-	];
-
-
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		headerToolbar: {
-			left: "prev,next today",
-			right: "title",
-			// right: 'dayGridMonth,timeGridWeek,timeGridDay'
-		},
-
-		themeSystem: "bootstrap",
-
-		locale: "vi",
-
-		events: events,
-
-		editable: true,
-
-		droppable: true,
-
-		dateClick: function (info) {
-			var clickedDate = info.date;
-
-			RenderUIBookRoom(PadDate(clickedDate.getDate(), clickedDate.getMonth(), clickedDate.getFullYear()));
-		},
-
-		eventClick: function (info) {
-			// Lấy thông tin về sự kiện được chọn
-			var eventId = info.event.id;
-			var eventTitle = info.event.title;
-			var eventStart = info.event.start;
-			var eventEnd = info.event.end;
-
-			// Hiển thị thông tin sự kiện trong console (hoặc xử lý theo ý muốn)
-			console.log('ID: ' + eventId);
-			console.log('Tiêu đề sự kiện: ' + eventTitle);
-			console.log('Thời gian bắt đầu: ' + eventStart.getDate());
-			console.log('Thời gian kết thúc: ' + eventEnd);
-        },
-
-		drop: function (info) {
-			if (checkbox.checked) {
-				info.draggedEl.parentNode.removeChild(info.draggedEl);
-			}
-		},
-	});
-
-	// render giao diện calendar
-	calendar.render();
-
-	
-
-	// Bắt sự kiện click của các item trong navbar
-	$(".nav-container li").click(function () {
-		// Lấy id của item được click
-		var view = $(this).attr("id");
-
-		// Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
-		if (view === "month-view") {
-			calendar.changeView("dayGridMonth");
-		} else if (view === "week-view") {
-			calendar.changeView("dayGridWeek");
-		} else if (view === "day-view") {
-			calendar.changeView("listDay");
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông tin");
 		}
 	});
-});
+}
+
+
 
 /* --------------------------------- Main --------------------------------- */
 Main();
@@ -181,7 +185,7 @@ function AddBookRoomDetails() {
 // M: xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
 function AddRoom(listRoom) {
 	var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
-	var listRoomString = document.getElementById('list-room-string')
+	var listRoomString = document.getElementById('list-room-string');
 
 	// duyệt từng roomItem
 	roomItem.forEach((item, index) => {
@@ -291,7 +295,7 @@ function CreateBookRoom() {
 										<!-- CCCD -->
 										<div class="panel-form-item">
 											<h5 class="panel-form-title">Căn cước công dân</h5>
-											<input class="panel-form-input" name="CardId" type="number" value="" />
+											<input class="panel-form-input" name="cardId" type="number" value="" />
 										</div>
 
 										<!-- Ngày -->
@@ -299,12 +303,12 @@ function CreateBookRoom() {
 											<div class="panel-form-height">
 												<div class="panel-form-height-item">
 													<h5 class="panel-form-title">Ngày nhận phòng</h5>
-													<input class="panel-form-input" name="checkInDate" type="date" />
+													<input class="panel-form-input" name="CheckInDate" type="date" />
 												</div>
 
 												<div class="panel-form-height-item">
 													<h5 class="panel-form-title">Ngày trả phòng</h5>
-													<input class="panel-form-input" name="checkOutDate" type="date" />
+													<input class="panel-form-input" name="CheckOutDate" type="date" />
 												</div>
 											</div>
 										</div>

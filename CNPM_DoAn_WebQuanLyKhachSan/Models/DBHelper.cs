@@ -54,7 +54,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 
         /* ------------------------------------- Customer ------------------------------------- */
         // M: Lấy khách hàng
-        public Customer GetCustomerByCard(int cardId)
+        public Customer GetCustomerById(int cardId)
         {
             return dbContext.Customers.FirstOrDefault(p => p.CardId == cardId); 
         }
@@ -81,6 +81,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         /* ------------------------------------- BookRoom ------------------------------------- */
+        // M: Lấy danh sách đặt phòng
+        public List<BookRoom> GetBookRooms()
+        {
+            return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).ToList();
+        }
+
         // M: Thêm mới Đặt phòng
         public void CreateBookRoom(BookRoom newBookRoom)
         {

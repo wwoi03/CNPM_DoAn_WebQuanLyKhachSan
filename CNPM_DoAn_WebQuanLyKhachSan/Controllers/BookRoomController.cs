@@ -18,7 +18,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult Index()
         {
             ViewData["PapeTitle"] = "Đặt Phòng";
+            
             return View();
+        }
+
+        public IActionResult GetDataIndex()
+        {
+            List<BookRoom> bookRooms = dBHelper.GetBookRooms();
+            return Json(bookRooms);
         }
 
         public IActionResult Create()
@@ -28,18 +35,18 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(BookRoomVM bookRoomVM,  string listRoomString, string nameCustomer, string phoneCustomer, int CardId, DateTime checkInDate, DateTime checkOutDate)
+        public IActionResult Create(BookRoomVM bookRoomVM,  string listRoomString, string nameCustomer, string phoneCustomer, int cardId)
         {
             ViewData["PapeTitle"] = "Đặt Phòng";
             string[] listRoomNum = listRoomString.Split(',');
 
             // Kiểm tra khách hàng đã có từ trước
-            if (dBHelper.GetCustomerByCard(CardId) == null) // chưa có khách hàng
+            if (dBHelper.GetCustomerById(cardId) == null) // chưa có khách hàng
             {
                 // Thêm mới khách hàng
                 Customer customer = new Customer()
                 {
-                    CardId = CardId,
+                    CardId = cardId,
                     Name = nameCustomer,
                     Phone = phoneCustomer,
                 };
@@ -50,16 +57,15 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             // Tạo đơn đặt phòng
             BookRoom bookRoom = new BookRoom()
             {
-                CardId = CardId,
+                CardId = cardId,
                 StaffId = 1,
                 PrePayment = bookRoomVM.PrePayment,
-                Note = bookRoomVM.Note
+                Note = bookRoomVM.Note,
+                CheckOutDate = bookRoomVM.CheckOutDate,
+                CheckInDate = bookRoomVM.CheckInDate,
             };
-
             dBHelper.CreateBookRoom(bookRoom);
-
             int bookRoomId = dBHelper.GetNewBookRoom().BookRoomId;
-
 
             // Tạo các chi tiết đặt phòng
             for (int i = 0; i < listRoomNum.Length; i++)
@@ -71,11 +77,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 {
                     BookRoomId = bookRoomId,
                     RoomID = roomId,
-                    CheckInDate = checkInDate,
-                    CheckOutDate = checkOutDate,
+                    CheckInDate = bookRoomVM.CheckInDate,
+                    CheckOutDate = bookRoomVM.CheckOutDate,
                     StatusRented = 0,
-                    Note = bookRoomVM.Note,
+                    Note = "",
                 };
+
+                dBHelper.CreateBookRoomDetails(bookRoomDetails);
             }
 
             return RedirectToAction("Index");
