@@ -45,11 +45,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 return RedirectToAction("Index");
 	}
 
-            return Json(roomVM);
-}
-
-
-
 	// M: Xóa loại phòng
 	[HttpGet]
 		public IActionResult Delete(int roomId)

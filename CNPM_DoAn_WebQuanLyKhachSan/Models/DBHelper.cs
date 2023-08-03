@@ -23,11 +23,17 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         {
             return dbContext.Rooms.FirstOrDefault(p => p.RoomId == roomId);
         }
+		// M: Thêm  phòng
+		public void InsertRoom(Room newRoom)
+		{
+			dbContext.Rooms.Add(newRoom);
+			dbContext.SaveChanges();
+		}
 
 
-        /* ------------------------------------- RoomType ------------------------------------- */
-        // M: Lấy danh sách sản phẩm
-        public List<RoomType> GetRoomType()
+		/* ------------------------------------- RoomType ------------------------------------- */
+		// M: Lấy danh sách sản phẩm
+		public List<RoomType> GetRoomType()
         {
             return  dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
