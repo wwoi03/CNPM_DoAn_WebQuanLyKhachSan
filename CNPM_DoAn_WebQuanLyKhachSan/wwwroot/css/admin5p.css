@@ -80,6 +80,7 @@
     text-align: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .nav-line {
@@ -378,6 +379,7 @@
     border: 1px solid #E1E1E1;
     background-color: white;
     box-shadow: 0 2px 4px rgba(198, 179, 179, 0.1);
+    padding: 8px 0;
 }
 
     .more-menu button {
@@ -387,21 +389,22 @@
         cursor: pointer;
         border: none;
         background-color: white;
-        margin: 5px;
-        width: 100%;
+        padding: 6px 10px;
         text-align: left;
+        cursor: pointer;
+        width: 100%;
     }
 
-    .more-menu :has(:hover) {
-        background-color: wheat;
-    }
+        .more-menu button:hover {
+            background-color: #F5F5F5;
+        }
 
     .more-menu span {
         font-size: 16px;
     }
 
     .more-menu i {
-        font-size: 14px;
+        font-size: 16px;
         margin-right: 5px;
     }
 
@@ -411,7 +414,7 @@
 }
 
 .card-content1-top {
-    justify-content: center;
+    justify-content: space-around;
     display: flex;
     align-items: center;
     border-bottom: 0.5px solid #E1E1E1;
@@ -419,7 +422,7 @@
 }
 
     .card-content1-top i {
-        margin-left: auto;
+        padding-left: 15px;
     }
 
         .card-content1-top i:focus {

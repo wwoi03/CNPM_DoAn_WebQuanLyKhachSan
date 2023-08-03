@@ -13,14 +13,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AssignmentDetails>()
-                .HasKey(o => new { o.AssginmentDetailsId, o.StaffID });
+                .HasKey(o => new { o.AssginmentId, o.StaffID });
             modelBuilder.Entity<MenuOrder>()
                 .HasKey(o => new { o.MenuId, o.StaffId, o.BookRoomDetailsId, o.OrderTime });
         }
         
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<AssignmentDetails> AssignmentDetails { get; set; }
-        public DbSet<Bill> Bill { get; set; }
+        public DbSet<Bill> Bills { get; set; }
         public DbSet<BookRoom> BookRooms { get; set; }
         public DbSet<BookRoomDetails> BookRoomDetails { get; set; }
         public DbSet<Customer> Customers { get; set; }
