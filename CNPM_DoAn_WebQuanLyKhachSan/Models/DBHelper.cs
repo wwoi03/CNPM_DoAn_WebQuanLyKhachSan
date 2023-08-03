@@ -113,5 +113,21 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         {
             return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).FirstOrDefault(p => p.BookRoomId == bookRoomId);
         }
+
+        /* ------------------------------------- Menu ------------------------------------- */
+        public Menu GetMenuById(int menuId)
+        {
+            return dbContext.Menus.FirstOrDefault(p => p.MenuId == menuId);
+        }
+        public List<Menu> GetMenus()
+        {
+
+            return dbContext.Menus.OrderByDescending(p => p.MenuId).ToList();
+        }
+        public void InsertMenu(Menu newMenu)
+        {
+            dbContext.Menus.Add(newMenu);
+            dbContext.SaveChanges();
+        }
     }
 }
