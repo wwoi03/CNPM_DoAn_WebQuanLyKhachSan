@@ -14,7 +14,6 @@
         public string Email { get; set; }
         public string Passwork { get; set; }
         public int? Status { get; set; }
-        public ICollection<AssignmentDetails> AssignmentDetails { get; set; }
     }
 }
 

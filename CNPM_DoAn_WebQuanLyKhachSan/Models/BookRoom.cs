@@ -4,12 +4,9 @@
     {
         [key]
         public int BookRoomId { get; set; }
-        [key]
         public int CardId { get; set; }
-        [key]
         public int StaffId { get; set; }
         public double PrePayment { get; set; }
-        public double PriceAgreement { get; set; }
-        public string? note { get; set; }
+        public string? Note { get; set; }
     }
 }

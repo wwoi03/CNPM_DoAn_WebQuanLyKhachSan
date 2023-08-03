@@ -6,7 +6,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
     {
         [Key]
         public int MenuTypeId { get; set; }
-
         public string Name { get; set; }
     }
 }

@@ -5,6 +5,5 @@
         [key]
         public int PaymentId { get; set; }
         public string Name { get; set; }
-
     }
 }
