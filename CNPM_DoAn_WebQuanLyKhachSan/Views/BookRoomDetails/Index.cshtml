@@ -40,39 +40,96 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
             <div class="container1">
                 <h2 class="container-title1">Tên Loại Phòng</h2>
                 <div class="card-container1">
+                    <!-- Item -->
 					<div class="col-3 p-0 m-0">
 						<div class="card1-item">
                             <div class="card1">
                                 <div class="card-content1">
                                     <div class="card-content1-top">
                                         <h3 class="card-title1">Ten Phong</h3>
-                                        <i id="show-menu" class="fa-solid fa-ellipsis-vertical"></i>
-                                      
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                                            <div class="more-menu">
+                                                <button id="dialog-bt">
+                                                    <i class="fa-solid fa-key" style="color: #8d929a;"></i>
+                                                    <span >
+                                                        Nhận Phòng
+                                                    </span>                                         
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
+                                                    <span>
+                                                        Nhận Phòng đặt trước
+                                                    </span>    
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
+                                                    <span>
+                                                        Yêu cầu dọn phòng
+                                                    </span>    
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                     <div class="more-menu">
-                                         <button id="dialog-bt">
-                                             <i class="fa-solid fa-key" style="color: #8d929a;"></i>
-                                             <span >
-                                                 Nhận Phòng
-                                             </span>                                         
-                                         </button>
-                                         <button onclick="openDialog()">
-                                            <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
-                                            <span>
-                                                 Nhận Phòng đặt trước
-                                             </span>    
-                                         </button>
-                                         <button onclick="openDialog()">
-                                             <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
-                                             <span>
-                                                 Yêu cầu dọn phòng
-                                             </span>    
-                                         </button>
-                                       </div>
+                                     
                                     <div class="card-content1-bottom">
                                         <i class="fa-solid fa-person-running fa-2xl"></i>
                                         <h3 class="card-title1">Ten Phong</h3>
                                     </div>
+
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                    </div>
+                                    <!-- Thêm các thông tin khác của card 1 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- Item -->
+					<div class="col-3 p-0 m-0">
+						<div class="card1-item">
+                            <div class="card1">
+                                <div class="card-content1">
+                                    <div class="card-content1-top">
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                                            <div class="more-menu">
+                                                <button id="dialog-bt">
+                                                    <i class="fa-solid fa-key" style="color: #8d929a;"></i>
+                                                    <span >
+                                                        Nhận Phòng
+                                                    </span>                                         
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
+                                                    <span>
+                                                        Nhận Phòng đặt trước
+                                                    </span>    
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
+                                                    <span>
+                                                        Yêu cầu dọn phòng
+                                                    </span>    
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-person-running fa-2xl"></i>
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                    </div>
+
                                     <div class="card-content1-bottom">
                                         <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
                                         <h3 class="card-title1">Ten Phong</h3>
@@ -83,62 +140,46 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                         </div>
                     </div>
 
-                    <div class="col-3 p-0 m-0">
+                    <!-- Item -->
+					<div class="col-3 p-0 m-0">
 						<div class="card1-item">
                             <div class="card1">
                                 <div class="card-content1">
                                     <div class="card-content1-top">
                                         <h3 class="card-title1">Ten Phong</h3>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-person-running fa-2xl"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                    </div>
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                    </div>
-                                    <!-- Thêm các thông tin khác của card 1 -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
 
-                    <div class="col-3 p-0 m-0">
-						<div class="card1-item">
-                            <div class="card1">
-                                <div class="card-content1">
-                                    <div class="card-content1-top">
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-person-running fa-2xl"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                    </div>
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                    </div>
-                                    <!-- Thêm các thông tin khác của card 1 -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                            <div class="more-menu">
+                                                <button id="dialog-bt">
+                                                    <i class="fa-solid fa-key" style="color: #8d929a;"></i>
+                                                    <span >
+                                                        Nhận Phòng
+                                                    </span>                                         
+                                                </button>
 
-                    <div class="col-3 p-0 m-0">
-						<div class="card1-item">
-                            <div class="card1">
-                                <div class="card-content1">
-                                    <div class="card-content1-top">
-                                        <h3 class="card-title1">Ten Phong</h3>
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
+                                                    <span>
+                                                        Nhận Phòng đặt trước
+                                                    </span>    
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
+                                                    <span>
+                                                        Yêu cầu dọn phòng
+                                                    </span>    
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+                                     
                                     <div class="card-content1-bottom">
                                         <i class="fa-solid fa-person-running fa-2xl"></i>
                                         <h3 class="card-title1">Ten Phong</h3>
                                     </div>
+
                                     <div class="card-content1-bottom">
                                         <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
                                         <h3 class="card-title1">Ten Phong</h3>

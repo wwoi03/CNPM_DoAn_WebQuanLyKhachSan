@@ -206,35 +206,34 @@ function AddRoom(listRoom) {
 
 // menu mở rộng
 function MoreMenu() {
-	const showOptionsButton = document.getElementById('show-menu');
+	const showMenuIcons = document.querySelectorAll('.show-menu');
 	const options = document.querySelectorAll('.more-menu');
-
-	let isOptionsVisible = false;
-
-	if (showOptionsButton != null) {
-		showOptionsButton.addEventListener('click', function () {
-			if (isOptionsVisible) {
-				options.forEach(option => {
-					option.style.display = 'none';
-				});
-			} else {
-				options.forEach(option => {
-					option.style.display = 'block';
-				});
-			}
-
-			isOptionsVisible = !isOptionsVisible;
+	console.log("44");
+	showMenuIcons.forEach(icon => {
+		icon.addEventListener('click', function () {
+			icon.classList.toggle('active');
 		});
+	});
+
+	/*// Đóng more-menu khi nhấp bất kỳ nơi nào trên trang
+	document.addEventListener('click', function (event) {
+		if (!event.target.classList.contains('show-menu')) {
+			options.forEach(option => {
+				option.style.display = 'none';
+			});
+		}
+	});*/
 		const showdialog = document.getElementById('dialog-bt');
 		const tagdialog = document.getElementById("dialog");
 		showdialog.addEventListener('click', function () {
 			tagdialog.style.display = "block";
 		});
-    }
+    
 
 	function closeDialog() {
 		document.getElementById("dialog").style.display = "none";
 	}
+
 }
 
 // M: Xử lý các chức năng của BookRoom
