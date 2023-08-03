@@ -230,10 +230,11 @@ function MoreMenu() {
 		});
     
 
-	function closeDialog() {
-		document.getElementById("dialog").style.display = "none";
-	}
+	
 
+}
+function closeDialog() {
+	document.getElementById("dialog").style.display = "none";
 }
 
 // M: Xử lý các chức năng của BookRoom

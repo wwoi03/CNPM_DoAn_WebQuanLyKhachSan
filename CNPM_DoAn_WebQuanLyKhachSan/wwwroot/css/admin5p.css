@@ -462,7 +462,7 @@
 }
 /*dialog ở đây*/
 .dialog {
-    display: block;
+    display: none;
     position:relative;
     z-index:1400;
     height:100vh;
