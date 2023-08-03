@@ -24,15 +24,24 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 
         public IActionResult GetDataIndex()
         {
-            List<BookRoom> bookRooms = dBHelper.GetBookRooms();
-            return Json(bookRooms);
+            List<BookRoom> _bookRooms = dBHelper.GetBookRooms();
+
+            return Json(_bookRooms);
         }
 
         // M: Thêm đơn đặt phòng
         public IActionResult Create()
         {
-            ViewData["PapeTitle"] = "Đặt Phòng";
-            return Json("fsdfs");
+            List<RoomType> _roomTypes = dBHelper.GetRoomType();
+            List<Room> _rooms = dBHelper.GetUnusedRoom();
+
+            var data = new
+            {
+                roomTypes = _roomTypes,
+                rooms = _rooms
+            };
+
+            return Json(data);
         }
 
         [HttpPost]

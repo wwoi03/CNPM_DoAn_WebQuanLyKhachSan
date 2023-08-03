@@ -271,136 +271,133 @@ function CreateBookRoom() {
 			// Gọi Action GetEmployee bằng AJAX
 			$.ajax({
 				type: "GET",
-				url: "/RoomType/Create", // Đường dẫn tới Action GetEmployee
+				url: "/BookRoom/Create", // Đường dẫn tới Action GetEmployee
 				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 				success: function (data) {
+					var roomTypes = data.roomTypes;
+					var rooms = data.rooms;
 					var listRoom = [];
 
 					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 					var employeeDetailsHtml =
 						`
-							<form method="post" action="BookRoom/Create">
-								<!-- Lưu đặt phòng -->
-								<div class="panel-save d-flex justify-content-between align-items-center">
-									<span>Thêm mới</span>
+					<form id="form-book-room" method="post" action="BookRoom/Edit">
+						<!-- Lưu đặt phòng -->
+						<div class="panel-save d-flex justify-content-between align-items-center">
+							<span>Chỉnh sửa</span>
 
-									<div class="">
-										<input type="submit" value="Lưu"/>
+							<div class="">
+								<input type="submit" value="Lưu"/>
+							</div>
+						</div>
+
+						<!-- Form -->
+						<div class="panel-form">
+							<!-- Thông tin -->
+							<div class="panel-form-info">
+								<!-- Tên khách hàng -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Họ và tên khách hàng</h5>
+									<input class="panel-form-input" name="nameCustomer" type="text" />
+								</div>
+
+								<!-- Số điện thoại -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Số điện thoại</h5>
+									<input class="panel-form-input" name="phoneCustomer" type="number"/>
+								</div>
+
+								<!-- CCCD -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Căn cước công dân</h5>
+									<input class="panel-form-input" name="cardId" type="number" />
+								</div>
+
+								<!-- Ngày -->
+								<div class="panel-form-item">
+									<div class="panel-form-height">
+										<div class="panel-form-height-item">
+											<h5 class="panel-form-title">Ngày nhận phòng</h5>
+											<input class="panel-form-input" name="CheckInDate" type="date" value="" />
+										</div>
+
+										<div class="panel-form-height-item">
+											<h5 class="panel-form-title">Ngày trả phòng</h5>
+											<input class="panel-form-input" name="CheckOutDate" type="date" value="" />
+										</div>
 									</div>
 								</div>
 
-								<!-- Form -->
-								<div class="panel-form">
-									<!-- Thông tin -->
-									<div class="panel-form-info">
-										<!-- Tên khách hàng -->
-										<div class="panel-form-item">
-											<h5 class="panel-form-title">Họ và tên khách hàng</h5>
-											<input class="panel-form-input" name="nameCustomer" type="text" value="" />
-										</div>
+								<!-- Tiền trả trước -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Tiền trả trước</h5>
+									<input class="panel-form-input" type="number" name="PrePayment" placeholder="0.000 đ"/>
+								</div>
 
-										<!-- Số điện thoại -->
-										<div class="panel-form-item">
-											<h5 class="panel-form-title">Số điện thoại</h5>
-											<input class="panel-form-input" name="phoneCustomer" type="number" value="" />
-										</div>
+								<!-- Ghi chú -->
+								<div class="panel-form-item">
+									<h5 class="panel-form-title">Ghi chú</h5>
+									<input class="panel-form-input" type="text" name="Note" placeholder=""/>
+								</div>
+							</div>
 
-										<!-- CCCD -->
-										<div class="panel-form-item">
-											<h5 class="panel-form-title">Căn cước công dân</h5>
-											<input class="panel-form-input" name="cardId" type="number" value="" />
-										</div>
+							<!-- Phòng -->
+							<div class="panel-form-room">
+								<div class="panel-form-room-item">
+									<h5 class="panel-form-title">Thêm phòng</h5>
 
-										<!-- Ngày -->
-										<div class="panel-form-item">
-											<div class="panel-form-height">
-												<div class="panel-form-height-item">
-													<h5 class="panel-form-title">Ngày nhận phòng</h5>
-													<input class="panel-form-input" name="CheckInDate" type="date" />
-												</div>
-
-												<div class="panel-form-height-item">
-													<h5 class="panel-form-title">Ngày trả phòng</h5>
-													<input class="panel-form-input" name="CheckOutDate" type="date" />
-												</div>
-											</div>
-										</div>
-
-										<!-- Tiền trả trước -->
-										<div class="panel-form-item">
-											<h5 class="panel-form-title">Tiền trả trước</h5>
-											<input class="panel-form-input" type="number" name="PrePayment" placeholder="0.000 đ"/>
-										</div>
-
-										<!-- Ghi chú -->
-										<div class="panel-form-item">
-											<h5 class="panel-form-title">Ghi chú</h5>
-											<input class="panel-form-input" type="text" name="Note" value="" placeholder=""/>
-										</div>
-									</div>
-
-									<!-- Phòng -->
-									<div class="panel-form-room">
-										<div class="panel-form-room-item">
-											<h5 class="panel-form-title">Thêm phòng</h5>
-
-											<div class="panel-form-add-room">
-												<i class="fa-solid fa-square-plus"></i>
-												<p class="panel-form-room-btn">Thêm phòng</p>
-												<input id="list-room-string" hidden name="listRoomString"/>
-											</div>
-										</div>
-									</div>
-
-									<!-- Danh sách phòng theo loại-->
-									<div class="panel-form-roomtype">
-										<div class="panel-form-roomtype-item">
-											<div class="panel-form-roomtype-title">Phòng siêu vip</div>
-
-											<div class="panel-form-roomtype-render">
-												<div class="d-flex">
-													<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-														<div value="101" class="col-2 panel-form-roomtype-render-item">
-															101
-														</div>
-
-														<div value="102" class="col-2 panel-form-roomtype-render-item">
-															102
-														</div>
-
-														<div value="103" class="col-2 panel-form-roomtype-render-item">
-															103
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="panel-form-roomtype-item">
-											<div class="panel-form-roomtype-title">Phòng siêu vip</div>
-
-											<div class="panel-form-roomtype-render">
-												<div class="d-flex">
-													<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-														<div value="104" class="col-2 panel-form-roomtype-render-item">
-															104
-														</div>
-
-														<div value="105" class="col-2 panel-form-roomtype-render-item">
-															105
-														</div>
-
-														<div value="106" class="col-2 panel-form-roomtype-render-item">
-															106
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+									<div class="panel-form-add-room">
+										<i class="fa-solid fa-square-plus"></i>
+										<p class="panel-form-room-btn">Thêm phòng</p>
+										<input id="list-room-string" hidden name="listRoomString"/>
 									</div>
 								</div>
-							</form>
-						`;
+							</div>
+
+							<!-- Danh sách phòng theo loại-->
+							<div class="panel-form-roomtype">`;
+
+					roomTypes.forEach(function (itemRT, index) {
+						// Tên loại phòng
+						employeeDetailsHtml +=
+							`
+								<div class="panel-form-roomtype-item">
+									<div class="panel-form-roomtype-title">${itemRT.name}</div>
+
+									<div class="panel-form-roomtype-render">
+										<div class="d-flex">
+											<div class="row p-0 container-fluid panel-form-roomtype-render-list">
+							`;
+
+						var nextItemHtml = ``;
+
+						// Phòng
+						rooms.forEach(function (itemR, index) {
+							if (itemRT.roomTypeId == itemR.roomTypeId) {
+								nextItemHtml +=
+									`
+										<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
+											${itemR.roomId}
+										</div>
+									`;
+                            }
+						});
+
+						employeeDetailsHtml += nextItemHtml;
+
+						employeeDetailsHtml +=
+							`
+							</div>
+						</div>
+					</div> 
+				</div>
+					`;
+					})
+
+					employeeDetailsHtml +=
+						`</div>
+					</div>
+				</form>`;
 
 					// render giao diện
 					$(".right-panel").html(employeeDetailsHtml);
