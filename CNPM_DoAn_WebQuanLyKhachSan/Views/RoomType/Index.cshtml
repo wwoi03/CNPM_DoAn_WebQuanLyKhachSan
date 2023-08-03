@@ -27,11 +27,12 @@
 								<table class="datatable table table-stripped table table-hover table-center mb-0">
 									<thead>
 										<tr>
-											<th style="width: 10%">Mã Phòng</th>
+											<th style="width: 1%">Mã</th>
 											<th style="width: 20%">Tên Loại Phòng</th>
-											<th style="width: 20%">Giá</th>
+											<th style="width: 10%">Giá</th>
 											<th style="width: 10%">Số Lượng</th>
-											<th style="width: 40%">Chức năng</th>
+											<th style="width: 20%">Hình ảnh</th>
+											<th style="width: 39%">Chức năng</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -42,6 +43,9 @@
 												<td>@item.Name</td>
 												<td>@item.Price</td>
 												<td>@item.BedNumber</td>
+												<td>
+													<img src="/images/@item.Image" style="width: 100%">
+												</td>
 												<td>
 													<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" >
 														<i class="fas fa-folder"></i>

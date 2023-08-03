@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230803051652_initUpdateDatabaseNew")]
-    partial class initUpdateDatabaseNew
+    [Migration("20230803121030_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,8 +106,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookRoomId"));
 
-                    b.Property<int>("CardId")
+                    b.Property<int?>("CardId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("CheckInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CheckOutDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -115,10 +121,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("PrePayment")
                         .HasColumnType("float");
 
-                    b.Property<int>("StaffId")
+                    b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.HasKey("BookRoomId");
+
+                    b.HasIndex("CardId");
+
+                    b.HasIndex("StaffId");
 
                     b.ToTable("BookRooms");
                 });
@@ -191,9 +201,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("ImportPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("MenuTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -205,8 +212,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("MenuId");
-
-                    b.HasIndex("MenuTypeId");
 
                     b.ToTable("Menus");
                 });
@@ -281,11 +286,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PositionId"));
 
-                    b.Property<int?>("BonusCoefficient")
-                        .HasColumnType("int");
+                    b.Property<double?>("BonusCoefficient")
+                        .HasColumnType("float");
 
-                    b.Property<int?>("CoefficientsSalary")
-                        .HasColumnType("int");
+                    b.Property<double?>("CoefficientsSalary")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -405,6 +410,21 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Navigation("Staff");
                 });
 
+            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoom", b =>
+                {
+                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CardId");
+
+                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Staff");
+                });
+
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoomDetails", b =>
                 {
                     b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoom", "BookRoom")
@@ -422,17 +442,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Navigation("BookRoom");
 
                     b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Menu", b =>
-                {
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.MenuType", "MenuType")
-                        .WithMany()
-                        .HasForeignKey("MenuTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MenuType");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Room", b =>
