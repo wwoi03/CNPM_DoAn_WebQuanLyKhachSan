@@ -48,7 +48,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.AssignmentDetails", b =>
                 {
-                    b.Property<int>("AssginmentDetailsId")
+                    b.Property<int>("AssginmentId")
                         .HasColumnType("int");
 
                     b.Property<int>("StaffID")
@@ -63,7 +63,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<int>("WorkingHours")
                         .HasColumnType("int");
 
-                    b.HasKey("AssginmentDetailsId", "StaffID");
+                    b.HasKey("AssginmentId", "StaffID");
 
                     b.HasIndex("StaffID");
 
@@ -73,15 +73,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Bill", b =>
                 {
                     b.Property<int>("BillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
-
-                    b.Property<int>("BookRoomDetailsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuOrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
@@ -101,8 +92,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     b.HasKey("BillId");
 
-                    b.HasIndex("BookRoomDetailsId");
-
                     b.ToTable("Bill");
                 });
 
@@ -118,9 +107,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("PrePayment")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PriceAgreement")
                         .HasColumnType("float");
 
                     b.Property<int>("StaffId")
@@ -174,9 +160,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -202,7 +185,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Importil")
+                    b.Property<double>("ImportPrice")
                         .HasColumnType("float");
 
                     b.Property<int>("MenuTypeId")
@@ -305,10 +288,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PositionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("PositionId");
 
                     b.ToTable("Positions");
@@ -328,21 +307,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StaffId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Status")
                         .HasColumnType("int");
-
-                    b.Property<string>("image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoomId");
 
                     b.HasIndex("RoomTypeId");
-
-                    b.HasIndex("StaffId");
 
                     b.ToTable("Rooms");
                 });
@@ -426,24 +396,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.AssignmentDetails", b =>
                 {
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", "staffID")
-                        .WithMany("AssignmentDetails")
+                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", "Staff")
+                        .WithMany()
                         .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("staffID");
-                });
-
-            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Bill", b =>
-                {
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoomDetails", "BookRoomDetails")
-                        .WithMany()
-                        .HasForeignKey("BookRoomDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BookRoomDetails");
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoomDetails", b =>
@@ -484,15 +443,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("RoomType");
-
-                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", b =>
@@ -504,11 +455,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired();
 
                     b.Navigation("Position");
-                });
-
-            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", b =>
-                {
-                    b.Navigation("AssignmentDetails");
                 });
 #pragma warning restore 612, 618
         }
