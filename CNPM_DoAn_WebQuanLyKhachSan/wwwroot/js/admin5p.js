@@ -3,14 +3,13 @@ Main();
 
 // Main
 function Main() {
-	FullCalendarLibrary();
 	SwitchTabs();
 	MoreMenu();
 
+	// Controller
 	RoomType();
 	BookRoom();
 	Menu();
-
 }
 
 /* --------------------------------- Hàm xử lý sự kiện --------------------------------- */
@@ -236,11 +235,6 @@ function MoreMenu() {
 	}
 }
 
-// M: Xử lý các chức năng của BookRoom
-function BookRoom() {
-	CreateBookRoom();
-}
-
 // định dạng chuẩn ngày tháng năm
 function PadDate(day, month, year) {
 	var newDay = String(day).padStart(2, '0');
@@ -254,6 +248,13 @@ function PadDate(day, month, year) {
 	};
 
 	return result;
+}
+
+/* --------------------------------- Controller --------------------------------- */
+// M: Xử lý các chức năng của BookRoom
+function BookRoom() {
+	FullCalendarLibrary();
+	CreateBookRoom();
 }
 
 // M: Xử lý các chức năng của RoomType
@@ -282,135 +283,8 @@ function CreateBookRoom() {
 				success: function (data) {
 					var roomTypes = data.roomTypes;
 					var rooms = data.rooms;
-					var listRoom = [];
 
-					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-					var employeeDetailsHtml =
-						`
-					<form id="form-book-room" method="post" action="BookRoom/Edit">
-						<!-- Lưu đặt phòng -->
-						<div class="panel-save d-flex justify-content-between align-items-center">
-							<span>Chỉnh sửa</span>
-
-							<div class="">
-								<input type="submit" value="Lưu"/>
-							</div>
-						</div>
-
-						<!-- Form -->
-						<div class="panel-form">
-							<!-- Thông tin -->
-							<div class="panel-form-info">
-								<!-- Tên khách hàng -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Họ và tên khách hàng</h5>
-									<input class="panel-form-input" name="nameCustomer" type="text" />
-								</div>
-
-								<!-- Số điện thoại -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Số điện thoại</h5>
-									<input class="panel-form-input" name="phoneCustomer" type="number"/>
-								</div>
-
-								<!-- CCCD -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Căn cước công dân</h5>
-									<input class="panel-form-input" name="cardId" type="number" />
-								</div>
-
-								<!-- Ngày -->
-								<div class="panel-form-item">
-									<div class="panel-form-height">
-										<div class="panel-form-height-item">
-											<h5 class="panel-form-title">Ngày nhận phòng</h5>
-											<input class="panel-form-input" name="CheckInDate" type="date" value="" />
-										</div>
-
-										<div class="panel-form-height-item">
-											<h5 class="panel-form-title">Ngày trả phòng</h5>
-											<input class="panel-form-input" name="CheckOutDate" type="date" value="" />
-										</div>
-									</div>
-								</div>
-
-								<!-- Tiền trả trước -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Tiền trả trước</h5>
-									<input class="panel-form-input" type="number" name="PrePayment" placeholder="0.000 đ"/>
-								</div>
-
-								<!-- Ghi chú -->
-								<div class="panel-form-item">
-									<h5 class="panel-form-title">Ghi chú</h5>
-									<input class="panel-form-input" type="text" name="Note" placeholder=""/>
-								</div>
-							</div>
-
-							<!-- Phòng -->
-							<div class="panel-form-room">
-								<div class="panel-form-room-item">
-									<h5 class="panel-form-title">Thêm phòng</h5>
-
-									<div class="panel-form-add-room">
-										<i class="fa-solid fa-square-plus"></i>
-										<p class="panel-form-room-btn">Thêm phòng</p>
-										<input id="list-room-string" hidden name="listRoomString"/>
-									</div>
-								</div>
-							</div>
-
-							<!-- Danh sách phòng theo loại-->
-							<div class="panel-form-roomtype">`;
-
-					roomTypes.forEach(function (itemRT, index) {
-						// Tên loại phòng
-						employeeDetailsHtml +=
-							`
-								<div class="panel-form-roomtype-item">
-									<div class="panel-form-roomtype-title">${itemRT.name}</div>
-
-									<div class="panel-form-roomtype-render">
-										<div class="d-flex">
-											<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-							`;
-
-						var nextItemHtml = ``;
-
-						// Phòng
-						rooms.forEach(function (itemR, index) {
-							if (itemRT.roomTypeId == itemR.roomTypeId) {
-								nextItemHtml +=
-									`
-										<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
-											${itemR.roomId}
-										</div>
-									`;
-                            }
-						});
-
-						employeeDetailsHtml += nextItemHtml;
-
-						employeeDetailsHtml +=
-							`
-							</div>
-						</div>
-					</div> 
-				</div>
-					`;
-					})
-
-					employeeDetailsHtml +=
-						`</div>
-					</div>
-				</form>`;
-
-					// render giao diện
-					$(".right-panel").html(employeeDetailsHtml);
-
-					// xử lý các sự kiện
-					AddBookRoomDetails();
-					AddRoom(listRoom);
+					RenderUIBookRoom('', roomTypes, rooms);
 				},
 				error: function () {
 					alert("Đã xảy ra lỗi khi lấy thông t");
@@ -423,7 +297,7 @@ function CreateBookRoom() {
 }
 
 // M: Render UI BookRoom
-function RenderUIBookRoom(clickDate) {
+function RenderUIBookRoom(clickDate, roomTypes, rooms) {
 	// Ngày tiếp theo
 	var specificDate = new Date(clickDate.year + '-' + clickDate.month + '-' + clickDate.day); // Thay thế bằng ngày tháng năm cụ thể của bạn
 	var nextDay = new Date(specificDate);
@@ -437,12 +311,13 @@ function RenderUIBookRoom(clickDate) {
 	var listRoom = [];
 			
 	// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+	// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 	var employeeDetailsHtml =
 		`
-			<form method="post" action="BookRoom/Create">
+			<form id="form-book-room" method="post" action="BookRoom/Edit">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
-					<span>Thêm mới</span>
+					<span>Chỉnh sửa</span>
 
 					<div class="">
 						<input type="submit" value="Lưu"/>
@@ -456,19 +331,19 @@ function RenderUIBookRoom(clickDate) {
 						<!-- Tên khách hàng -->
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Họ và tên khách hàng</h5>
-							<input class="panel-form-input" name="nameCustomer" type="text" value="" />
+							<input class="panel-form-input" name="nameCustomer" type="text" />
 						</div>
 
 						<!-- Số điện thoại -->
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Số điện thoại</h5>
-							<input class="panel-form-input" name="phoneCustomer" type="number" value="" />
+							<input class="panel-form-input" name="phoneCustomer" type="number"/>
 						</div>
 
 						<!-- CCCD -->
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Căn cước công dân</h5>
-							<input class="panel-form-input" name="cardId" type="number" value="" />
+							<input class="panel-form-input" name="cardId" type="number" />
 						</div>
 
 						<!-- Ngày -->
@@ -476,12 +351,12 @@ function RenderUIBookRoom(clickDate) {
 							<div class="panel-form-height">
 								<div class="panel-form-height-item">
 									<h5 class="panel-form-title">Ngày nhận phòng</h5>
-									<input class="panel-form-input" name="CheckInDate" type="date" value="${checkInDate}" />
+									<input class="panel-form-input" name="CheckInDate" type="date" value="${checkInDate != null ? checkInDate : ""}" />
 								</div>
 
 								<div class="panel-form-height-item">
 									<h5 class="panel-form-title">Ngày trả phòng</h5>
-									<input class="panel-form-input" name="CheckOutDate" type="date" value="${checkOutDate}" />
+									<input class="panel-form-input" name="CheckOutDate" type="date" value="${checkInDate != null ? checkInDate : ""}" />
 								</div>
 							</div>
 						</div>
@@ -495,7 +370,7 @@ function RenderUIBookRoom(clickDate) {
 						<!-- Ghi chú -->
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Ghi chú</h5>
-							<input class="panel-form-input" type="text" name="Note" value="" placeholder=""/>
+							<input class="panel-form-input" type="text" name="Note" placeholder=""/>
 						</div>
 					</div>
 
@@ -513,54 +388,49 @@ function RenderUIBookRoom(clickDate) {
 					</div>
 
 					<!-- Danh sách phòng theo loại-->
-					<div class="panel-form-roomtype">
-						<div class="panel-form-roomtype-item">
-							<div class="panel-form-roomtype-title">Phòng siêu vip</div>
+					<div class="panel-form-roomtype">`;
 
-							<div class="panel-form-roomtype-render">
-								<div class="d-flex">
-									<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-										<div value="101" class="col-2 panel-form-roomtype-render-item">
-											101
-										</div>
+		roomTypes.forEach(function (itemRT, index) {
+			// Tên loại phòng
+			employeeDetailsHtml +=
+				`
+					<div class="panel-form-roomtype-item">
+						<div class="panel-form-roomtype-title">${itemRT.name}</div>
 
-										<div value="102" class="col-2 panel-form-roomtype-render-item">
-											102
-										</div>
+						<div class="panel-form-roomtype-render">
+							<div class="d-flex">
+								<div class="row p-0 container-fluid panel-form-roomtype-render-list">
+				`;
 
-										<div value="103" class="col-2 panel-form-roomtype-render-item">
-											103
-										</div>
-									</div>
-								</div>
-							</div>
+		var nextItemHtml = ``;
+
+		// Phòng
+		rooms.forEach(function (itemR, index) {
+			if (itemRT.roomTypeId == itemR.roomTypeId) {
+				nextItemHtml +=
+					`
+						<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
+							${itemR.roomId}
 						</div>
+					`;
+			}
+		});
 
-						<div class="panel-form-roomtype-item">
-							<div class="panel-form-roomtype-title">Phòng siêu vip</div>
+		employeeDetailsHtml += nextItemHtml;
 
-							<div class="panel-form-roomtype-render">
-								<div class="d-flex">
-									<div class="row p-0 container-fluid panel-form-roomtype-render-list">
-										<div value="104" class="col-2 panel-form-roomtype-render-item">
-											104
-										</div>
-
-										<div value="105" class="col-2 panel-form-roomtype-render-item">
-											105
-										</div>
-
-										<div value="106" class="col-2 panel-form-roomtype-render-item">
-											106
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		employeeDetailsHtml +=
+			`
 				</div>
-			</form>
+			</div>
+		</div> 
+	</div>
 		`;
+	})
+
+	employeeDetailsHtml +=
+		`</div>
+	</div>
+</form>`;
 
 	// render giao diện
 	$(".right-panel").html(employeeDetailsHtml);
@@ -831,7 +701,7 @@ function DeleteRoomType() {
 	// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
 	roomTypeDelete.forEach((ele, index) => {
 		ele.addEventListener('click', function (e) {
-			var employeeId = $(this).data('room-type-id');
+			var employeeId = $(this).data('room-type-id'); 
 
 			// Gọi Action GetEmployee bằng AJAX
 			$.ajax({
