@@ -1,8 +1,12 @@
-﻿namespace CNPM_DoAn_WebQuanLyKhachSan.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 {
     public class Room
     {
-        [key]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RoomId { get; set; }
         public int RoomTypeId { get; set; }
         public RoomType RoomType { get; set; }

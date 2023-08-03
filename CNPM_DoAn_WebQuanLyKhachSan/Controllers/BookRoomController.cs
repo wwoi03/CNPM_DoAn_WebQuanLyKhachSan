@@ -52,8 +52,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             {
                 CardId = CardId,
                 StaffId = 1,
-
+                PrePayment = bookRoomVM.PrePayment,
+                Note = bookRoomVM.Note
             };
+
+            dBHelper.CreateBookRoom(bookRoom);
+
+            int bookRoomId = dBHelper.GetNewBookRoom().BookRoomId;
 
 
             // Tạo các chi tiết đặt phòng
@@ -62,6 +67,15 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 int roomId = int.Parse(listRoomNum[i]);
                 Room room = dBHelper.GetRoomById(roomId);
 
+                BookRoomDetails bookRoomDetails = new BookRoomDetails()
+                {
+                    BookRoomId = bookRoomId,
+                    RoomID = roomId,
+                    CheckInDate = checkInDate,
+                    CheckOutDate = checkOutDate,
+                    StatusRented = 0,
+                    Note = bookRoomVM.Note,
+                };
             }
 
             return RedirectToAction("Index");

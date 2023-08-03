@@ -92,7 +92,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     b.HasKey("BillId");
 
-                    b.ToTable("Bill");
+                    b.ToTable("Bills");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoom", b =>
@@ -106,14 +106,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<int>("CardId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("PrePayment")
                         .HasColumnType("float");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
-
-                    b.Property<string>("note")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookRoomId");
 
@@ -137,6 +137,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RoomID")
                         .HasColumnType("int");
 
@@ -155,10 +158,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Customer", b =>
                 {
                     b.Property<int>("CardId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -296,10 +296,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Room", b =>
                 {
                     b.Property<int>("RoomId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
                     b.Property<int?>("CleanRoom")
                         .HasColumnType("int");

@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 {
     /// <inheritdoc />
-    public partial class initDatabase : Migration
+    public partial class initUpdateDatabaseNew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Assignment",
+                name: "Assignments",
                 columns: table => new
                 {
                     AssignmentId = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,23 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Assignment", x => x.AssignmentId);
+                    table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    BillId = table.Column<int>(type: "int", nullable: false),
+                    PaymentId = table.Column<int>(type: "int", nullable: false),
+                    TotalPriceMenu = table.Column<double>(type: "float", nullable: false),
+                    TotalPriceBill = table.Column<double>(type: "float", nullable: false),
+                    PriceRoom = table.Column<double>(type: "float", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.BillId);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,8 +51,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     CardId = table.Column<int>(type: "int", nullable: false),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     PrePayment = table.Column<double>(type: "float", nullable: false),
-                    PriceAgreement = table.Column<double>(type: "float", nullable: false),
-                    note = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,22 +59,20 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
-                    CardId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CardId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.CardId);
+                    table.PrimaryKey("PK_Customers", x => x.CardId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MenuOrder",
+                name: "MenuOrders",
                 columns: table => new
                 {
                     MenuId = table.Column<int>(type: "int", nullable: false),
@@ -72,11 +85,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuOrder", x => new { x.MenuId, x.StaffId, x.BookRoomDetailsId, x.OrderTime });
+                    table.PrimaryKey("PK_MenuOrders", x => new { x.MenuId, x.StaffId, x.BookRoomDetailsId, x.OrderTime });
                 });
 
             migrationBuilder.CreateTable(
-                name: "MenuType",
+                name: "MenuTypes",
                 columns: table => new
                 {
                     MenuTypeId = table.Column<int>(type: "int", nullable: false)
@@ -85,11 +98,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuType", x => x.MenuTypeId);
+                    table.PrimaryKey("PK_MenuTypes", x => x.MenuTypeId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "Payments",
                 columns: table => new
                 {
                     PaymentId = table.Column<int>(type: "int", nullable: false)
@@ -98,27 +111,26 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payment", x => x.PaymentId);
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Position",
+                name: "Positions",
                 columns: table => new
                 {
                     PositionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PositionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoefficientsSalary = table.Column<int>(type: "int", nullable: true),
                     BonusCoefficient = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Position", x => x.PositionId);
+                    table.PrimaryKey("PK_Positions", x => x.PositionId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoomType",
+                name: "RoomTypes",
                 columns: table => new
                 {
                     RoomTypeId = table.Column<int>(type: "int", nullable: false)
@@ -127,39 +139,39 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     BedNumber = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    ListImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomType", x => x.RoomTypeId);
+                    table.PrimaryKey("PK_RoomTypes", x => x.RoomTypeId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menu",
+                name: "Menus",
                 columns: table => new
                 {
                     MenuId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MenuTypeId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Importil = table.Column<double>(type: "float", nullable: false),
+                    ImportPrice = table.Column<double>(type: "float", nullable: false),
                     SalePrice = table.Column<double>(type: "float", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menu", x => x.MenuId);
+                    table.PrimaryKey("PK_Menus", x => x.MenuId);
                     table.ForeignKey(
-                        name: "FK_Menu_MenuType_MenuTypeId",
+                        name: "FK_Menus_MenuTypes_MenuTypeId",
                         column: x => x.MenuTypeId,
-                        principalTable: "MenuType",
+                        principalTable: "MenuTypes",
                         principalColumn: "MenuTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Staff",
+                name: "Staffs",
                 columns: table => new
                 {
                     StaffId = table.Column<int>(type: "int", nullable: false)
@@ -176,12 +188,32 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Staff", x => x.StaffId);
+                    table.PrimaryKey("PK_Staffs", x => x.StaffId);
                     table.ForeignKey(
-                        name: "FK_Staff_Position_PositionId",
+                        name: "FK_Staffs_Positions_PositionId",
                         column: x => x.PositionId,
-                        principalTable: "Position",
+                        principalTable: "Positions",
                         principalColumn: "PositionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rooms",
+                columns: table => new
+                {
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    RoomTypeId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    CleanRoom = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rooms", x => x.RoomId);
+                    table.ForeignKey(
+                        name: "FK_Rooms_RoomTypes_RoomTypeId",
+                        column: x => x.RoomTypeId,
+                        principalTable: "RoomTypes",
+                        principalColumn: "RoomTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -189,7 +221,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 name: "AssignmentDetails",
                 columns: table => new
                 {
-                    AssginmentDetailsId = table.Column<int>(type: "int", nullable: false),
+                    AssginmentId = table.Column<int>(type: "int", nullable: false),
                     StaffID = table.Column<int>(type: "int", nullable: false),
                     WorkingHours = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -197,40 +229,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssignmentDetails", x => new { x.AssginmentDetailsId, x.StaffID });
+                    table.PrimaryKey("PK_AssignmentDetails", x => new { x.AssginmentId, x.StaffID });
                     table.ForeignKey(
-                        name: "FK_AssignmentDetails_Staff_StaffID",
+                        name: "FK_AssignmentDetails_Staffs_StaffID",
                         column: x => x.StaffID,
-                        principalTable: "Staff",
-                        principalColumn: "StaffId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Room",
-                columns: table => new
-                {
-                    RoomId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomTypeId = table.Column<int>(type: "int", nullable: false),
-                    StaffId = table.Column<int>(type: "int", nullable: false),
-                    Staus = table.Column<int>(type: "int", nullable: true),
-                    image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CleanRoom = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Room", x => x.RoomId);
-                    table.ForeignKey(
-                        name: "FK_Room_RoomType_RoomTypeId",
-                        column: x => x.RoomTypeId,
-                        principalTable: "RoomType",
-                        principalColumn: "RoomTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Room_Staff_StaffId",
-                        column: x => x.StaffId,
-                        principalTable: "Staff",
+                        principalTable: "Staffs",
                         principalColumn: "StaffId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -245,7 +248,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     RoomID = table.Column<int>(type: "int", nullable: false),
                     CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusRented = table.Column<int>(type: "int", nullable: true)
+                    StatusRented = table.Column<int>(type: "int", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,35 +261,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         principalColumn: "BookRoomId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookRoomDetails_Room_RoomID",
+                        name: "FK_BookRoomDetails_Rooms_RoomID",
                         column: x => x.RoomID,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "RoomId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bill",
-                columns: table => new
-                {
-                    BillId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookRoomDetailsId = table.Column<int>(type: "int", nullable: false),
-                    MenuOrderId = table.Column<int>(type: "int", nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: false),
-                    TotalPriceBill = table.Column<double>(type: "float", nullable: false),
-                    PriceRoom = table.Column<double>(type: "float", nullable: false),
-                    TotalPriceMenu = table.Column<double>(type: "float", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bill", x => x.BillId);
-                    table.ForeignKey(
-                        name: "FK_Bill_BookRoomDetails_BookRoomDetailsId",
-                        column: x => x.BookRoomDetailsId,
-                        principalTable: "BookRoomDetails",
-                        principalColumn: "BookRoomDetailsId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -293,11 +272,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 name: "IX_AssignmentDetails_StaffID",
                 table: "AssignmentDetails",
                 column: "StaffID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bill_BookRoomDetailsId",
-                table: "Bill",
-                column: "BookRoomDetailsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookRoomDetails_BookRoomId",
@@ -310,23 +284,18 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                 column: "RoomID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menu_MenuTypeId",
-                table: "Menu",
+                name: "IX_Menus_MenuTypeId",
+                table: "Menus",
                 column: "MenuTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_RoomTypeId",
-                table: "Room",
+                name: "IX_Rooms_RoomTypeId",
+                table: "Rooms",
                 column: "RoomTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_StaffId",
-                table: "Room",
-                column: "StaffId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Staff_PositionId",
-                table: "Staff",
+                name: "IX_Staffs_PositionId",
+                table: "Staffs",
                 column: "PositionId");
         }
 
@@ -334,46 +303,46 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Assignment");
-
-            migrationBuilder.DropTable(
                 name: "AssignmentDetails");
 
             migrationBuilder.DropTable(
-                name: "Bill");
+                name: "Assignments");
 
             migrationBuilder.DropTable(
-                name: "Customer");
-
-            migrationBuilder.DropTable(
-                name: "Menu");
-
-            migrationBuilder.DropTable(
-                name: "MenuOrder");
-
-            migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "BookRoomDetails");
 
             migrationBuilder.DropTable(
-                name: "MenuType");
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "MenuOrders");
+
+            migrationBuilder.DropTable(
+                name: "Menus");
+
+            migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "BookRooms");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "RoomType");
+                name: "MenuTypes");
 
             migrationBuilder.DropTable(
-                name: "Staff");
+                name: "Positions");
 
             migrationBuilder.DropTable(
-                name: "Position");
+                name: "RoomTypes");
         }
     }
 }

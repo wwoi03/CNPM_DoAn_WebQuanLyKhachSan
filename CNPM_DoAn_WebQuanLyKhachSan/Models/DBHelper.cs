@@ -74,6 +74,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.SaveChanges();
         }
 
+        // M: Lấy thông tin đặt phòng mới nhất
+        public BookRoom GetNewBookRoom()
+        {
+            return dbContext.BookRooms.OrderByDescending(p => p.BookRoomId).FirstOrDefault();
+        }
+
         /* ------------------------------------- BookRoom ------------------------------------- */
         // M: Thêm mới Đặt phòng
         public void CreateBookRoom(BookRoom newBookRoom)
