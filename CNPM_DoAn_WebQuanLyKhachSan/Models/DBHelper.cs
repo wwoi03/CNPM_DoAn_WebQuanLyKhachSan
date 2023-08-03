@@ -93,5 +93,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.BookRooms.Add(newBookRoom);
             dbContext.SaveChanges();
         }
-    }
+
+		internal void DeleteRoom(object roomId)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
