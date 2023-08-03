@@ -36,7 +36,9 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
         </nav>
 
         <!-- Main content -->
-        <section id="WaitRoom" class="ren-content">
+         <!--phong chờ -->
+
+        <section id="WaitRoom-content" class="book-room-details-tabs active ren-content">
             <div class="container1">
                 <h2 class="container-title1">Tên Loại Phòng</h2>
                 <div class="card-container1">
@@ -48,10 +50,10 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                     <div class="card-content1-top">
                                         <h3 class="card-title1">Ten Phong</h3>
                                         <div class="show-menu">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical"  ></i>
 
-                                            <div class="more-menu">
-                                                <button id="dialog-bt">
+                                            <div class="more-menu" >
+                                                <button id="dialog-bt" onclick="openDialog()">
                                                     <i class="fa-solid fa-key" style="color: #8d929a;"></i>
                                                     <span >
                                                         Nhận Phòng
@@ -101,7 +103,7 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
 
                                             <div class="more-menu">
-                                                <button id="dialog-bt">
+                                                <button id="dialog-bt"  onclick="openDialog()">
                                                     <i class="fa-solid fa-key" style="color: #8d929a;"></i>
                                                     <span >
                                                         Nhận Phòng
@@ -151,7 +153,7 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
 
                                             <div class="more-menu">
-                                                <button id="dialog-bt">
+                                                <button id="dialog-bt"  onclick="openDialog()">
                                                     <i class="fa-solid fa-key" style="color: #8d929a;"></i>
                                                     <span >
                                                         Nhận Phòng
@@ -192,77 +194,178 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                 </div>
             </div>
         </section>
+         <!-- Main content -->
+         <!--phòng đang thue-->
+         <section class="book-room-details-tabs ren-content" id="RentRoom-content" >
+            <div class="container1">
+                <h2 class="container-title1">Tuấn</h2>
+                <div class="card-container1">
+                    <!-- Item -->
+					<div class="col-3 p-0 m-0">
+						<div class="card1-item">
+                            <div class="card1">
+                                <div class="card-content1">
+                                    <div class="card-content1-top">
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"  ></i>
+                                            <div class="more-menu" >
+                                                <button id="dialog-bt" >
+                                                   <i class="fa-solid fa-marker" style="color: #5a6372;"></i>
+                                                    <span  >
+                                                        Chỉnh sửa
+                                                    </span>                                         
+                                                </button>
+
+                                                <button onclick="AddMenu()">
+                                                    <i class="fa-solid fa-calendar-days" style="color: #637088"></i>
+                                                    <span  >
+                                                       Thêm menu
+                                                    </span>    
+                                                </button>
+
+                                                <button >
+                                                    <i class="fa-solid fa-rotate-left fa-spin fa-spin-reverse" style="color: #444850;"></i>
+                                                    <span>
+                                                        Trả Phòng
+                                                    </span>    
+                                                </button>                                              
+                                                 <button>
+                                                    <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
+                                                    <span>
+                                                        Yêu cầu dọn phòng
+                                                    </span>    
+                                                </button>
+                                                 <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-trash" style="color: #565c67;"></i>
+                                                    <span>
+                                                       Xóa
+                                                    </span>    
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-person-running fa-2xl"></i>
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                    </div>
+
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                    </div>
+                                    <!-- Thêm các thông tin khác của card 1 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+             
+                </div>
+            </div>
+        </section>
+         <!-- Main content -->
+         <!--phòng cần dọn-->
+          <section class="book-room-details-tabs ren-content" id="CleanRoom-content" >
+            <div class="container1">
+                <h2 class="container-title1">Loại phòng</h2>
+                <div class="card-container1">
+                    <!-- Item -->
+					<div class="col-3 p-0 m-0">
+						<div class="card1-item">
+                            <div class="card1">
+                                <div class="card-content1">
+                                    <div class="card-content1-top">
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"  ></i>
+
+                                            <div class="more-menu" >
+                                                <button id="dialog-bt" onclick="openDialog()">
+                                                    <i class="fa-solid fa-check" style="color: #585b5f;"></i>
+                                                    <span >
+                                                        Đã Dọn
+                                                    </span>                                         
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-hourglass-start fa-beat-fade"></i>
+                                        <h3 class="card-title1" style="color:#009688"> Phòng Chờ</h3>
+                                    </div>
+
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-stopwatch" style="color: #72767e;"></i>
+                                        <h3 class="card-title1">999 giờ</h3>
+                                    </div>
+                                    <!-- Thêm các thông tin khác của card 1 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                               
+                </div>
+            </div>
+        </section>
+        <!-- Main content -->
+         <!--lịch sử-->
+         <section class="book-room-details-tabs ren-content" id="History-content" >
+            <div class="container1">
+                <h2 class="container-title1">Lịch sử</h2>
+                <div class="card-container1">
+                    <!-- Item -->
+					<div class="col-3 p-0 m-0">
+						<div class="card1-item">
+                            <div class="card1">
+                                <div class="card-content1">
+                                    <div class="card-content1-top">
+                                        <h3 class="card-title1">Ten Phong</h3>
+                                        <div class="show-menu">
+                                            <i class="fa-solid fa-ellipsis-vertical"  ></i>
+
+                                            <div class="more-menu" >
+                                                <button id="dialog-bt" onclick="openDialog()">
+                                                    <i class="fa-solid fa-pencil fa-rotate-270 fa-lg" style="color: #484d56;"></i>
+                                                    <span >
+                                                        Chỉnh sửa
+                                                    </span>                                         
+                                                </button>
+
+                                                <button onclick="openDialog()">
+                                                    <i class="fa-solid fa-print fa-flip-horizontal" style="color: #525966;"></i>
+                                                    <span>
+                                                       In hóa đơn
+                                                    </span>    
+                                                </button>                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="card-content1-bottom">
+                                        <i class="fa-solid fa-rotate-left fa-sm" style="color: #7987a0;"></i>
+                                        <h3 class="card-title1">2 ngày 1 giờ</h3>
+                                    </div>
+
+                                    <div class="card-content1-bottom">
+                                       <i class="fa-solid fa-coins" style="color: #545e6d;"></i>
+                                        <h3 class="card-title1">50 chục</h3>
+                                    </div>
+                                    <!-- Thêm các thông tin khác của card 1 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                
+                </div>
+            </div>
+        </section>
+        
     </div>
 
     <!-- Nội dung bên phải -->
-    <div class="right-panel col-4 pl-0 pr-0">
-        <!-- Lưu đặt phòng -->
-        <div class="panel-save d-flex justify-content-between align-items-center">
-            <span>Thêm mới</span>
-
-            <div class="">
-                <a asp-controller="" asp-action="">Lưu</a>
-            </div>
-        </div>
-
-        <!-- Form -->
-        <form class="panel-form">
-            <!-- Thông tin -->
-            <div class="panel-form-info">
-                <!-- Tên khách hàng -->
-                <div class="panel-form-item">
-                    <h5 class="panel-form-title">Họ và tên khách hàng</h5>
-                    <input class="panel-form-input" type="text" value="" />
-                </div>
-
-                <!-- Số điện thoại -->
-                <div class="panel-form-item">
-                    <h5 class="panel-form-title">Số điện thoại</h5>
-                    <input class="panel-form-input" type="number" value="" />
-                </div>
-
-                <!-- CCCD -->
-                <div class="panel-form-item">
-                    <h5 class="panel-form-title">Căn cước công dân</h5>
-                    <input class="panel-form-input" type="number" value="" />
-                </div>
-
-                <!-- Ngày -->
-                <div class="panel-form-item">
-                    <div class="panel-form-height">
-                        <div class="panel-form-height-item">
-                            <h5 class="panel-form-title">Ngày nhận phòng</h5>
-                            <input class="panel-form-input" type="date" value="" />
-                        </div>
-
-                        <div class="panel-form-height-item">
-                            <h5 class="panel-form-title">Ngày trả phòng</h5>
-                            <input class="panel-form-input" type="date" value="" />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tiền trả trước -->
-                <div class="panel-form-item">
-                    <h5 class="panel-form-title">Tiền trả trước</h5>
-                    <input class="panel-form-input" type="number" value="" placeholder="0.000 đ" />
-                </div>
-
-                <!-- Ghi chú -->
-                <div class="panel-form-item">
-                    <h5 class="panel-form-title">Ghi chú</h5>
-                    <input class="panel-form-input" type="text" value="" placeholder="" />
-                </div>
-            </div>
-
-            <!-- Phòng -->
-            <div class="panel-form-room">
-                <div class="panel-form-room-item">
-                    <h5 class="panel-form-title">Thêm phòng</h5>
-
-                    <button class="panel-form-room-btn">Thêm phòng</button>
-                </div>
-            </div>
-        </form>
+    <div class="right-panel col-4 pl-0 pr-0">     
+       
+                                 
     </div>
 </div>

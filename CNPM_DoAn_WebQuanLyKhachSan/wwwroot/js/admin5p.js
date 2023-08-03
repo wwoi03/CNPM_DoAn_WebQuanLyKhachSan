@@ -135,7 +135,7 @@ function Main() {
 	BookRoom();
 	
 	MoreMenu();
-
+	Navibar();
 }
 
 /* --------------------------------- Hàm xử lý sự kiện --------------------------------- */
@@ -203,39 +203,187 @@ function AddRoom(listRoom) {
 	});
 
 }
-
+/* --------------------------------- Xử mấy cái thuê trả phòng --------------------------------- */
 // menu mở rộng
 function MoreMenu() {
 	const showMenuIcons = document.querySelectorAll('.show-menu');
-	const options = document.querySelectorAll('.more-menu');
 	console.log("44");
 	showMenuIcons.forEach(icon => {
 		icon.addEventListener('click', function () {
+			var m = document.querySelector(".show-menu.active");
+			if (m != null)
+				m.classList.remove("active")
 			icon.classList.toggle('active');
 		});
 	});
+}
+function openDialog() {
+	document.getElementById("dialog").style.display = "block";
+}
+function closeDialog() {
+	document.getElementById("dialog").style.display = "none";
+}
+function Navibar() {
+	const tabbar = document.querySelectorAll('.book-room-details-tabs');
+	const navItem = document.querySelectorAll('.nav-container .nav-item');
 
-	/*// Đóng more-menu khi nhấp bất kỳ nơi nào trên trang
-	document.addEventListener('click', function (event) {
-		if (!event.target.classList.contains('show-menu')) {
-			options.forEach(option => {
-				option.style.display = 'none';
-			});
-		}
-	});*/
-		const showdialog = document.getElementById('dialog-bt');
-		const tagdialog = document.getElementById("dialog");
-		showdialog.addEventListener('click', function () {
-			tagdialog.style.display = "block";
-		});
-    
-
-	function closeDialog() {
-		document.getElementById("dialog").style.display = "none";
-	}
+	navItem.forEach(function (item, index) {
+		item.addEventListener('click', function () {
+			document.querySelector('.book-room-details-tabs.active').classList.remove('active');
+			console.log("dd: " + index);
+			console.log(tabbar[index]);
+			tabbar[index].classList.add('active');
+        })
+	});
 
 }
+//
+let value = 0;
+function Additemmenu() {
+		value++;		
+		valueDisplay.textContent = value;
+}
+function subtractionMenu() {
+	value--;
+	if (value <= 0)
+		value = 0;
+	valueDisplay.textContent = value;
+}
+////thêm menu
+function AddMenu() {
+	$.ajax({
+		type: "GET",
+		url: "RoomType/Create", // Đường dẫn tới Action GetEmployee
+		//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+		success: function (data) {
+			// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+			var employeeDetailsHtml =
+				`
+							 <form method="post" action="RoomType/Create" enctype="multipart/form-data">
+								<!-- Lưu đặt phòng -->
+								<div class="panel-save d-flex justify-content-between align-items-center">
+									<span>Thêm mới</span>
 
+									<div class="">
+										<input type="submit" value="Lưu"/>
+									</div>
+								</div>
+
+                            <table class="datatable table table-stripped table table-hover table-center mb-0">
+                                  <thead>
+                                     <tr>
+                                          <th>
+                                         Tên
+                                      </th>
+                                      <th>
+                                          giá
+                                      </th>
+                                      <th>
+                                          số lượng
+                                      </th>
+                                        <th>
+                                         chỉnh sửa
+                                      </th>
+                                     </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                         <td>
+                                         bánh
+                                     </td>
+                                     <td>
+                                         ngọt
+                                     </td>
+                                     <td id="valueDisplay">
+                                          0
+                                        </td>
+                                     <td>
+                                         <button onClick="Additemmenu()" type="button" class="btn btn-success">
+                                            +
+                                         </button>
+                                         <button onClick="subtractionMenu()" type="button" class="btn btn-danger">
+                                            -
+                                         </button>
+                                     </td>
+                                    </tr>
+
+                                  </tbody>
+                              </table>
+           </form>
+                            
+								
+						`;
+			$(".right-panel").html(employeeDetailsHtml);
+		},
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông t");
+		}
+	});
+}
+////nhận phòng
+function Checkin() {
+	$.ajax({
+		type: "GET",
+		url: "/RoomType/Delete?roomTypeId=" + employeeId, // Đường dẫn tới Action GetEmployee
+		//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+		success: function (data) {
+			// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+			var employeeDetailsHtml =
+				`
+						<form method="post" action="RoomType/DeleteById?roomTypeId=${data.roomTypeId}">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Thêm mới</span>
+
+								<div class="">
+									<input type="submit" value="Xóa"/>
+								</div>
+							</div>
+
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên loại phòng</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số giường</h5>
+										<input class="panel-form-input" type="text" value="${data.bedNumber}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá</h5>
+										<input class="panel-form-input" type="text" value="${data.price}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Mô tả</h5>
+										<input class="panel-form-input" type="text" value="${data.description}" readonly/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+			$(".right-panel").html(employeeDetailsHtml);
+		},
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông t");
+		}
+	});
+}
+////trả phòng
+//function CheckOut{
+
+//}
+
+/* --------------------------------- Kết thúc thuê trả phòng --------------------------------- */
 // M: Xử lý các chức năng của BookRoom
 function BookRoom() {
 	CreateBookRoom();
