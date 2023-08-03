@@ -12,6 +12,9 @@
         font-weight: bold;
     }
 
+.fc-day-today {
+    background-color: #17A2B8 !important; /* Đặt màu nền tùy ý */
+}
 .fc-scroller {
     overflow: unset !important;
 }
@@ -243,6 +246,10 @@
         position: relative;
     }
 
+    .panel-form-roomtype-item:last-child {
+        margin: 0;
+    }
+
 
     .panel-form-roomtype-title {
         font-size: 16px;
@@ -280,6 +287,25 @@
         border: 2px solid #009688;
     }
 
+.panel-cancel-room {
+    padding: 18px 16px;
+    text-align: right;
+    border-top: 1px solid #949494;
+}
+
+    .panel-cancel-room a {
+        padding: 8px 10px;
+        background-color: #707070;
+        font-size: 16px;
+        color: #fff !important;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .panel-cancel-room a:hover {
+        opacity: 0.8;   
+    }
 /*--------------------------------------------Thuê trả - Phòng ------------------------------*/
 .roomtype {
     height: auto;
