@@ -286,6 +286,14 @@
     }
 
 /*--------------------------------------------Thuê trả - Phòng ------------------------------*/
+.book-room-details-tabs {
+    display: none;
+}
+
+.book-room-details-tabs.active {
+    display: block;
+}
+
 .roomtype {
     height: auto;
     background: inherit;
@@ -378,8 +386,8 @@
 .more-menu {
     display: none;
     position: absolute;
-    right: -50%;
-    top: 37px;
+    top: 54px;
+    right: -30%;
     z-index: 1000;
     border: 1px solid #E1E1E1;
     background-color: white;
@@ -427,8 +435,13 @@
 }
 
     .card-content1-top i {
-        padding-left: 15px;
+       padding:10px;
+        
     }
+        .card-content1-top i:hover{
+            background-color:wheat;
+            border-radius:360px;
+        }
 
         .card-content1-top i:focus {
             outline: none;
