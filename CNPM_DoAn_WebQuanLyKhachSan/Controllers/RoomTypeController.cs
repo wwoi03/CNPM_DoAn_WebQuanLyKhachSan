@@ -67,7 +67,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                     Image = roomTypeVM.Image,
                 };
 
-                dBHelper.InsertRoomType(roomType);
+                dBHelper.InsertRoomType( roomType);
                 return RedirectToAction("Index");
             }
 
