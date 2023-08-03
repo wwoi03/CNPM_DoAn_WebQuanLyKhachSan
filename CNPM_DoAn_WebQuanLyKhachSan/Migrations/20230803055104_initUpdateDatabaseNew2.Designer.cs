@@ -4,6 +4,7 @@ using CNPM_DoAn_WebQuanLyKhachSan.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230803055104_initUpdateDatabaseNew2")]
+    partial class initUpdateDatabaseNew2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,14 +106,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookRoomId"));
 
-                    b.Property<int?>("CardId")
+                    b.Property<int>("CardId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("CheckOutDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -118,14 +115,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("PrePayment")
                         .HasColumnType("float");
 
-                    b.Property<int?>("StaffId")
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
                     b.HasKey("BookRoomId");
-
-                    b.HasIndex("CardId");
-
-                    b.HasIndex("StaffId");
 
                     b.ToTable("BookRooms");
                 });
@@ -408,21 +401,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Staff");
-                });
-
-            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.BookRoom", b =>
-                {
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CardId");
-
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffId");
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Staff");
                 });

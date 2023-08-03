@@ -5,7 +5,7 @@
         [key]
         public int PositionId { get; set; }
         public string Name { get; set; }
-        public int? CoefficientsSalary { get; set; }
-        public int? BonusCoefficient { get; set; }
+        public double? CoefficientsSalary { get; set; }
+        public double? BonusCoefficient { get; set; }
     }
 }
