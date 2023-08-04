@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 {
@@ -18,16 +19,48 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             return dbContext.Rooms.Include(p => p.RoomType).Where(p => p.Status == 0).ToList();
         }
 
+        public List <Room> GetRoom() { //aben
+          return dbContext.Rooms.OrderByDescending(p => p.RoomId).ToList();
+		}
+
         // M: Lấy phòng theo Id
         public Room GetRoomById(int roomId)
         {
             return dbContext.Rooms.FirstOrDefault(p => p.RoomId == roomId);
+
+        }
+		// M: Thêm  phòng
+		public void InsertRoom(Room newRoom)
+		{
+			dbContext.Rooms.Add(newRoom);
+			dbContext.SaveChanges();
+		}
+
+
+		// M: xóa phòng
+		public void DeleteRoom(int roomId)
+		{
+			dbContext.Rooms.Remove(GetRoomById(roomId));
+			dbContext.SaveChanges();
+		}
+
+		// chi tiết phòng
+		public void DetailsRoom(int roomId)
+        {
+         dbContext.SaveChanges();
         }
 
+		// chỉnh sửa phòng
+		public void EditRoom(Room room)
+		{
+			dbContext.Rooms.Update(room);
+			dbContext.SaveChanges();
+		}
 
-        /* ------------------------------------- RoomType ------------------------------------- */
-        // M: Lấy danh sách sản phẩm
-        public List<RoomType> GetRoomType()
+
+		/* ------------------------------------- RoomType ------------------------------------- */
+		// M: Lấy danh sách sản phẩm
+		public List<RoomType> GetRoomType()
         {
             return  dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
