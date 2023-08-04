@@ -713,8 +713,7 @@ function DeleteRoomType() {
 }
 }
 /*------------------------------------Room----------------------------------*/
-/* --------------------------------- RoomType --------------------------------- */
-// M: Create RoomType
+// M: Create Room
 function CreateRoom() {
 	var roomCreate = document.getElementById('room-create')
 	if (roomCreate != null) {
