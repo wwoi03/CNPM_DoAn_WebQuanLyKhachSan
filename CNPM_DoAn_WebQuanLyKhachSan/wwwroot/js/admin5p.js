@@ -712,6 +712,143 @@ function DeleteRoomType() {
 	
 }
 }
+/*------------------------------------Room----------------------------------*/
+/* --------------------------------- RoomType --------------------------------- */
+// M: Create RoomType
+function CreateRoom() {
+	var roomCreate = document.getElementById('room-create')
+	if (roomCreate != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		roomCreate.addEventListener('click', function (e) {
+			// Gọi Action GetEmployee bằng AJAX
+			$.ajax({
+				type: "GET",
+				url: "/Room/Create", // Đường dẫn tới Action GetEmployee
+				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+				success: function (data) {
+					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+					var employeeDetailsHtml =
+						`
+							<form method="post" action="Room/Create" enctype="multipart/form-data">
+								<!-- Lưu đặt phòng -->
+								<div class="panel-save d-flex justify-content-between align-items-center">
+									<span>Thêm mới</span>
+
+									<div class="">
+										<input type="submit" value="Lưu"/>
+									</div>
+								</div>
+
+								<!-- Form -->
+								<div class="panel-form">
+									<!-- Thông tin -->
+									<div class="panel-form-info">
+										<!-- Tên tài khoản -->
+										<div class="panel-form-item">
+											<h5 class="panel-form-title">Tên phòng</h5>
+											<input class="panel-form-input" type="text" name="Name"/>
+											<span data-valmsg-for="${data}" class="text-danger"></span>
+										</div>
+
+										<!-- Tên tài khoản -->
+										<div class="panel-form-item">
+											<h5 class="panel-form-title">Giá</h5>
+											<input class="panel-form-input" type="number" name="price"/>
+										</div>
+
+										
+
+										<!-- Tên tài khoản -->
+										<div class="panel-form-item">
+											<h5 class="panel-form-title">Mô tả</h5>
+											<input class="panel-form-input" type="text" name="Description"/>
+										</div>
+
+										
+									</div>
+								</div>
+							</form>
+						`;
+					$(".right-panel").html(employeeDetailsHtml);
+				},
+				error: function () {
+					alert("Đã xảy ra lỗi khi lấy thông t");
+				}
+			});
+		});
+	}
+}
+
+// M: Delete Room
+function DeleteRoom() {
+	var roomDelete = document.querySelectorAll('.room-delete')
+	if (roomDelete != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		roomDelete.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('room-id');
+
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "/RoomDelete?roomId=" + employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeDetailsHtml =
+							`
+						<form method="post" action="Room/DeleteById?roomId=${data.roomTypeId}">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Thêm mới</span>
+
+								<div class="">
+									<input type="submit" value="Xóa"/>
+								</div>
+							</div>
+
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên phòng</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số giường</h5>
+										<input class="panel-form-input" type="text" value="${data.bedNumber}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá</h5>
+										<input class="panel-form-input" type="text" value="${data.price}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Mô tả</h5>
+										<input class="panel-form-input" type="text" value="${data.description}" readonly/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+						$(".right-panel").html(employeeDetailsHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông tin");
+					}
+				});
+			});
+		})
+
+	}
+}
 
 /* --------------------------------- Staff --------------------------------- */
 if (document.getElementById('account-edit') != null) {
