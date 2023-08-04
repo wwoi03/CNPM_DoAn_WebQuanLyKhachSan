@@ -12,7 +12,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         /* ------------------------------------- Room ------------------------------------- */
-        // M: Lấy danh sách phòng
+        // M: Lấy danh sách phòng chưa đặt
         public List<Room> GetUnusedRoom()
         {
             return dbContext.Rooms.Include(p => p.RoomType).Where(p => p.Status == 0).ToList();
@@ -80,6 +80,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             return dbContext.BookRooms.OrderByDescending(p => p.BookRoomId).FirstOrDefault();
         }
 
+        // M: Lấy danh sách BookRoomDetails theo BookRoomId
+        public List<BookRoomDetails> GetBookRoomDetailsByBookRoomId(int bookRoomId)
+        {
+            List<BookRoomDetails> bookRoomDetailsList = dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).Where(p => p.BookRoomId == bookRoomId).ToList();
+            return bookRoomDetailsList;
+        }
+
         /* ------------------------------------- BookRoom ------------------------------------- */
         // M: Lấy danh sách đặt phòng
         public List<BookRoom> GetBookRooms()
@@ -93,19 +100,34 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.BookRooms.Add(newBookRoom);
             dbContext.SaveChanges();
         }
-		/* ------------------------------------- Menu ------------------------------------- */
-		public Menu GetMenuById(int menuId)
-		{
-			return dbContext.Menus.FirstOrDefault(p => p.MenuId == menuId);
-		}
-        public List<Menu> GetMenus() { 
-          
-          return  dbContext.Menus.OrderByDescending(p =>p.MenuId).ToList();
+
+        // M: Xóa đặt phòng
+        public void DeleteBookRoom(int bookRoomId)
+        {
+            dbContext.BookRooms.Remove(GetBookRoomById(bookRoomId));
+            dbContext.SaveChanges();
         }
-		public void InsertMenu(Menu newMenu)
-		{
-			dbContext.Menus.Add(newMenu);
-			dbContext.SaveChanges();
-		}
-	}
+
+        // M: Lấy BookRoom theo id
+        public BookRoom GetBookRoomById(int bookRoomId)
+        {
+            return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).FirstOrDefault(p => p.BookRoomId == bookRoomId);
+        }
+
+        /* ------------------------------------- Menu ------------------------------------- */
+        public Menu GetMenuById(int menuId)
+        {
+            return dbContext.Menus.FirstOrDefault(p => p.MenuId == menuId);
+        }
+        public List<Menu> GetMenus()
+        {
+
+            return dbContext.Menus.OrderByDescending(p => p.MenuId).ToList();
+        }
+        public void InsertMenu(Menu newMenu)
+        {
+            dbContext.Menus.Add(newMenu);
+            dbContext.SaveChanges();
+        }
+    }
 }
