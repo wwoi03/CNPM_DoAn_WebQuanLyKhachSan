@@ -18,18 +18,57 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             return dbContext.Rooms.Include(p => p.RoomType).Where(p => p.Status == 0).ToList();
         }
 
+        public List<Room> GetRoom()
+        { //aben
+            return dbContext.Rooms.OrderByDescending(p => p.RoomId).ToList();
+        }
+
         // M: Lấy phòng theo Id
         public Room GetRoomById(int roomId)
         {
             return dbContext.Rooms.FirstOrDefault(p => p.RoomId == roomId);
+
+        }
+        // M: Thêm  phòng
+        public void InsertRoom(Room newRoom)
+        {
+            dbContext.Rooms.Add(newRoom);
+            dbContext.SaveChanges();
         }
 
+
+        // M: xóa phòng
+        public void DeleteRoom(int roomId)
+        {
+            dbContext.Rooms.Remove(GetRoomById(roomId));
+            dbContext.SaveChanges();
+        }
+
+        // chi tiết phòng
+        public void DetailsRoom(int roomId)
+        {
+            dbContext.SaveChanges();
+        }
+
+        // chỉnh sửa phòng
+        public void EditRoom(Room room)
+        {
+            dbContext.Rooms.Update(room);
+            dbContext.SaveChanges();
+        }
+        //lấy phòng theo loại
+        public List<Room> GetRoonByTypeRoom(int roomTypeId)
+        {
+            return dbContext.Rooms
+                .Where(room => room.RoomTypeId == roomTypeId)
+                .ToList();
+        }
 
         /* ------------------------------------- RoomType ------------------------------------- */
         // M: Lấy danh sách sản phẩm
         public List<RoomType> GetRoomType()
         {
-            return  dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
+            return dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
 
         // M: Lấy loại phòng theo id
@@ -42,6 +81,15 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void InsertRoomType(RoomType newRoomType)
         {
             dbContext.RoomTypes.Add(newRoomType);
+            dbContext.SaveChanges();
+        }
+        public void DetailsRoomType(int roomTypeId)
+        {
+            dbContext.SaveChanges();
+        }
+        public void EditRoomType(RoomType roomType)
+        {
+            dbContext.RoomTypes.Update(roomType);
             dbContext.SaveChanges();
         }
 
@@ -127,6 +175,20 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void InsertMenu(Menu newMenu)
         {
             dbContext.Menus.Add(newMenu);
+            dbContext.SaveChanges();
+        }
+        public void DeleteMenu(int menuId)
+        {
+            dbContext.Menus.Remove(GetMenuById(menuId));
+            dbContext.SaveChanges();
+        }
+        public void DetailsMenu(int menuid)
+        {
+            dbContext.SaveChanges();
+        }
+        public void EditMenu(Menu menu)
+        {
+            dbContext.Menus.Update(menu);
             dbContext.SaveChanges();
         }
     }

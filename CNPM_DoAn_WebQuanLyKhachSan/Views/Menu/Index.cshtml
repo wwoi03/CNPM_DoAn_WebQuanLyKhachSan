@@ -1,7 +1,10 @@
-﻿@{
+﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
+@{
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 	var itemmenu = ViewBag.menu;
 }
+
+@model MenuVM
 
 <div class="main-container d-flex">
 	<!-- Nội dung bên trái -->
@@ -48,16 +51,16 @@
 													<img src="/images/@item.Image" style ="width: 100%">
 												</td>
 												<td>
-													<a class="btn btn-primary btn-sm menu-details" id="menu-details" style="width: 100px">
-														<i class="fas fa-folder"></i>
+													<a data-menu-id="@item.MenuId" class="btn btn-primary btn-sm menu-details">
+														<i class="fas fa-pencil-alt"></i>
 														Chi tiết
 													</a>
 
-													<a class="btn btn-info btn-sm menu-edit" style="width: 100px">
+													<a data-menu-id="@item.MenuId" class="btn btn-info btn-sm menu-edit">
 														<i class="fas fa-pencil-alt"></i>
 														Chỉnh sửa
 													</a>
-													<a class="btn btn-danger btn-sm menu-delete " id="menu-delete" style="width: 100px">
+													<a data-menu-id="@item.MenuId" class="btn btn-danger btn-sm menu-delete">
 														<i class="fas fa-pencil-alt"></i>
 														Xóa
 													</a>
