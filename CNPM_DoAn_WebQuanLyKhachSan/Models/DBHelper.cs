@@ -74,6 +74,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.SaveChanges();
         }
 
+        // M: Thêm mới chi tiết đặt phòng
+        public void UpdateBookRoomDetails(BookRoomDetails newBookRoomDetails)
+        {
+            dbContext.BookRoomDetails.Update(newBookRoomDetails);
+            dbContext.SaveChanges();
+        }
+
         // M: Lấy thông tin đặt phòng mới nhất
         public BookRoom GetNewBookRoom()
         {
@@ -98,6 +105,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void CreateBookRoom(BookRoom newBookRoom)
         {
             dbContext.BookRooms.Add(newBookRoom);
+            dbContext.SaveChanges();
+        }
+
+        // M: Thêm mới Đặt phòng
+        public void UpdateBookRoom(BookRoom newBookRoom)
+        {
+            dbContext.BookRooms.Update(newBookRoom);
             dbContext.SaveChanges();
         }
 

@@ -22,10 +22,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             return View();
         }
 
+        // M: Lấy danh sách các phòng đã đặt trả về dạng Json
         public IActionResult GetDataIndex()
         {
             List<BookRoom> _bookRooms = dBHelper.GetBookRooms();
-
             return Json(_bookRooms);
         }
 
@@ -149,7 +149,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             dBHelper.CreateBookRoom(bookRoom);
             int bookRoomId = dBHelper.GetNewBookRoom().BookRoomId;
 
-            // Tạo các chi tiết đặt phòng
             for (int i = 0; i < listRoomNum.Length; i++)
             {
                 int roomId = int.Parse(listRoomNum[i]);
