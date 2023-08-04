@@ -143,5 +143,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Menus.Add(newMenu);
             dbContext.SaveChanges();
         }
+
+        /* ------------------------------------- Staff ------------------------------------- */
+        public Staff GetStaffByUsername(string username)
+        {
+            return dbContext.Staffs.Where(p => p.Username == username).FirstOrDefault();
+        }
     }
 }

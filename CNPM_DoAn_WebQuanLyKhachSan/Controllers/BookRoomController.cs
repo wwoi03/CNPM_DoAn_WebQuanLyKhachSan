@@ -67,7 +67,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             BookRoom bookRoom = new BookRoom()
             {
                 CardId = cardId,
-                StaffId = 1,
+                StaffId = HttpContext.Session.GetInt32("StaffId"),
                 PrePayment = bookRoomVM.PrePayment,
                 Note = bookRoomVM.Note,
                 CheckOutDate = bookRoomVM.CheckOutDate,
@@ -140,7 +140,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             BookRoom bookRoom = new BookRoom()
             {
                 CardId = cardId,
-                StaffId = 1,
+                StaffId = HttpContext.Session.GetInt32("StaffId"),
                 PrePayment = bookRoomVM.PrePayment,
                 Note = bookRoomVM.Note,
                 CheckOutDate = bookRoomVM.CheckOutDate,

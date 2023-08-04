@@ -375,7 +375,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Passwork")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -388,6 +388,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
 
                     b.Property<int?>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StaffId");
 

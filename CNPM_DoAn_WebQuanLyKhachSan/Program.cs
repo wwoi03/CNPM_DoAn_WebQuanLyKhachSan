@@ -1,11 +1,18 @@
-using CNPM_DoAn_WebQuanLyKhachSan.Models;
+﻿using CNPM_DoAn_WebQuanLyKhachSan.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Kết nối đến database
 builder.Services.AddDbContext<DatabaseContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DbContext")));
+
+// Kích hoạt Session
+builder.Services.AddSession();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,6 +23,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -25,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Admin}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=Login}/{id?}");
 
 app.Run();

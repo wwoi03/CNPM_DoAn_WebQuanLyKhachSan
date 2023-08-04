@@ -37,7 +37,7 @@ function FullCalendarLibrary() {
 	if (calendarEl != null) {
 		$.ajax({
 			type: "GET",
-			url: "/BookRoom/GetDataIndex",
+			url: "../../BookRoom/GetDataIndex",
 			success: function (data) {
 
 				// Ngày cho các sự kiện trên lịch
@@ -109,7 +109,7 @@ function FullCalendarLibrary() {
 					// xử lý sự kiện khi bấm vào từng date
 					dateClick: function (info) {
 						// lấy ngày
-						var clickedDate = info.date; 
+						var clickedDate = info.date;
 
 						// chuyển đổi ngày qua đúng định dạng : 00:00:0000
 						var clickDateConvert = PadDate(clickedDate.getDate(), clickedDate.getMonth(), clickedDate.getFullYear());
@@ -117,15 +117,16 @@ function FullCalendarLibrary() {
 						// sử dụng ajax để gọi đến action bên controller
 						$.ajax({
 							type: "GET",
-							url: "BookRoom/Create",
+							url: "../../BookRoom/Create",
 							success: function (data) {
+								console.log("dada");
 								var roomTypes = data.roomTypes;
 								var rooms = data.rooms;
 								RenderFormBookRoom(clickDateConvert, roomTypes, rooms);
 							},
 							error: function () {
 								alert("Không thể lấy được thông tin");
-                            }
+							}
 						});
 					},
 
@@ -197,7 +198,7 @@ function SwitchTabs() {
 				this.classList.add("active");
 			});
 		});
-    }
+	}
 }
 
 // M: Xử lý khi bấm vào nút thêm phòng
@@ -209,7 +210,7 @@ function AddBookRoomDetails() {
 		addRoom.addEventListener('click', function () {
 			panelFormRoomType.classList.toggle('active');
 		});
-    }
+	}
 }
 
 // M: xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
@@ -261,7 +262,7 @@ function MoreMenu() {
 		showdialog.addEventListener('click', function () {
 			tagdialog.style.display = "block";
 		});
-    }
+	}
 
 	function closeDialog() {
 		document.getElementById("dialog").style.display = "none";
@@ -313,7 +314,7 @@ function CreateBookRoom() {
 			// Gọi Action GetEmployee bằng AJAX
 			$.ajax({
 				type: "GET",
-				url: "/BookRoom/Create", // Đường dẫn tới Action GetEmployee
+				url: "../../BookRoom/Create", // Đường dẫn tới Action GetEmployee
 				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 				success: function (data) {
 					var roomTypes = data.roomTypes;
@@ -326,7 +327,7 @@ function CreateBookRoom() {
 					alert("Đã xảy ra lỗi khi lấy thông t");
 				}
 			});
-			
+
 		});
 
 	}
@@ -347,11 +348,11 @@ function RenderFormBookRoom(clickDate, roomTypes, rooms) {
 
 	// lưu danh sách phòng khách hàng đặt
 	var listRoom = [];
-			
+
 	// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 	var employeeDetailsHtml =
 		`
-			<form id="form-book-room" method="post" action="BookRoom/Edit">
+			<form id="form-book-room" method="post" action="../../BookRoom/Edit">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
 					<span>Chỉnh sửa</span>
@@ -488,7 +489,7 @@ function EditBookRoom(bookRoomId) {
 	// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 	$.ajax({
 		type: "GET",
-		url: "/BookRoom/Edit?bookRoomId=" + bookRoomId, //
+		url: "../../BookRoom/Edit?bookRoomId=" + bookRoomId, //
 		success: function (data) {
 			var bookRoom = data.bookRoom;
 			var bookRoomDetails = data.bookRoomDetails;
@@ -497,7 +498,7 @@ function EditBookRoom(bookRoomId) {
 
 			var employeeDetailsHtml =
 				`
-					<form id="form-book-room" method="post" action="BookRoom/Edit">
+					<form id="form-book-room" method="post" action="../../BookRoom/Edit">
 						<!-- Lưu đặt phòng -->
 						<div class="panel-save d-flex justify-content-between align-items-center">
 							<span>Chỉnh sửa</span>
@@ -602,19 +603,19 @@ function EditBookRoom(bookRoomId) {
 								listRoom.push(String(itemR.roomId));
 								checkCount++;
 								return;
-							} 
+							}
 						})
 
 						// Kiểm tra nếu phòng
-						if (checkCount == 0) { 
+						if (checkCount == 0) {
 							nextItemHtml +=
 								`
 									<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
 										${itemR.roomId}
 									</div>
 								`;
-                        }
-                    }
+						}
+					}
 				})
 
 				employeeDetailsHtml += nextItemHtml;
@@ -629,14 +630,14 @@ function EditBookRoom(bookRoomId) {
 			})
 
 			employeeDetailsHtml +=
-					`</div>
+				`</div>
 				</div>
 
 				<div class="panel-cancel-room">
 					<input id="book-room-delete" type="submit" readonly value="Hủy đặt phòng">
 				</div>
 			</form>`;
-							
+
 			// render giao diện
 			$(".right-panel").html(employeeDetailsHtml);
 
@@ -663,13 +664,13 @@ function CreateRoomType() {
 			// Gọi Action GetEmployee bằng AJAX
 			$.ajax({
 				type: "GET",
-				url: "/RoomType/Create", // Đường dẫn tới Action GetEmployee
+				url: "../../RoomType/Create", // Đường dẫn tới Action GetEmployee
 				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 				success: function (data) {
 					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 					var employeeDetailsHtml =
 						`
-							<form method="post" action="RoomType/Create" enctype="multipart/form-data">
+							<form method="post" action="../../RoomType/Create" enctype="multipart/form-data">
 								<!-- Lưu đặt phòng -->
 								<div class="panel-save d-flex justify-content-between align-items-center">
 									<span>Thêm mới</span>
@@ -731,21 +732,21 @@ function CreateRoomType() {
 function DeleteRoomType() {
 	var roomTypeDelete = document.querySelectorAll('.roomType-delete')
 	if (roomTypeDelete != null) {
-	// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
-	roomTypeDelete.forEach((ele, index) => {
-		ele.addEventListener('click', function (e) {
-			var employeeId = $(this).data('room-type-id'); 
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		roomTypeDelete.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('room-type-id');
 
-			// Gọi Action GetEmployee bằng AJAX
-			$.ajax({
-				type: "GET",
-				url: "/RoomType/Delete?roomTypeId=" + employeeId, // Đường dẫn tới Action GetEmployee
-				//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
-				success: function (data) {
-					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-					var employeeDetailsHtml =
-						`
-						<form method="post" action="RoomType/DeleteById?roomTypeId=${data.roomTypeId}">
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "../../RoomType/Delete?roomTypeId=" + employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeDetailsHtml =
+							`
+						<form method="post" action="../../RoomType/DeleteById?roomTypeId=${data.roomTypeId}">
 							<!-- Lưu đặt phòng -->
 							<div class="panel-save d-flex justify-content-between align-items-center">
 								<span>Thêm mới</span>
@@ -786,37 +787,37 @@ function DeleteRoomType() {
 							</div>
 						</form>
 					`;
-					$(".right-panel").html(employeeDetailsHtml);
-				},
-				error: function () {
-					alert("Đã xảy ra lỗi khi lấy thông t");
-				}
+						$(".right-panel").html(employeeDetailsHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông t");
+					}
+				});
 			});
-		});
-    })
-	
-}
+		})
+
+	}
 }
 
 /* --------------------------------- Staff --------------------------------- */
 if (document.getElementById('account-edit') != null) {
 	// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
 	document.getElementById('account-edit').addEventListener('click', function (e) {
-    //var employeeId = $(this).data("employee-id");
-    // Gọi Action GetEmployee bằng AJAX
-    $.ajax({
-        type: "GET",
-        url: "/Staff/Edit", // Đường dẫn tới Action GetEmployee
-        //data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
-        success: function (data) {
-            // Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-            var employeeDetailsHtml = `
+		//var employeeId = $(this).data("employee-id");
+		// Gọi Action GetEmployee bằng AJAX
+		$.ajax({
+			type: "GET",
+			url: "../../Staff/Edit", // Đường dẫn tới Action GetEmployee
+			//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+			success: function (data) {
+				// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+				var employeeDetailsHtml = `
                         <!-- Lưu đặt phòng -->
 						<div class="panel-save d-flex justify-content-between align-items-center">
 							<span>Thêm mới ${data}</span>
 
 							<div class="">
-								<a asp-controller="" asp-action="">Lưu</a>
+								<a asp-controller="" asp-action="../../">Lưu</a>
 							</div>
 						</div>
 
@@ -880,13 +881,13 @@ if (document.getElementById('account-edit') != null) {
 							</div>
 						</form>
                     `;
-            $(".right-panel").html(employeeDetailsHtml);
-        },
-        error: function () {
-            alert("Đã xảy ra lỗi khi lấy thông t");
-        }
-    });
-});
+				$(".right-panel").html(employeeDetailsHtml);
+			},
+			error: function () {
+				alert("Đã xảy ra lỗi khi lấy thông t");
+			}
+		});
+	});
 }
 
 // Details staff
@@ -898,7 +899,7 @@ if (accountDetails != null) {
 		// Gọi Action GetEmployee bằng AJAX
 		$.ajax({
 			type: "GET",
-			url: "/Staff/Details", // Đường dẫn tới Action GetEmployee
+			url: "../../Staff/Details", // Đường dẫn tới Action GetEmployee
 			//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 			success: function (data) {
 				// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
@@ -909,7 +910,7 @@ if (accountDetails != null) {
 							<span>Thêm mới ${data}</span>
 
 							<div class="">
-								<a asp-controller="" asp-action="">Lưu</a>
+								<a asp-controller="" asp-action="../../">Lưu</a>
 							</div>
 						</div>
 
@@ -1039,7 +1040,7 @@ if (accountCreate != null) {
 		// Gọi Action GetEmployee bằng AJAX
 		$.ajax({
 			type: "GET",
-			url: "/Staff/Create", // Đường dẫn tới Action GetEmployee
+			url: "../../Staff/Create", // Đường dẫn tới Action GetEmployee
 			//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 			success: function (data) {
 				// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
@@ -1050,7 +1051,7 @@ if (accountCreate != null) {
 							<span>Thêm mới ${data}</span>
 
 							<div class="">
-								<a asp-controller="" asp-action="">Lưu</a>
+								<a asp-controller="" asp-action="../../">Lưu</a>
 							</div>
 						</div>
 
@@ -1182,13 +1183,13 @@ function CreateMenu() {
 			// Gọi Action GetEmployee bằng AJAX
 			$.ajax({
 				type: "GET",
-				url: "/Menu/Create", // Đường dẫn tới Action GetEmployee
+				url: "../../Menu/Create", // Đường dẫn tới Action GetEmployee
 				//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 				success: function (data) {
 					// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 					var employeeMenuCreateHtml =
 						`
-							<form method="post" action="Menu/Create" enctype="multipart/form-data">
+							<form method="post" action="../../Menu/Create" enctype="multipart/form-data">
 								<!-- Lưu đặt phòng -->
 								<div class="panel-save d-flex justify-content-between align-items-center">
 									<span>Thêm mới</span>
@@ -1252,10 +1253,10 @@ if (document.getElementById('menu-delete') != null) {
 		console.log("Quan");
 		$.ajax({
 			type: "GET",
-			url: "/Menu/Delete",
+			url: "../../Menu/Delete",
 			success: function (data) {
 				var employeeDeleteHtml = `
-					<form method="post" action="Menu/Delete">
+					<form method="post" action="../../Menu/Delete">
 					<!-- Xóa -->
 		<!-- Lưu đặt phòng -->
 		<div class="panel-save d-flex justify-content-between align-items-center">
@@ -1296,7 +1297,7 @@ if (document.getElementById('menu-delete') != null) {
 				</div>
 				<div>
 					<div class="" style="text-align:right">
-						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="../../">Hủy bỏ</a>
 					</div>
 				</div>
 		</form>
@@ -1317,10 +1318,10 @@ if (document.getElementById('menu-edit') != null) {
 		console.log("Quan");
 		$.ajax({
 			type: "GET",
-			url: "/Menu/Edit",
+			url: "../../Menu/Edit",
 			success: function (data) {
 				var employeeEditHtml = `
-					<form method="post" action="Menu/Edit">
+					<form method="post" action="../../Menu/Edit">
 					<!-- Xóa -->
 		<!-- Lưu đặt phòng -->
 		<div class="panel-save d-flex justify-content-between align-items-center">
@@ -1360,7 +1361,7 @@ if (document.getElementById('menu-edit') != null) {
 				</div>
 				<div>
 					<div class="" style="text-align:right">
-						<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+						<a class="btn btn-info btn-sm">Hủy bỏ</a>
 					</div>
 				</div>
 		</form>
