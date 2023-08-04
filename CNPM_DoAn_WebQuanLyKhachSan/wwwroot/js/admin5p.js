@@ -261,11 +261,15 @@ function BookRoom() {
 function RoomType() {
 	CreateRoomType();
 	DeleteRoomType();
+	DetailsRoomType();
 }
 
 // M: Menu
 function Menu() {
 	CreateMenu();
+	DeleteMenu();
+	DetailsMenu();
+	EditMenu();
 }
 
 /* --------------------------------- BookRoom --------------------------------- */
@@ -764,6 +768,72 @@ function DeleteRoomType() {
 	
 }
 }
+/*-------------------details-----------------*/
+function DetailsRoomType() {
+	var detailsRoomType = document.querySelectorAll('.roomType-details')
+	if (detailsRoomType != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		detailsRoomType.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('room-type-id');
+
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "/RoomType/Details?roomTypeId="+employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						console.log(data);					
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeDetailsHtml =
+							`
+						<form method="post" action="RoomType/Details?roomTypeId=${data.roomTypeId}">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Chi Tiết</span>
+							</div>
+
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên Loại Phòng</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá</h5>
+										<input class="panel-form-input" type="number" value="${data.price}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số lượng</h5>
+										<input class="panel-form-input" type="number" value="${data.bedNumber}" readonly/>
+									</div>
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Hình Ảnh </h5>
+										<img src ="/images/${data.image}"/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+						$(".right-panel").html(employeeDetailsHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông t");
+					}
+				});
+			});
+		})
+
+	}
+}
+/*-------------------edit-----------------*/
 
 /* --------------------------------- Staff --------------------------------- */
 if (document.getElementById('account-edit') != null) {
@@ -1179,19 +1249,19 @@ function CreateMenu() {
 										<!-- Tên tài khoản -->
 										<div class="panel-form-item">
 											<h5 class="panel-form-title">Giá nhập</h5>
-											<input class="panel-form-input" type="number" name="BedNumber"/>
+											<input class="panel-form-input" type="number" name="ImportPrice"/>
 										</div>
 
 										<!-- Tên tài khoản -->
 										<div class="panel-form-item">
 											<h5 class="panel-form-title">Giá bán</h5>
-											<input class="panel-form-input" type="number" name="Price"/>
+											<input class="panel-form-input" type="number" name="SalePrice"/>
 										</div>
 
 										<!-- Tên tài khoản -->
 										<div class="panel-form-item">
 											<h5 class="panel-form-title">Số lương</h5>
-											<input class="panel-form-input" type="number" name="Description"/>
+											<input class="panel-form-input" type="number" name="Quantity"/>
 										</div>
 
 										<!-- Tên tài khoản -->
@@ -1214,129 +1284,224 @@ function CreateMenu() {
 }
 
 /*-------------------delete-----------------*/
-if (document.getElementById('menu-delete') != null) {
-	document.getElementById('menu-delete').addEventListener('click', function (e) {
-		console.log("Quan");
-		$.ajax({
-			type: "GET",
-			url: "/Menu/Delete",
-			success: function (data) {
-				var employeeDeleteHtml = `
-					<form method="post" action="Menu/Delete">
-					<!-- Xóa -->
-		<!-- Lưu đặt phòng -->
-		<div class="panel-save d-flex justify-content-between align-items-center">
-			<span>Xóa</span>
+function DeleteMenu() {
+	var menuDelete = document.querySelectorAll('.menu-delete')
+	if (menuDelete != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		menuDelete.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('menu-id');
 
-			<div class="">
-				<input class="panel-save-submit" type="submit" value="lưu" />
-			</div>
-		</div>
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "/Menu/Delete?menuId=" + employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						console.log(data);
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeDeleteHtml =
+							`
+						<form method="post" action="Menu/DeleteById?menuId=${data.menuId}">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Xóa</span>
 
-		<!-- Form -->
-		<form class="panel-form">
-			<!-- Thông tin -->
-			<div class="panel-form-info">
-				<!-- Mã dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Mã dịch vụ</h5>
-					<input class="panel-form-input" type="text" value="1" readonly />
-				</div>
+								<div class="">
+									<input type="submit" value="Xóa"/>
+								</div>
+							</div>
 
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên Thực đơn</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" readonly/>
+									</div>
 
-				<!-- Tên dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tên</h5>
-					<input class="panel-form-input" type="text" value="Phòng siêu Vip" readonly />
-				</div>
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Nhập</h5>
+										<input class="panel-form-input" type="number" value="${data.importPrice}" readonly/>
+									</div>
 
-				<!-- Giá dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Giá</h5>
-					<input class="panel-form-input" type="text" value="1.000.000đ" readonly />
-				</div>
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Bán</h5>
+										<input class="panel-form-input" type="number" value="${data.salePrice}" readonly/>
+									</div>
 
-				<!-- Số lượng -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số lượng</h5>
-					<input class="panel-form-input" type="text" value="2" readonly />
-				</div>
-				<div>
-					<div class="" style="text-align:right">
-						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
-					</div>
-				</div>
-		</form>
-	<form/>
-				`;
-				$(".right-panel").html(employeeDeleteHtml);
-			},
-			error: function () {
-				alert("Đã xảy ra lỗi khi lấy thông tin")
-			}
-		});
-	});
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số Lượng</h5>
+										<input class="panel-form-input" type="number" value="${data.quantity}" readonly/>
+									</div>
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Hình Ảnh </h5>
+										<img src ="/images/${data.image}"/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+						$(".right-panel").html(employeeDeleteHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông t");
+					}
+				});
+			});
+		})
+
+	}
+}
+/*-------------------details-----------------*/
+function DetailsMenu() {
+	var detailsMenu = document.querySelectorAll('.menu-details')
+	if (detailsMenu != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		detailsMenu.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('menu-id');
+
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "/Menu/Details?menuId=" + employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						console.log(data);
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeDetailsHtml =
+							`
+						<form method="post" action="Menu/Details?menuId=${data.menuId}">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Chi Tiết</span>
+							</div>
+
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên Thực đơn</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Nhập</h5>
+										<input class="panel-form-input" type="number" value="${data.importPrice}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Bán</h5>
+										<input class="panel-form-input" type="number" value="${data.salePrice}" readonly/>
+									</div>
+
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số Lượng</h5>
+										<input class="panel-form-input" type="number" value="${data.quantity}" readonly/>
+									</div>
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Hình Ảnh </h5>
+										<img src ="/images/${data.image}"/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+						$(".right-panel").html(employeeDetailsHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông t");
+					}
+				});
+			});
+		})
+
+	}
 }
 /*-------------------edit-----------------*/
-if (document.getElementById('menu-edit') != null) {
-	document.getElementById('menu-edit').addEventListener('click', function (e) {
-		console.log("Quan");
-		$.ajax({
-			type: "GET",
-			url: "/Menu/Edit",
-			success: function (data) {
-				var employeeEditHtml = `
-					<form method="post" action="Menu/Edit">
-					<!-- Xóa -->
-		<!-- Lưu đặt phòng -->
-		<div class="panel-save d-flex justify-content-between align-items-center">
-			<span>Chỉnh sửa</span>
+function EditMenu() {
+	var menuEdit = document.querySelectorAll('.menu-edit')
+	if (menuEdit != null) {
+		// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+		menuEdit.forEach((ele, index) => {
+			ele.addEventListener('click', function (e) {
+				var employeeId = $(this).data('menu-id');
 
-			<div class="">
-				<input class="panel-save-submit" type="submit" value="lưu" />
-			</div>
-		</div>
+				// Gọi Action GetEmployee bằng AJAX
+				$.ajax({
+					type: "GET",
+					url: "/Menu/EditById?menuId=" + employeeId, // Đường dẫn tới Action GetEmployee
+					//data: { roomTypeId: employeeId }, // Truyền tham số id cho Action GetEmployee
+					success: function (data) {
+						console.log(data);
+						// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+						var employeeEditHtml =
+							`
+						<form method="post" action="Menu/EditById?menuId=${data.menuId}" enctype="multipart/form-data">
+							<!-- Lưu đặt phòng -->
+							<div class="panel-save d-flex justify-content-between align-items-center">
+								<span>Chỉnh sửa</span>
 
-		<!-- Form -->
-		<form class="panel-form">
-			<div class="panel-form-info">
-				<!-- Mã dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Mã dịch vụ</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+								<div class="">
+									<input type="submit" value="Lưu"/>
+								</div>
+							</div>
 
+							<!-- Form -->
+							<div class="panel-form">
+								<!-- Thông tin -->
+								<div class="panel-form-info">
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Tên Thực đơn</h5>
+										<input class="panel-form-input" type="text" value="${data.name}" name="Name"/>
+									</div>
 
-				<!-- Tên dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tên</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Nhập</h5>
+										<input class="panel-form-input" type="number" value="${data.importPrice}" name="ImportPrice"/>
+									</div>
 
-				<!-- Giá dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Giá</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Giá Bán</h5>
+										<input class="panel-form-input" type="number"  value="${data.salePrice}" name="SalePrice"/>
+									</div>
 
-				<!-- Số lượng -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số lượng</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
-				<div>
-					<div class="" style="text-align:right">
-						<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
-					</div>
-				</div>
-		</form>
-	<form/>
-				`;
-				$(".right-panel").html(employeeEditHtml);
-			},
-			error: function () {
-				alert("Đã xảy ra lỗi khi lấy thông tin")
-			}
-		});
-	});
+									<!-- Tên tài khoản -->
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Số Lượng</h5>
+										<input class="panel-form-input" type="number" value="${data.quantity}" name="Quantity"/>
+									</div>
+									<div class="panel-form-item">
+										<h5 class="panel-form-title">Hình Ảnh </h5>
+										<input class="panel-form-input" accept="image/*" type="file" name="ImageFile"/>
+										<img src ="/images/${data.image}"name="ImageFile"/>
+									</div>
+								</div>
+							</div>
+						</form>
+					`;
+						$(".right-panel").html(employeeEditHtml);
+					},
+					error: function () {
+						alert("Đã xảy ra lỗi khi lấy thông t");
+					}
+				});
+			});
+		})
+
+	}
 }

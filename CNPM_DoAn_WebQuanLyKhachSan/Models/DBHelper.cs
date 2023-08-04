@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 {
@@ -44,9 +45,18 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.RoomTypes.Add(newRoomType);
             dbContext.SaveChanges();
         }
+		public void DetailsRoomType(int roomTypeId)
+		{
+			dbContext.SaveChanges();
+		}
+		public void EditRoomType(RoomType roomType)
+		{
+			dbContext.RoomTypes.Update(roomType);
+			dbContext.SaveChanges();
+		}
 
-        // M: Thêm loại phòng
-        public void DeleteRoomType(int roomTypeId)
+		// M: Thêm loại phòng
+		public void DeleteRoomType(int roomTypeId)
         {
             dbContext.RoomTypes.Remove(GetRoomTypeById(roomTypeId));
             dbContext.SaveChanges();
@@ -129,5 +139,19 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Menus.Add(newMenu);
             dbContext.SaveChanges();
         }
-    }
+		public void DeleteMenu(int menuId)
+		{
+			dbContext.Menus.Remove(GetMenuById(menuId));
+			dbContext.SaveChanges();
+		}
+		public void DetailsMenu(int menuid)
+		{
+            dbContext.SaveChanges();
+		}
+        public void EditMenu(Menu menu)
+        {
+            dbContext.Menus.Update(menu);
+            dbContext.SaveChanges();
+        }
+	}
 }

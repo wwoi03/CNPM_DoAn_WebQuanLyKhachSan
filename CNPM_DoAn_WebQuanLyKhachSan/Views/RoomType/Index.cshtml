@@ -47,17 +47,18 @@
 													<img src="/images/@item.Image" style="width: 100%">
 												</td>
 												<td>
-													<a asp-controller="" asp-action="" class="btn btn-primary btn-sm" >
-														<i class="fas fa-folder"></i>
-														Chi tiết
+													<a data-room-type-id="@item.RoomTypeId" class="btn btn-primary btn-sm roomType-details">
+														<i class="fas fa-pencil-alt"></i>
+														Chi Tiết
 													</a>
 
-													<a asp-controller="" asp-action="" class="btn btn-info btn-sm" >
+													<a data-room-type-id="@item.RoomTypeId" class="btn btn-info btn-sm roomType-edit">
 														<i class="fas fa-pencil-alt"></i>
 														Chỉnh sửa
 													</a>
 
 													<a data-room-type-id="@item.RoomTypeId" class="btn btn-danger btn-sm roomType-delete"  >
+
 														<i class="fas fa-pencil-alt"></i>
 														Xóa
 													</a>
