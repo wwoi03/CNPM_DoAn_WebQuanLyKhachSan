@@ -4,8 +4,6 @@
     {
         [key]
         public int MenuId { get; set; }
-        public int MenuTypeId { get; set; }
-        public MenuType MenuType { get; set; }
         public string Name { get; set; }  
         public double ImportPrice { get; set; }
         public double SalePrice { get; set; }

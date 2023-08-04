@@ -198,9 +198,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Property<double>("ImportPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("MenuTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -212,8 +209,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("MenuId");
-
-                    b.HasIndex("MenuTypeId");
 
                     b.ToTable("Menus");
                 });
@@ -444,17 +439,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Migrations
                     b.Navigation("BookRoom");
 
                     b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Menu", b =>
-                {
-                    b.HasOne("CNPM_DoAn_WebQuanLyKhachSan.Models.MenuType", "MenuType")
-                        .WithMany()
-                        .HasForeignKey("MenuTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MenuType");
                 });
 
             modelBuilder.Entity("CNPM_DoAn_WebQuanLyKhachSan.Models.Room", b =>
