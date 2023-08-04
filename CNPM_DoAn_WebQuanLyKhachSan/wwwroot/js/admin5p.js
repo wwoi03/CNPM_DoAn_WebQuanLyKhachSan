@@ -742,7 +742,7 @@ function CreateRoom() {
 								<div class="panel-form">
 									<!-- Thông tin -->
 									<div class="panel-form-info">
-										<!-- Tên tài khoản -->
+										<!-- Tên phòng -->
 										<div class="panel-form-item">
 											<h5 class="panel-form-title">Tên phòng</h5>
 											<input class="panel-form-input" type="text" name="Name"/>
@@ -751,16 +751,19 @@ function CreateRoom() {
 
 										<!-- Tên tài khoản -->
 										<div class="panel-form-item">
-											<h5 class="panel-form-title">Giá</h5>
-											<input class="panel-form-input" type="number" name="price"/>
+											<h5 class="panel-form-title">loại phòng</h5>
+											<input class="panel-form-input" type="text name="loại phòng"/>
 										</div>
-
-										
 
 										<!-- Tên tài khoản -->
 										<div class="panel-form-item">
-											<h5 class="panel-form-title">Mô tả</h5>
-											<input class="panel-form-input" type="text" name="Description"/>
+											<h5 class="panel-form-title">trạng thái</h5>
+											<input class="panel-form-input" type="text" name="Trạng thái"/>
+										</div>
+										<!-- Tên tài khoản -->
+										<div class="panel-form-item">
+											<h5 class="panel-form-title">Dọn phòng</h5>
+											<input class="panel-form-input" type="text" name="Dọn phòng"/>
 										</div>
 
 										
