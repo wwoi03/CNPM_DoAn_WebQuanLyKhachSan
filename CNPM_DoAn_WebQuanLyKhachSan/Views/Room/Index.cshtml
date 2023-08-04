@@ -1,7 +1,7 @@
 ﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
 @{
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
-	var roomTypes = ViewBag.room;
+	var room = ViewBag.room;
 }
 @model RoomVM
 
@@ -35,7 +35,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach (var item in roomTypes)
+										@foreach (var item in room)
 										{
 											<tr>
 												<td>@item.RoomId</td>
