@@ -103,8 +103,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 		[HttpGet]
 		public IActionResult EditById(int roomTypeId)
 		{
-			Menu menu = dBHelper.GetMenuById(roomTypeId);
-			return Json(menu);
+			RoomType roomType = dBHelper.GetRoomTypeById(roomTypeId);
+			return Json(roomType);
 		}
 		[HttpPost]
 		public IActionResult EditById(RoomTypeVM roomTypeVM)
