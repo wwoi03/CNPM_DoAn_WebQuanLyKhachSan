@@ -88,5 +88,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             dBHelper.DeleteRoomType(roomTypeId);
             return RedirectToAction("Index");
         }
+
     }
 }

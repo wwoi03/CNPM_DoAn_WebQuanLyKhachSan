@@ -486,7 +486,22 @@
     align-items: center;
     padding-top: 14px;
 }
-
+.hover-text {
+    position: absolute;
+    top: auto; /* Đặt vị trí bên dưới hover-container */
+    background-color: #333;
+    font-size:10px;
+    color: #fff;
+    padding: 1px;
+    border-radius: 1px;
+    opacity: 0; /* Ẩn ban đầu */
+    visibility: hidden; /* Ẩn ban đầu */
+    transition: opacity 0.3s, visibility 0.3s; /* Hiệu ứng mượt mà */
+}
+.card-content1-bottom:hover .hover-text {
+    opacity: 1; /* Hiện khi hover */
+    visibility: visible; /* Hiện khi hover */
+}
     .card-content1-bottom i {
         font-size: 22px;
     }

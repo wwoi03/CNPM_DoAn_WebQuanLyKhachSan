@@ -51,23 +51,14 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                         <h3 class="card-title1">Ten Phong</h3>
                                         <div class="show-menu">
                                             <i class="fa-solid fa-ellipsis-vertical"  ></i>
-
                                             <div class="more-menu" >
-                                                <button id="dialog-bt" onclick="openDialog()">
+                                                <button id="dialog-bt checkin" onclick="openDialog()">
                                                     <i class="fa-solid fa-key" style="color: #8d929a;"></i>
                                                     <span >
                                                         Nhận Phòng
                                                     </span>                                         
-                                                </button>
-
-                                                <button onclick="openDialog()">
-                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
-                                                    <span>
-                                                        Nhận Phòng đặt trước
-                                                    </span>    
-                                                </button>
-
-                                                <button onclick="openDialog()">
+                                                </button>                                             
+                                                <button onclick="ClearRoom()" id="btclearRoom">
                                                     <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
                                                     <span>
                                                         Yêu cầu dọn phòng
@@ -111,13 +102,6 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                                 </button>
 
                                                 <button onclick="openDialog()">
-                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
-                                                    <span>
-                                                        Nhận Phòng đặt trước
-                                                    </span>    
-                                                </button>
-
-                                                <button onclick="openDialog()">
                                                     <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
                                                     <span>
                                                         Yêu cầu dọn phòng
@@ -158,15 +142,7 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                                     <span >
                                                         Nhận Phòng
                                                     </span>                                         
-                                                </button>
-
-                                                <button onclick="openDialog()">
-                                                    <i class="fa-solid fa-calendar-days" style="color: #637088;"></i>
-                                                    <span>
-                                                        Nhận Phòng đặt trước
-                                                    </span>    
-                                                </button>
-
+                                                </button>                                              
                                                 <button onclick="openDialog()">
                                                     <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
                                                     <span>
@@ -246,14 +222,31 @@ Layout = "~/Views/Shared/_AdminLayout.cshtml";
                                         </div>
                                     </div>
                                      
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-person-running fa-2xl"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
+                                    <div class="card-content1-bottom ">
+                                        <i class="fa-solid fa-clock fa-beat" style="color: #3b424f;"></i>
+                                         <div class="hover-text">Thời Gian Thuê</div>
+                                        <h3 class="card-title1">2 ngày 3</h3>
                                     </div>
-
-                                    <div class="card-content1-bottom">
-                                        <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
-                                        <h3 class="card-title1">Ten Phong</h3>
+                                      
+                                    <div class="card-content1-bottom ">
+                                        <i class="fa-solid fa-champagne-glasses fa-fade" style="color: #31343a;"></i>
+                                         <div class="hover-text">Tiền dùng menu</div>
+                                        <h3 class="card-title1">11110$</h3>
+                                    </div>                                                                                                                                            
+                                    <div class="card-content1-bottom ">
+                                        <i class="fa-regular fa-credit-card fa-beat" style="color: #3b424e;"></i>
+                                         <div class="hover-text">Tiền trả trước</div>
+                                        <h3 class="card-title1">11110$</h3>
+                                    </div>
+                                     <div class="card-content1-bottom ">
+                                       <i class="fa-solid fa-sack-dollar " style="color: #3f4550;"></i>
+                                        <div class="hover-text">Tổng tiền</div>
+                                        <h3 class="card-title1">11110$</h3>
+                                    </div>
+                                    <div class="card-content1-bottom ">
+                                        <i class="fa-solid fa-note-sticky" style="color: #5e6673;"></i>
+                                         <div class="hover-text">Ghi chú</div>
+                                        <h3 class="card-title1">11110$</h3>
                                     </div>
                                     <!-- Thêm các thông tin khác của card 1 -->
                                 </div>
