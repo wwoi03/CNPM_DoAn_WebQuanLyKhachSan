@@ -12,6 +12,11 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         /* ------------------------------------- Room ------------------------------------- */
+        // M: lấy danh sách phòng
+        public List<Room> GetRooms()
+        {
+            return dbContext.Rooms.Include(p => p.RoomType).ToList();
+        }
         // M: Lấy danh sách phòng chưa đặt
         public List<Room> GetUnusedRoom()
         {
@@ -24,6 +29,45 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             return dbContext.Rooms.FirstOrDefault(p => p.RoomId == roomId);
         }
 
+        // M: cập nhật phòng
+        public void UpdateRoom(Room room)
+        {
+            dbContext.Rooms.Update(room);
+            dbContext.SaveChanges();
+        }
+
+        public List<Room> GetRoom()
+        { //aben
+            return dbContext.Rooms.OrderByDescending(p => p.RoomId).ToList();
+        }
+
+        // M: Thêm  phòng
+        public void InsertRoom(Room newRoom)
+        {
+            dbContext.Rooms.Add(newRoom);
+            dbContext.SaveChanges();
+        }
+
+
+        // M: xóa phòng
+        public void DeleteRoom(int roomId)
+        {
+            dbContext.Rooms.Remove(GetRoomById(roomId));
+            dbContext.SaveChanges();
+        }
+
+        // chi tiết phòng
+        public void DetailsRoom(int roomId)
+        {
+            dbContext.SaveChanges();
+        }
+
+        // chỉnh sửa phòng
+        public void EditRoom(Room room)
+        {
+            dbContext.Rooms.Update(room);
+            dbContext.SaveChanges();
+        }
 
         /* ------------------------------------- RoomType ------------------------------------- */
         // M: Lấy danh sách sản phẩm
@@ -54,7 +98,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 
         /* ------------------------------------- Customer ------------------------------------- */
         // M: Lấy khách hàng
-        public Customer GetCustomerById(int cardId)
+        public Customer GetCustomerById(int? cardId)
         {
             return dbContext.Customers.FirstOrDefault(p => p.CardId == cardId); 
         }
@@ -63,6 +107,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void CreateCustomer(Customer newCustomer)
         {
             dbContext.Customers.Add(newCustomer);
+            dbContext.SaveChanges();
+        }
+
+        // M: Xóa khách hàng
+        public void DeleteCustomer(int? customerId)
+        {
+            dbContext.Customers.Remove(GetCustomerById(customerId));
             dbContext.SaveChanges();
         }
 
@@ -92,6 +143,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         {
             List<BookRoomDetails> bookRoomDetailsList = dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).Where(p => p.BookRoomId == bookRoomId).ToList();
             return bookRoomDetailsList;
+        }
+
+        // M: Xóa BookRoomDetails
+        public void DeleteBookRoomDetails(BookRoomDetails deleteBookRoomDetails)
+        {
+            dbContext.BookRoomDetails.Remove(deleteBookRoomDetails);
+            dbContext.SaveChanges();
         }
 
         /* ------------------------------------- BookRoom ------------------------------------- */
@@ -148,6 +206,46 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public Staff GetStaffByUsername(string username)
         {
             return dbContext.Staffs.Where(p => p.Username == username).FirstOrDefault();
+        }
+
+        //-----------------------------------Position-------------------------------------------//
+        public List<Position> GetPosition()
+        { //aben
+            return dbContext.Positions.OrderByDescending(p => p.PositionId).ToList();
+        }
+
+        // M: Lấy chức vụ theo Id
+        public Position GetPositionById(int positionId)
+        {
+            return dbContext.Positions.FirstOrDefault(p => p.PositionId == positionId);
+
+        }
+        // M: Thêm  chức vụ
+        public void InsertPosition(Position newPosition)
+        {
+            dbContext.Positions.Add(newPosition);
+            dbContext.SaveChanges();
+        }
+
+
+        // M: xóa chuc vu
+        public void DeletePosition(int positionId)
+        {
+            dbContext.Positions.Remove(GetPositionById(positionId));
+            dbContext.SaveChanges();
+        }
+
+        // chi tiết chuc vu
+        public void DetailsPosition(int positionId)
+        {
+            dbContext.SaveChanges();
+        }
+
+        // chỉnh sửa phòng
+        public void EditPostion(Position position)
+        {
+            dbContext.Positions.Update(position);
+            dbContext.SaveChanges();
         }
     }
 }

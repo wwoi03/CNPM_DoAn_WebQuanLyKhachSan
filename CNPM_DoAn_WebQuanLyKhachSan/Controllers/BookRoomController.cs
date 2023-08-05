@@ -69,7 +69,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 CardId = cardId,
                 StaffId = HttpContext.Session.GetInt32("StaffId"),
                 PrePayment = bookRoomVM.PrePayment,
-                Note = bookRoomVM.Note,
+                Note = bookRoomVM.Note != null ? bookRoomVM.Note : "",
                 CheckOutDate = bookRoomVM.CheckOutDate,
                 CheckInDate = bookRoomVM.CheckInDate,
             };
@@ -81,6 +81,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             {
                 int roomId = int.Parse(listRoomNum[i]);
                 Room room = dBHelper.GetRoomById(roomId);
+                room.Status = 1;
+
+                dBHelper.UpdateRoom(room);
 
                 BookRoomDetails bookRoomDetails = new BookRoomDetails()
                 {
@@ -89,6 +92,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                     CheckInDate = bookRoomVM.CheckInDate,
                     CheckOutDate = bookRoomVM.CheckOutDate,
                     StatusRented = 0,
+                    CheckInPerson = nameCustomer,
                     Note = "",
                 };
 
@@ -104,7 +108,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             BookRoom _bookRoom = dBHelper.GetBookRoomById(bookRoomId);
             List<BookRoomDetails> _bookRoomDetails = dBHelper.GetBookRoomDetailsByBookRoomId(bookRoomId);
             List<RoomType> _roomTypes = dBHelper.GetRoomType();
-            List<Room> rooms = dBHelper.GetUnusedRoom();
+            List<Room> rooms = dBHelper.GetRooms();
 
             var data = new
             {
@@ -139,6 +143,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             // Tạo đơn đặt phòng
             BookRoom bookRoom = new BookRoom()
             {
+                BookRoomId = bookRoomVM.BookRoomId,
                 CardId = cardId,
                 StaffId = HttpContext.Session.GetInt32("StaffId"),
                 PrePayment = bookRoomVM.PrePayment,
@@ -146,21 +151,27 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 CheckOutDate = bookRoomVM.CheckOutDate,
                 CheckInDate = bookRoomVM.CheckInDate,
             };
-            dBHelper.CreateBookRoom(bookRoom);
-            int bookRoomId = dBHelper.GetNewBookRoom().BookRoomId;
+            dBHelper.UpdateBookRoom(bookRoom);
 
+            DeleteOldRoom(bookRoomVM.BookRoomId);
+
+            // Tạo các chi tiết đặt phòng
             for (int i = 0; i < listRoomNum.Length; i++)
             {
                 int roomId = int.Parse(listRoomNum[i]);
                 Room room = dBHelper.GetRoomById(roomId);
+                room.Status = 1;
+
+                dBHelper.UpdateRoom(room);
 
                 BookRoomDetails bookRoomDetails = new BookRoomDetails()
                 {
-                    BookRoomId = bookRoomId,
+                    BookRoomId = bookRoomVM.BookRoomId,
                     RoomID = roomId,
                     CheckInDate = bookRoomVM.CheckInDate,
                     CheckOutDate = bookRoomVM.CheckOutDate,
                     StatusRented = 0,
+                    CheckInPerson = nameCustomer,
                     Note = "",
                 };
 
@@ -174,8 +185,25 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         [HttpPost]
         public IActionResult Delete(int bookRoomId)
         {
+            DeleteOldRoom(bookRoomId);
             dBHelper.DeleteBookRoom(bookRoomId);
-            return RedirectToAction("Index");
+            //dBHelper.DeleteCustomer(dBHelper.GetBookRoomById(bookRoomId).CardId);
+
+            List<BookRoom> _bookRooms = dBHelper.GetBookRooms();
+            return Json(_bookRooms);
+        }
+
+        public void DeleteOldRoom(int bookRoomId)
+        {
+            // Xóa các chi phòng cũ
+            List<BookRoomDetails> bookRoomDetailsList = dBHelper.GetBookRoomDetailsByBookRoomId(bookRoomId);
+            for (int i = 0; i < bookRoomDetailsList.Count; i++)
+            {
+                var deleteBookRoomDetails = bookRoomDetailsList[i];
+                deleteBookRoomDetails.Room.Status = 0;
+                dBHelper.UpdateRoom(deleteBookRoomDetails.Room);
+                dBHelper.DeleteBookRoomDetails(deleteBookRoomDetails);
+            }
         }
     }
 }

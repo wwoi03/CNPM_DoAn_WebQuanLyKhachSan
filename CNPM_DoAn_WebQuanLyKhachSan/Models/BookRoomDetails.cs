@@ -12,5 +12,6 @@
         public DateTime CheckOutDate { get; set;}
         public int? StatusRented { get; set; }
         public string? Note { get; set; }
+        public string CheckInPerson { get; set; }
     }
 }
