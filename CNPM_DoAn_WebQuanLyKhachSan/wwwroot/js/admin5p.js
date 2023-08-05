@@ -109,10 +109,7 @@ function FullCalendarLibrary() {
 					// xử lý sự kiện khi bấm vào từng date
 					dateClick: function (info) {
 						// lấy ngày
-						var clickedDate = info.date;
-
-						// chuyển đổi ngày qua đúng định dạng : 00:00:0000
-						var clickDateConvert = PadDate(clickedDate.getDate(), clickedDate.getMonth(), clickedDate.getFullYear());
+						var date = setDateTime(info.date);
 
 						// sử dụng ajax để gọi đến action bên controller
 						$.ajax({
@@ -122,7 +119,7 @@ function FullCalendarLibrary() {
 								console.log("dada");
 								var roomTypes = data.roomTypes;
 								var rooms = data.rooms;
-								RenderFormBookRoom(clickDateConvert, roomTypes, rooms);
+								RenderFormBookRoom(date, roomTypes, rooms);
 							},
 							error: function () {
 								alert("Không thể lấy được thông tin");
@@ -134,7 +131,6 @@ function FullCalendarLibrary() {
 					eventClick: function (info) {
 						// Lấy thông tin về sự kiện được chọn
 						var eventId = info.event.id;
-						console.log(eventId);
 						EditBookRoom(eventId);
 					},
 
@@ -213,7 +209,7 @@ function AddBookRoomDetails() {
 	}
 }
 
-// M: xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
+// M: Xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
 function AddRoom(listRoom) {
 	var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
 	var listRoomString = document.getElementById('list-room-string');
@@ -236,7 +232,7 @@ function AddRoom(listRoom) {
 
 }
 
-// menu mở rộng
+// M: Menu mở rộng
 function MoreMenu() {
 	const showOptionsButton = document.getElementById('show-menu');
 	const options = document.querySelectorAll('.more-menu');
@@ -269,39 +265,29 @@ function MoreMenu() {
 	}
 }
 
-// định dạng chuẩn ngày tháng năm
-function PadDate(day, month, year) {
-	var newDay = String(day).padStart(2, '0');
-	var newMonth = String(month + 1).padStart(2, '0');
-	var newYear = String(year).padStart(2, '0');
+// M: Hàm tính ngày tiếp theo
+function NextDay(date) {
+	var nextDay = new Date(date);
+	nextDay.setDate(nextDay.getDate() + 1);
 
-	var result = {
-		day: newDay,
-		month: newMonth,
-		year: newYear
-	};
-
-	return result;
+	return nextDay;
 }
 
-// Định dạng tiền
-function formatMoney(input) {
-	input.addEventListener('input', function () {
-		// Xóa các dấu phân tách cũ (nếu có) và lấy giá trị nhập vào
-		let value = input.value.replace(/\./g, '');
+// M: Hàm định dạng ngày giờ
+function setDateTime(date) {
+	// Lấy thời gian hiện tại
+	const currentDate = new Date(date);
 
-		// Chuyển đổi giá trị thành số
-		let num = Number(value);
+	const year = currentDate.getFullYear();
+	const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+	const day = String(currentDate.getDate()).padStart(2, '0');
+	const hours = String(currentDate.getHours()).padStart(2, '0');
+	const minutes = String(currentDate.getMinutes()).padStart(2, '0');
 
-		// Kiểm tra xem giá trị nhập vào có phải là số
-		if (!isNaN(num)) {
-			// Định dạng số thành tiền Việt
-			let formattedValue = num.toLocaleString('vi-VN', { minimumFractionDigits: 0 });;
+	// Gán giá trị vào input
+	const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-			// Hiển thị giá trị đã định dạng vào ô input
-			input.value = formattedValue;
-		}
-	});
+	return formattedDate;
 }
 
 /* --------------------------------- BookRoom --------------------------------- */
@@ -334,17 +320,10 @@ function CreateBookRoom() {
 }
 
 // M: Render UI BookRoom
-function RenderFormBookRoom(clickDate, roomTypes, rooms) {
-	// Ngày tiếp theo
-	var specificDate = new Date(clickDate.year + '-' + clickDate.month + '-' + clickDate.day); // Thay thế bằng ngày tháng năm cụ thể
-	var nextDay = new Date(specificDate);
-	nextDay.setDate(specificDate.getDate() + 1);
-
-	var nextDateConvert = PadDate(nextDay.getDate(), nextDay.getMonth(), nextDay.getFullYear())
-
+function RenderFormBookRoom(date, roomTypes, rooms) {
 	// ngày nhận phòng, trả phòng
-	var checkInDate = clickDate.year + '-' + clickDate.month + '-' + clickDate.day;
-	var checkOutDate = nextDateConvert.year + '-' + nextDateConvert.month + '-' + nextDateConvert.day;
+	var checkInDate = date;
+	var checkOutDate = setDateTime(NextDay(date));
 
 	// lưu danh sách phòng khách hàng đặt
 	var listRoom = [];
@@ -355,7 +334,7 @@ function RenderFormBookRoom(clickDate, roomTypes, rooms) {
 			<form id="form-book-room" method="post" action="../../BookRoom/Edit">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
-					<span>Chỉnh sửa</span>
+					<span>Thêm mới</span>
 
 					<div class="">
 						<input type="submit" value="Lưu"/>
@@ -389,12 +368,12 @@ function RenderFormBookRoom(clickDate, roomTypes, rooms) {
 							<div class="panel-form-height">
 								<div class="panel-form-height-item">
 									<h5 class="panel-form-title">Ngày nhận phòng</h5>
-									<input class="panel-form-input" name="CheckInDate" type="date" value="${checkInDate != null ? checkInDate : ""}" />
+									<input class="panel-form-input" name="CheckInDate" type="datetime-local" value="${checkInDate != null ? checkInDate : ""}" />
 								</div>
 
 								<div class="panel-form-height-item">
 									<h5 class="panel-form-title">Ngày trả phòng</h5>
-									<input class="panel-form-input" name="CheckOutDate" type="date" value="${checkOutDate != null ? checkOutDate : ""}" />
+									<input class="panel-form-input" name="CheckOutDate" type="datetime-local" value="${checkOutDate != null ? checkOutDate : ""}" />
 								</div>
 							</div>
 						</div>
@@ -475,8 +454,6 @@ function RenderFormBookRoom(clickDate, roomTypes, rooms) {
 	// render giao diện
 	$(".right-panel").html(employeeDetailsHtml);
 
-	formatMoney(document.getElementById('form-input-money'));
-
 	// xử lý các sự kiện
 	AddBookRoomDetails();
 	AddRoom(listRoom);
@@ -495,6 +472,9 @@ function EditBookRoom(bookRoomId) {
 			var bookRoomDetails = data.bookRoomDetails;
 			var roomTypes = data.roomTypes;
 			var rooms = data.rooms;
+
+			var d = new Date(bookRoom.checkInDate);
+			console.log(d);
 
 			var employeeDetailsHtml =
 				`
@@ -641,10 +621,9 @@ function EditBookRoom(bookRoomId) {
 			// render giao diện
 			$(".right-panel").html(employeeDetailsHtml);
 
-			formatMoney(document.getElementById('form-input-money'));
 
 			document.getElementById('book-room-delete').addEventListener('click', function () {
-				document.getElementById('form-book-room').action = "BookRoom/Delete?bookRoomId=" + bookRoom.bookRoomId;
+				document.getElementById('form-book-room').action = "../../BookRoom/Delete?bookRoomId=" + bookRoom.bookRoomId;
 			});
 
 			// xử lý các sự kiện
