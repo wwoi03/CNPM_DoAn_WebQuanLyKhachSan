@@ -56,6 +56,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			dBHelper.DeleteRoom(roomId);
 			return RedirectToAction("Index");
 		}
+
+
 		// CHi tiet phong
 		[HttpPost]
 		public IActionResult DetailsById(int roomId)

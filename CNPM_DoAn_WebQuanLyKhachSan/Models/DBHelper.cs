@@ -57,10 +57,50 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 			dbContext.SaveChanges();
 		}
 
+		//-----------------------------------Position-------------------------------------------//
+		public List<Position> GetPosition()
+		{ //aben
+			return dbContext.Positions.OrderByDescending(p => p.PositionId).ToList();
+		}
 
-		/* ------------------------------------- RoomType ------------------------------------- */
-		// M: Lấy danh sách sản phẩm
-		public List<RoomType> GetRoomType()
+		// M: Lấy chức vụ theo Id
+		public Position GetPositionById(int positionId)
+		{
+			return dbContext.Positions.FirstOrDefault(p => p.PositionId == positionId);
+
+		}
+		// M: Thêm  chức vụ
+		public void InsertPosition(Position newPosition)
+		{
+			dbContext.Positions.Add(newPosition);
+			dbContext.SaveChanges();
+		}
+
+
+        // M: xóa chuc vu
+        public void DeletePosition(int positionId)
+        {
+            dbContext.Positions.Remove(GetPositionById(positionId));
+            dbContext.SaveChanges();
+        }
+
+        // chi tiết chuc vu
+        public void DetailsPosition(int positionId)
+        {
+            dbContext.SaveChanges();
+        }
+
+        // chỉnh sửa phòng
+        public void EditPostion(Position position)
+        {
+            dbContext.Positions.Update(position);
+            dbContext.SaveChanges();
+        }
+
+
+        /* ------------------------------------- RoomType ------------------------------------- */
+        // M: Lấy danh sách sản phẩm
+        public List<RoomType> GetRoomType()
         {
             return  dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
