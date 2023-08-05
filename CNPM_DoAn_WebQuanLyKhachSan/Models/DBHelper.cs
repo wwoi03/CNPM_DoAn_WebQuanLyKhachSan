@@ -73,7 +73,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         // M: Lấy danh sách sản phẩm
         public List<RoomType> GetRoomType()
         {
-            return  dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
+            return dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
 
         // M: Lấy loại phòng theo id
@@ -86,6 +86,15 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void InsertRoomType(RoomType newRoomType)
         {
             dbContext.RoomTypes.Add(newRoomType);
+            dbContext.SaveChanges();
+        }
+        public void DetailsRoomType(int roomTypeId)
+        {
+            dbContext.SaveChanges();
+        }
+        public void EditRoomType(RoomType roomType)
+        {
+            dbContext.RoomTypes.Update(roomType);
             dbContext.SaveChanges();
         }
 
