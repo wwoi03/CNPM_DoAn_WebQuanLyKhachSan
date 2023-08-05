@@ -347,7 +347,27 @@ function AddMenu() {
 function ClearRoom() {
 	//kiểm tra điều kiên kiện trong database
 	document.getElementById("btclearRoom").style.color = "red";
+	document.querySelectorAll('card-content1-bottom clean-room')
+	
+
+
+	$.ajax({
+		type: "GET",
+		url: "Room/Index",	
+		success: function (data) {
+			
+			var empCleanRoomHtml =
+				`
+						
+				`;
+			$(".right-panel").html(empCleanRoomHtml);
+		},
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông t");
+		}
+	});
 }
+
 ////trả phòng
 //function CheckOut{
 
