@@ -210,6 +210,20 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Menus.Add(newMenu);
             dbContext.SaveChanges();
         }
+        public void DeleteMenu(int menuId)
+        {
+            dbContext.Menus.Remove(GetMenuById(menuId));
+            dbContext.SaveChanges();
+        }
+        public void DetailsMenu(int menuId)
+        {
+            dbContext.SaveChanges();
+        }
+        public void EditMenu(Menu menu)
+        {
+            dbContext.Menus.Update(menu);
+            dbContext.SaveChanges();
+        }
 
         /* ------------------------------------- Staff ------------------------------------- */
         public Staff GetStaffByUsername(string username)
