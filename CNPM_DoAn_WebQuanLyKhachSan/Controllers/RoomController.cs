@@ -88,6 +88,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			dBHelper.EditRoom(room);
 			return RedirectToAction("Index");
 		}
+		[HttpGet]
+		public IActionResult CleanRoom()
+        {
+
+			return Json(dBHelper.GetRoom());
+        }
 	}
 
 
