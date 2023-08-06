@@ -91,7 +91,7 @@
 	function AddMenu() {
 		$.ajax({
 			type: "GET",
-			url: "RoomType/Create", // Đường dẫn tới Action GetEmployee
+			url: "../../RoomType/Create", // Đường dẫn tới Action GetEmployee
 			//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
 			success: function (data) {
 				// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên

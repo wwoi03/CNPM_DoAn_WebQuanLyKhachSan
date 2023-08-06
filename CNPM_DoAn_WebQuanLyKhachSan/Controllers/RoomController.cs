@@ -93,6 +93,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 		}
 
 		// M: Hiển thị phòng cần dọn
+		[HttpGet]
 		public IActionResult CleanRoom()
 		{
 
