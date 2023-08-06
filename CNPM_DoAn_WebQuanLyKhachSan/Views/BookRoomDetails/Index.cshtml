@@ -1,7 +1,7 @@
 ﻿﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var rootypes = ViewBag.RoomType;
-    var room  = ViewBag.Room;
+    var room  = ViewBag.BookRoom;
    
 }
 <div class="main-container d-flex">
@@ -48,14 +48,14 @@
                 <div class="card-container1">
                    @foreach (var item1 in room)
                         {
-                            if (item.RoomTypeId == item1.RoomTypeId)
+                            if (item.RoomTypeId == item1.Room.RoomTypeId)
                             {
                                 <div class="col-3 p-0 m-0">
                                     <div class="card1-item">
                                         <div class="card1">
                                             <div class="card-content1">
                                                 <div class="card-content1-top">
-                                                    <h3 class="card-title1">@item1.RoomId</h3>
+                                                    <h3 class="card-title1">@item1.Room.RoomId</h3>
                                                     <div class="show-menu">
                                                         <i class="fa-solid fa-ellipsis-vertical"  ></i>
                                                         <div class="more-menu" >
@@ -80,7 +80,7 @@
                                                     <h3 class="card-title1">Ten Phong</h3>
                                                 </div>
 
-                                               <div class="card-content1-bottom clean-room" data-room-id="@item1.RoomId">
+                                               <div class="card-content1-bottom clean-room" data-room-id="@item1.Room.RoomId">
                                                     <i class="fa-solid fa-check fa-2xl" style="color: #4fff0f;"></i>
                                                     <h3 class="card-title1">đã dọn phòng</h3>
                                                 </div>

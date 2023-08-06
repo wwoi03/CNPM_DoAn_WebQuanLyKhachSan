@@ -109,7 +109,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         // M: Lấy khách hàng
         public Customer GetCustomerById(int? cardId)
         {
-            return dbContext.Customers.FirstOrDefault(p => p.CardId == cardId); 
+            return dbContext.Customers.FirstOrDefault(p => p.CardId == cardId);
         }
 
         // M: Thêm khách hàng
@@ -160,7 +160,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.BookRoomDetails.Remove(deleteBookRoomDetails);
             dbContext.SaveChanges();
         }
-
+        // A: List RoomDetails
+        public List<BookRoomDetails> GetBookRoomDetails()
+        {
+            return dbContext.BookRoomDetails.OrderByDescending(p=>p.BookRoomDetailsId).Include(p=>p.Room).ToList();
+        }
+        
         /* ------------------------------------- BookRoom ------------------------------------- */
         // M: Lấy danh sách đặt phòng
         public List<BookRoom> GetBookRooms()

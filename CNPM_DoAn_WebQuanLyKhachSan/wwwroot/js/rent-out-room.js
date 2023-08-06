@@ -185,24 +185,29 @@
 
 	}
 	function SetColorClean() {
-		//var clear = document.querySelector('.nav-item active')
 		$.ajax({
 			type: "GET",
-			url: "../../Room/CleanRoom",
+			url: "../../BookRoomDetails/CleanRoom",
 			success: function (data) {
 				console.log(data);
+
 				// Lặp qua mỗi phần tử chứa dữ liệu
 				data.forEach(function (item) {
-					var cleanRoomElements = document.querySelectorAll('.clean-room[data-room-id="' + item.roomId + '"]');
-					cleanRoomElements.forEach(function (cleanRoomElement) {
-						var iconElement = cleanRoomElement.querySelector('i');
+					
+					var cleanRoomElement = document.querySelector('.clean-room[data-room-id="' + item.room.roomId + '"]');
 
-						if (item.cleanRoom == 0) {
+					if (cleanRoomElement) {
+						var iconElement = cleanRoomElement.querySelector('i');
+						var h3Element = cleanRoomElement.querySelector('h3');
+
+						//console.log(item.room.roomId);
+						//console.log(item.room.cleanRoom + "hehe");
+						if (item.room.cleanRoom == 0) {
+							
 							// Thay đổi thuộc tính class của thẻ <i> thành "fa-solid fa-xmark" và thiết lập màu
 							iconElement.className = 'fa-solid fa-xmark';
 							iconElement.style.color = '#ff0000';
 
-							var h3Element = cleanRoomElement.querySelector('h3');
 							// Thay đổi nội dung văn bản trong thẻ <h3>
 							h3Element.textContent = 'Chưa dọn phòng';
 							h3Element.style.color = 'red';
@@ -211,12 +216,12 @@
 							iconElement.className = 'fa-solid fa-check fa-2xl';
 							iconElement.style.color = '#4fff0f';
 
-							var h3Element = cleanRoomElement.querySelector('h3');
 							// Thay đổi nội dung văn bản trong thẻ <h3>
 							h3Element.textContent = 'Đã dọn phòng';
 							h3Element.style.color = '#4fff0f';
 						}
-					});
+					}
+					
 				});
 			},
 			error: function () {
@@ -224,6 +229,7 @@
 			}
 		});
 	}
+
 
 
 

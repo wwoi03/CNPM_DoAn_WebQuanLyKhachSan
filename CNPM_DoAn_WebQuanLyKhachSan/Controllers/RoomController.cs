@@ -91,12 +91,5 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			dBHelper.EditRoom(room);
 			return RedirectToAction("Index");
 		}
-
-		// M: Hiển thị phòng cần dọn
-		[HttpGet]
-		public IActionResult CleanRoom()
-		{
-			return Json(dBHelper.GetRoom());
-		}
 	}
 }

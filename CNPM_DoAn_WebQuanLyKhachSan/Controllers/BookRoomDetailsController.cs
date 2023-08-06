@@ -15,8 +15,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult Index()
         {
             ViewBag.RoomType = dBHelper.GetRoomType();
-            ViewBag.Room = dBHelper.GetRoom();
+            ViewBag.BookRoom = dBHelper.GetBookRoomDetails();
             return View();
+        }
+        // M: Hiển thị phòng cần dọn
+        [HttpGet]
+        public IActionResult CleanRoom()
+        {
+            return Json(dBHelper.GetBookRoomDetails());
         }
     }
 }
