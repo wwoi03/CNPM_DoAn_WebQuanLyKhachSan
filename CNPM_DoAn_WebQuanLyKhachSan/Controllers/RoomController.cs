@@ -76,6 +76,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			Room room = dBHelper.GetRoomById(roomId);
 			return Json(room);
 		}
+
 		[HttpPost]
 		public IActionResult EditById(RoomVM roomVM)
 		{
@@ -89,6 +90,13 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 
 			dBHelper.EditRoom(room);
 			return RedirectToAction("Index");
+		}
+
+		// M: Hiển thị phòng cần dọn
+		public IActionResult CleanRoom()
+		{
+
+			return Json(dBHelper.GetRoom());
 		}
 	}
 }

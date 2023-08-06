@@ -35,14 +35,14 @@
 .title-pape {
     text-transform: uppercase;
     font-size: 22px;
-    margin: 0 15px;
+    margin: 0 65px 0 15px;
     height: 77px;
     line-height: 77px;
     display: inline-block
 }
 
 .btn-page {
-    margin-left: 50px;
+    margin-right: 20px;
     display: inline-block;
     cursor: pointer;
 }
@@ -309,7 +309,83 @@
     .panel-cancel-room a:hover {
         opacity: 0.8;   
     }
+
+
+.panel-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.panel-overlay.active {
+    display: flex;
+}
+
+    .panel-overlay .overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #000;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+.panel-overlay-form {
+    padding: 24px;
+    width: 350px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+    .panel-overlay-form h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .panel-overlay-form p {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .panel-overlay-btn {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    .panel-overlay-btn button {
+        padding: 7.5px 16px;
+        font-size: 16px;
+        border: none;
+        background-color: transparent;
+        text-transform: uppercase;
+        margin-left: 8px;
+    }
+
+        .panel-overlay-btn button:hover {
+            background-color: #EBEBEB;
+            border-radius: 4px;
+        }
+
 /*--------------------------------------------Thuê trả - Phòng ------------------------------*/
+.book-room-details-tabs {
+    display: none;
+}
+
+    .book-room-details-tabs.active {
+        display: block;
+    }
+
 .roomtype {
     height: auto;
     background: inherit;
@@ -394,11 +470,16 @@
     position: relative;
 }
 
+
+.show-menu.active .more-menu {
+    display: block;
+}
+
 .more-menu {
     display: none;
     position: absolute;
-    right: -50%;
-    top: 37px;
+    top: 54px;
+    right: -30%;
     z-index: 1000;
     border: 1px solid #E1E1E1;
     background-color: white;
@@ -446,8 +527,13 @@
 }
 
     .card-content1-top i {
-        padding-left: 15px;
+        padding: 10px;
     }
+
+        .card-content1-top i:hover {
+            background-color: wheat;
+            border-radius: 360px;
+        }
 
         .card-content1-top i:focus {
             outline: none;
@@ -466,12 +552,30 @@
     padding-top: 14px;
 }
 
-    .card-content1-bottom i {
-        font-size: 22px;
-    }
+.hover-text {
+    position: absolute;
+    top: auto; /* Đặt vị trí bên dưới hover-container */
+    background-color: #333;
+    font-size: 10px;
+    color: #fff;
+    padding: 1px;
+    border-radius: 1px;
+    opacity: 0; /* Ẩn ban đầu */
+    visibility: hidden; /* Ẩn ban đầu */
+    transition: opacity 0.3s, visibility 0.3s; /* Hiệu ứng mượt mà */
+}
 
-    .card-content1-bottom h3 {
-    }
+.card-content1-bottom:hover .hover-text {
+    opacity: 1; /* Hiện khi hover */
+    visibility: visible; /* Hiện khi hover */
+}
+
+.card-content1-bottom i {
+    font-size: 22px;
+}
+
+.card-content1-bottom h3 {
+}
 
 .card-title1 {
     font-size: 16px;
@@ -482,12 +586,9 @@
 /*dialog ở đây*/
 .dialog {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1400;
+    height: 100vh;
 }
 
 .dialog-content {
@@ -498,15 +599,129 @@
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
+    z-index: 1500;
 }
 
-.close-btn {
+.dialog-over {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0
 }
+
+.dialog-bt {
+    display: flex;
+    justify-content: right;
+}
+
+.dialog-bt-confirm {
+    padding-right: 10px;
+}
+
+    .dialog-bt-confirm:hover {
+        background-color: antiquewhite;
+        cursor: pointer;
+    }
+
+.dialog-bt-cancel:hover {
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+/*-------------------------------------------- Quản lý hệ thống ------------------------------*/
+.sys-container {
+    padding: 20px 7.5px;
+}
+
+.sys-card {
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    width: 144px;
+    text-align: end;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 15px;
+    margin: 0 16px 16px 0;
+}
+
+.sys-card-icon {
+    text-align: center;
+    line-height: 68px;
+}
+
+    .sys-card-icon i {
+        font-size: 25px;
+        color: #03A9F4;
+    }
+
+.sys-card-title p {
+    color: #66615b;
+    font-size: 14px;
+    margin: 0;
+    padding: 14px 0 0 0;
+    text-align: center;
+    border-top: 1px solid #D1CFCD;
+}
+
+/*-------------------------------------------- Tài khoản phụ ------------------------------*/
+.right-panel.account-edit {
+    display: block;
+}
+
+.right-panel.account-details {
+    display: block;
+}
+
+.setting-account {
+}
+
+.setting-account-title {
+    font-size: 16px;
+    display: felx;
+    align-items: center;
+    padding: 16px 0;
+}
+
+    .setting-account-title i {
+        color: #009688;
+        font-size: 20px;
+    }
+
+    .setting-account-title span {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+.setting-account-power {
+    display: flex;
+}
+
+.setting-account-list {
+    width: 50%;
+}
+
+.setting-account-item {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+    .setting-account-item input {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+
+    .setting-account-item label {
+        font-weight: 500 !important;
+        padding: 0;
+        margin: 0;
+    }
 
 /*-------------------------------------------- Quản lý hệ thống ------------------------------*/
 .sys-container {

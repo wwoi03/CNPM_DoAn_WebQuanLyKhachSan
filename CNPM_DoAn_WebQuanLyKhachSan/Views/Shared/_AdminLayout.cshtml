@@ -31,6 +31,22 @@
 
 <body>
     <div class="main-wrapper">
+        @*Overlay*@
+        <div class="panel-overlay">
+		    <div class="overlay"></div>
+
+		    <div class="panel-overlay-form">
+			    <h1>Xác nhận</h1>
+
+			    <p>Bạn muốn hủy đặt phòng ?</p>
+
+			    <div class="panel-overlay-btn">
+				    <button id="delete-confirm">Đồng ý</button>
+
+				    <button id="delete-cancel" class="panel-overlay-btn-cancel">Hủy bỏ</button>
+			    </div>
+		    </div>
+	    </div>
         <div class="header">
             <div class="header-left" style="border-right: 1px solid #E5E5E5">
                 <a href="index.html" class="logo"> <img src="~/assets/img/hotel_logo.png" width="50" height="70"
@@ -43,10 +59,17 @@
 
 			<span class="title-pape">@ViewData["PapeTitle"]</span>
 
-            <div class="btn-page">
-                <i class="fa-solid fa-file-circle-plus"></i>
-				<span>Thêm mới</span>
-            </div>
+            @if (@ViewBag.openAddBookRoom != null ? @ViewBag.openAddBookRoom : false) {
+                <div class="btn-page">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+				    <span>Thêm mới</span>
+                </div>
+
+                <div class="btn-page">
+                    <i class="fa-solid fa-file-excel"></i>
+				    <span>Nhập excel</span>
+                </div>
+            }
 			
             <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
 
@@ -203,6 +226,8 @@
                 @RenderBody()
             </div>
         </div>
+
+		
     </div>
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="~/assets/js/jquery-3.5.1.min.js"></script>

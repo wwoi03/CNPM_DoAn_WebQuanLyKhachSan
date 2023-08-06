@@ -146,7 +146,7 @@
 									</div>
 									<div class="panel-form-item">
 										<h5 class="panel-form-title">Hình Ảnh </h5>
-										<img src ="/images/${data.image}"/>
+										<img src ="/images/${data.image}" style="width: 100%"/>
 									</div>
 								</div>
 							</div>
@@ -214,11 +214,6 @@
 										<input class="panel-form-input" type="number"  value="${data.bedNumber}" name="BedNumber"/>
 									</div>
 
-									<!-- Tên tài khoản -->
-									<div class="panel-form-item">
-										<h5 class="panel-form-title">Số Lượng</h5>
-										<input class="panel-form-input" type="number" value="${data.quantity}" name="Quantity"/>
-									</div>
 									<div class="panel-form-item">
 										<h5 class="panel-form-title">Mô Tả</h5>
 										<input class="panel-form-input" type="text" value="${data.description}" name="Description"/>
@@ -226,7 +221,8 @@
 									<div class="panel-form-item">
 										<h5 class="panel-form-title">Hình Ảnh </h5>
 										<input class="panel-form-input" accept="image/*" type="file" name="ImageFile"/>
-										<img src ="/images/${data.image}"name="ImageFile"/>
+										<input class="panel-form-input"  name="Image" value="${data.image}" hidden/>
+										<img src ="/images/${data.image}" name="ImageFile" style="width: 100%"/>
 									</div>
 								</div>
 							</div>
@@ -295,7 +291,7 @@
 									</div>
 									<div class="panel-form-item">
 										<h5 class="panel-form-title">Hình Ảnh </h5>
-										<img src ="/images/${data.image}"/>
+										<img src ="/images/${data.image}" style="width: 100%"/>
 									</div>
 								</div>
 							</div>

@@ -137,6 +137,7 @@
 						console.log("dada");
 						var roomTypes = data.roomTypes;
 						var rooms = data.rooms;
+
 						RenderFormBookRoom(date, roomTypes, rooms);
 					},
 					error: function () {
@@ -351,7 +352,7 @@
 
 
 				document.getElementById('book-room-delete').addEventListener('click', function () {
-					PostDeleteBookRoom(bookRoom.bookRoomId)
+					OpenOverlay(bookRoom.bookRoomId);
 				});
 
 				// xử lý các sự kiện
@@ -373,7 +374,7 @@
 		// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 		var employeeDetailsHtml =
 			`
-			<form id="form-book-room" method="post" action="../../BookRoom/Create">
+			<form id="form-book-room" method="post" action="../../BookRoom/Create" enctype="multipart/form-data">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
 					<span>Thêm mới</span>
@@ -430,6 +431,12 @@
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Ghi chú</h5>
 							<input class="panel-form-input" type="text" name="Note" placeholder=""/>
+						</div>
+
+						<!-- Excel -->
+						<div class="panel-form-item">
+							<h5 class="panel-form-title">Nhập excel</h5>
+							<input class="panel-form-input" type="file" name="excelFile" accept=".xlsx, .xls" placeholder=""/>
 						</div>
 					</div>
 
@@ -521,6 +528,24 @@
 	}
 
 	/* ------------------------------- Xử lý các sự kiện ------------------------------- */
+	// M: Mở xác nhận hủy phòng
+	function OpenOverlay(bookRoomId) {
+		var panelOverlay = document.querySelector('.panel-overlay');
+		var deleteComfirm = document.getElementById('delete-confirm');
+		var deleteCancel = document.getElementById('delete-cancel');
+
+		panelOverlay.classList.add('active');
+
+		deleteComfirm.addEventListener('click', function () {
+			PostDeleteBookRoom(bookRoomId);
+			panelOverlay.classList.remove('active');
+		});
+
+		deleteCancel.addEventListener('click', function () {
+			panelOverlay.classList.remove('active');
+		});
+    }
+
 	// M: Xử lý khi bấm vào nút thêm phòng
 	function AddBookRoomDetails() {
 		var addRoom = document.querySelector('.panel-form-add-room');
