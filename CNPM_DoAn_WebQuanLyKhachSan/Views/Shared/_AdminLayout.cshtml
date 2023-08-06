@@ -30,6 +30,23 @@
 </head>
 
 <body>
+    <!-- Thẻ div chứa dialog -->
+	<div id="dialog" class="dialog">
+		<div class="dialog-content">
+			<h2>xác nhận đặt phòng @ViewData["PapeTitle"]</h2>
+			<div class="dialog-bt">
+			<div class="dialog-bt-confirm">
+				<span>
+					XÁC NHẬN
+				</span>
+			</div>
+			<div class="dialog-bt-cancel" onclick="closeDialog()">
+				TỪ CHỐI
+			</div>
+		</div>
+		</div>
+		<div class="dialog-over" onclick="closeDialog()"></div>
+	</div>
     <div class="main-wrapper">
         @*Overlay*@
         <div class="panel-overlay">
