@@ -223,6 +223,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         }
 
         // M: Thêm đặt phòng bằng File Excel
+        [HttpPost]
         public IActionResult ImportFileExcel(IFormFile excelFile)
         {
             using (var stream = new MemoryStream())

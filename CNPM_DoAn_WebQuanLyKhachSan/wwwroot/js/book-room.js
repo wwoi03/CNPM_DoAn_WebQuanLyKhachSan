@@ -11,6 +11,7 @@
 	function BookRoom() {
 		RenderUIIndex();
 		GetCreateBookRoom();
+		AddFileExcel();
 	}
 
 	// M: hiển thị giao diện
@@ -374,7 +375,7 @@
 		// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
 		var employeeDetailsHtml =
 			`
-			<form id="form-book-room" method="post" action="../../BookRoom/Create" enctype="multipart/form-data">
+			<form id="form-book-room" method="post" action="../../BookRoom/Create">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
 					<span>Thêm mới</span>
@@ -431,12 +432,6 @@
 						<div class="panel-form-item">
 							<h5 class="panel-form-title">Ghi chú</h5>
 							<input class="panel-form-input" type="text" name="Note" placeholder=""/>
-						</div>
-
-						<!-- Excel -->
-						<div class="panel-form-item">
-							<h5 class="panel-form-title">Nhập excel</h5>
-							<input class="panel-form-input" type="file" name="excelFile" accept=".xlsx, .xls" placeholder=""/>
 						</div>
 					</div>
 
@@ -513,7 +508,6 @@
 
 	// M: Delete BookRoom
 	function PostDeleteBookRoom(bookRoomId) {
-		console.log("open");
 		$.ajax({
 			type: "POST",
 			url: "../../BookRoom/Delete?bookRoomId=" + bookRoomId,
@@ -526,6 +520,20 @@
             }
 		});
 	}
+
+	// M: Import File Excel
+	function PostImportFileExcel() {
+		$.ajax({
+			type: "POST",
+			url: "../../BookRoom/ImportFileExcel",
+			success: function (data) {
+				FullCalendarLibrary(data);
+			},
+			error: function () {
+				alert("Không truy cập vào được thông tin");
+            }
+        })
+    }
 
 	/* ------------------------------- Xử lý các sự kiện ------------------------------- */
 	// M: Mở xác nhận hủy phòng
@@ -617,4 +625,19 @@
 	function ClearPanelRight() {
 		$(".right-panel").html("");
 	};
+
+	// M: Xử lý khi bấm vào thêm file excel
+	function AddFileExcel() {
+		var btnExcel = document.querySelector('.btn-page-excel');
+		var formExcelInput = document.getElementById('form-excel-input');
+
+		btnExcel.addEventListener('click', function () {
+			btnExcel.classList.toggle('active');
+		});
+
+		formExcelInput.addEventListener('click', function () {
+			console.log("dasda");
+			PostImportFileExcel();
+		});
+	}
 });

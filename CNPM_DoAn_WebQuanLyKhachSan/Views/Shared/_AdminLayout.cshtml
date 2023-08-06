@@ -65,9 +65,18 @@
 				    <span>Thêm mới</span>
                 </div>
 
-                <div class="btn-page">
+                <div class="btn-page btn-page-excel">
                     <i class="fa-solid fa-file-excel"></i>
 				    <span>Nhập excel</span>
+
+                    <form class="form-excel" enctype="multipart/form-data">
+						<h1>Thêm excel</h1>
+						<input type="file" name="excelFile" accept=".xlsx, .xls"/>
+
+						<div class="form-excel-btn">
+							<input id="form-excel-input" value="Thêm" />
+                        </div>
+                    </form>
                 </div>
             }
 			

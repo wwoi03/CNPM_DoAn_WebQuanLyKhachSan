@@ -377,10 +377,55 @@
             border-radius: 4px;
         }
 
-/*--------------------------------------------Thuê trả - Phòng ------------------------------*/
-.book-room-details-tabs{
+.btn-page-excel {
+    position: relative;
+}
+
+    .btn-page-excel.active .form-excel {
+        display: block;
+    }
+
+.form-excel {
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    border-radius: 4px;
+    margin-top: 12px;
+    padding: 16px;
     display: none;
 }
+
+    .form-excel h1 {
+        font-size: 20px;
+        margin-bottom: 14px;
+        font-weight: bold;
+    }
+
+    .form-excel-btn {
+        text-align: right;
+    }
+
+        .form-excel-btn input {
+            padding: 7.5px 16px;
+            font-size: 16px;
+            border: none;
+            background-color: transparent;
+            text-transform: uppercase;
+            margin-left: 8px;
+            width: 80px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .form-excel-btn input:hover {
+            background-color: #EBEBEB;
+            border-radius: 4px;
+        }
+
+    /*--------------------------------------------Thuê trả - Phòng ------------------------------*/
+    .book-room-details-tabs {
+        display: none;
+    }
 
     .book-room-details-tabs.active {
         display: block;
