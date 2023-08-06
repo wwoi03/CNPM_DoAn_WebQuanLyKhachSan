@@ -12,6 +12,7 @@
 
 	// M: Xử lý chuyển tab
 	function SwitchTabs() {
+		console.log("a");
 		// Xử animation chuyển tab
 		var tabActive = document.querySelector(".nav-item.active");
 		var navLine = document.querySelector(".panel-navbar .nav-line");
@@ -187,7 +188,7 @@
 		//var clear = document.querySelector('.nav-item active')
 		$.ajax({
 			type: "GET",
-			url: "Room/CleanRoom",
+			url: "../../Room/CleanRoom",
 			success: function (data) {
 				console.log(data);
 				// Lặp qua mỗi phần tử chứa dữ liệu
@@ -196,7 +197,7 @@
 					cleanRoomElements.forEach(function (cleanRoomElement) {
 						var iconElement = cleanRoomElement.querySelector('i');
 
-						if (item.cleanRoom == null) {
+						if (item.cleanRoom == 0) {
 							// Thay đổi thuộc tính class của thẻ <i> thành "fa-solid fa-xmark" và thiết lập màu
 							iconElement.className = 'fa-solid fa-xmark';
 							iconElement.style.color = '#ff0000';
@@ -219,7 +220,7 @@
 				});
 			},
 			error: function () {
-				alert("Đã xảy ra lỗi khi lấy thông tin");
+				alert("lỗi clean");
 			}
 		});
 	}

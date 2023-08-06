@@ -96,7 +96,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 		[HttpGet]
 		public IActionResult CleanRoom()
 		{
-
 			return Json(dBHelper.GetRoom());
 		}
 	}
