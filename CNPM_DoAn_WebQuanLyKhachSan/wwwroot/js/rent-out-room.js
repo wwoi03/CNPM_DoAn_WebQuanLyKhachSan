@@ -89,23 +89,21 @@
 
 	//nhận phòng
 	function Checkin() {
-
+		// Tạo một đối tượng chứa dữ liệu bạn muốn gửi
 		var checkinButtons = document.querySelectorAll('.dialog-bt');
 
 		checkinButtons.forEach(function (button) {
 			button.addEventListener('click', function () {
+				var employeeId = $(this).data('menu-id');
 				document.getElementById("dialog").style.display = "none";
 				// Xử lý sự kiện ấn vào nút tại đây
 				$.ajax({
-					url: "/BookRoomDetails/Checkin",
-					type: 'POST',
-					data: { roomiD: roomId }, // Truyền dữ liệu roomId vào yêu cầu POST
+					url: "../../BookRoomDetails/CheckIn?bookRoomDetailsId" + employeeId,
+					type: 'POST', // Sử dụng phương thức POST
+					data: requestData, // Gửi dữ liệu roomId bằng phương thức POST
 					success: function (response) {
 						console.log('Room status updated successfully:', response);
 						// Thực hiện các hành động khác sau khi cập nhật trạng thái phòng
-
-						
-						
 					},
 					error: function (error) {
 						console.error('Error updating room status:', error);
@@ -113,16 +111,10 @@
 				});
 			});
 		});
-
-		
 	}
+	
 
-	function ClearRoom() {
-		//kiểm tra điều kiên kiện trong database
-		document.getElementById("btclearRoom").style.color = "red";
-		document.querySelectorAll('card-content1-bottom clean-room')
-
-	}
+	
 	function SetColorClean() {
 		$.ajax({
 			type: "GET",

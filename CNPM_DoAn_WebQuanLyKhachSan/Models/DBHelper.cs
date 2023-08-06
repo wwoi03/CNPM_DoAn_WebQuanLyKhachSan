@@ -153,7 +153,17 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             List<BookRoomDetails> bookRoomDetailsList = dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).Where(p => p.BookRoomId == bookRoomId).ToList();
             return bookRoomDetailsList;
         }
+        public BookRoomDetails GetBookRoomDetailsById(int bookRoomId)
+        {
+            BookRoomDetails bookRoomDetailsList = (BookRoomDetails)dbContext.BookRoomDetails.Where(p => p.BookRoomDetailsId == bookRoomId);
+            return bookRoomDetailsList;
+        }
 
+        public void CheckIn(BookRoomDetails bookRoomDetails)
+        {
+            dbContext.Update(bookRoomDetails);
+            dbContext.SaveChanges();
+        }
         // M: Xóa BookRoomDetails
         public void DeleteBookRoomDetails(BookRoomDetails deleteBookRoomDetails)
         {
@@ -165,12 +175,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         {
             return dbContext.BookRoomDetails.OrderByDescending(p=>p.BookRoomDetailsId).Include(p=>p.Room).Include(p=>p.BookRoom).ToList();
         }
-        public void CheckIn(BookRoomDetails bookRoomDetails)
-        {
-            dbContext.Update(bookRoomDetails);
-            dbContext.SaveChanges();
-        }
-        
+    
         /* ------------------------------------- BookRoom ------------------------------------- */
         // M: Lấy danh sách đặt phòng
         public List<BookRoom> GetBookRooms()
