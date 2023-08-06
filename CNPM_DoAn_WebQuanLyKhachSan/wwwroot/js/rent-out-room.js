@@ -7,6 +7,7 @@
 		MoreMenu();
 		Navibar()
 		SetColorClean();
+		Checkin();
 
 	}
 
@@ -56,12 +57,7 @@
 			});
 		});
 	}
-	function openDialog() {
-		document.getElementById("dialog").style.display = "block";
-	}
-	function closeDialog() {
-		document.getElementById("dialog").style.display = "none";
-	}
+	
 	function Navibar() {
 		const tabbar = document.querySelectorAll('.book-room-details-tabs');
 		const navItem = document.querySelectorAll('.nav-container .nav-item');
@@ -89,94 +85,37 @@
 		valueDisplay.textContent = value;
 	}
 	////thêm menu
-	function AddMenu() {
-		$.ajax({
-			type: "GET",
-			url: "../../RoomType/Create", // Đường dẫn tới Action GetEmployee
-			//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
-			success: function (data) {
-				// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-				var employeeAddMenuHtml =
-					`
-							 <form method="post" action="RoomType/Create" enctype="multipart/form-data">
-								<!-- Lưu đặt phòng -->
-								<div class="panel-save d-flex justify-content-between align-items-center">
-									<span>Thêm mới</span>
 
-									<div class="">
-										<input type="submit" value="Lưu"/>
-									</div>
-								</div>
 
-                            <table class="datatable table table-stripped table table-hover table-center mb-0">
-                                  <thead>
-                                     <tr>
-                                          <th>
-                                         Tên
-                                      </th>
-                                      <th>
-                                          giá
-                                      </th>
-                                      <th>
-                                          số lượng
-                                      </th>
-                                        <th>
-                                         chỉnh sửa
-                                      </th>
-                                     </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                         <td>
-                                         bánh
-                                     </td>
-                                     <td>
-                                         ngọt
-                                     </td>
-                                     <td id="valueDisplay">
-                                          0
-                                        </td>
-                                     <td>
-                                         <button onClick="Additemmenu()" type="button" class="btn btn-success">
-                                            +
-                                         </button>
-                                         <button onClick="subtractionMenu()" type="button" class="btn btn-danger">
-                                            -
-                                         </button>
-                                     </td>
-                                    </tr>
+	//nhận phòng
+	function Checkin() {
 
-                                  </tbody>
-                              </table>
-           </form>
-                            
-								
-						`;
-				$(".right-panel").html(employeeAddMenuHtml);
-			},
-			error: function () {
-				alert("Đã xảy ra lỗi khi lấy thông t");
-			}
+		var checkinButtons = document.querySelectorAll('.dialog-bt');
+
+		checkinButtons.forEach(function (button) {
+			button.addEventListener('click', function () {
+				document.getElementById("dialog").style.display = "none";
+				// Xử lý sự kiện ấn vào nút tại đây
+				$.ajax({
+					url: "/BookRoomDetails/Checkin",
+					type: 'POST',
+					data: { roomiD: roomId }, // Truyền dữ liệu roomId vào yêu cầu POST
+					success: function (response) {
+						console.log('Room status updated successfully:', response);
+						// Thực hiện các hành động khác sau khi cập nhật trạng thái phòng
+
+						
+						
+					},
+					error: function (error) {
+						console.error('Error updating room status:', error);
+					}
+				});
+			});
 		});
+
+		
 	}
-
-	////nhận phòng
-	//function Checkin() {
-	//	var roomId = /* lấy roomId từ nguồn nào đó, có thể là một biến hoặc một phần tử HTML */;
-
-	//	$.ajax({
-	//		url: "/Room/UpdateStatus",
-	//		type: 'POST',
-	//		data: { roomiD: roomId }, // Truyền dữ liệu roomId vào yêu cầu POST
-	//		success: function (response) {
-	//			console.log('Room status updated successfully:', response);
-	//			// Thực hiện các hành động khác sau khi cập nhật trạng thái phòng
-	//		},
-	//		error: function (error) {
-	//			console.error('Error updating room status:', error);
-	//		}
-	//	});
-	//}
 
 	function ClearRoom() {
 		//kiểm tra điều kiên kiện trong database
@@ -240,3 +179,79 @@
 
 	/* --------------------------------- Kết thúc thuê trả phòng --------------------------------- */
 });
+function openDialog() {
+	document.getElementById("dialog").style.display = "block";
+}
+function closeDialog() {
+	document.getElementById("dialog").style.display = "none";
+}
+function AddMenu() {
+	$.ajax({
+		type: "GET",
+		url: "../../RoomType/Create", // Đường dẫn tới Action GetEmployee
+		//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+		success: function (data) {
+			// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+			var employeeAddMenuHtml =
+				`
+							 <form method="post" action="RoomType/Create" enctype="multipart/form-data">
+								<!-- Lưu đặt phòng -->
+								<div class="panel-save d-flex justify-content-between align-items-center">
+									<span>Thêm mới</span>
+
+									<div class="">
+										<input type="submit" value="Lưu"/>
+									</div>
+								</div>
+
+                            <table class="datatable table table-stripped table table-hover table-center mb-0">
+                                  <thead>
+                                     <tr>
+                                          <th>
+                                         Tên
+                                      </th>
+                                      <th>
+                                          giá
+                                      </th>
+                                      <th>
+                                          số lượng
+                                      </th>
+                                        <th>
+                                         chỉnh sửa
+                                      </th>
+                                     </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                         <td>
+                                         bánh
+                                     </td>
+                                     <td>
+                                         ngọt
+                                     </td>
+                                     <td id="valueDisplay">
+                                          0
+                                        </td>
+                                     <td>
+                                         <button onClick="Additemmenu()" type="button" class="btn btn-success">
+                                            +
+                                         </button>
+                                         <button onClick="subtractionMenu()" type="button" class="btn btn-danger">
+                                            -
+                                         </button>
+                                     </td>
+                                    </tr>
+
+                                  </tbody>
+                              </table>
+           </form>
+                            
+								
+						`;
+			$(".right-panel").html(employeeAddMenuHtml);
+		},
+		error: function () {
+			alert("Đã xảy ra lỗi khi lấy thông t");
+		}
+	});
+}

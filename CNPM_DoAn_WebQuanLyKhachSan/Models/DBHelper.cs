@@ -163,7 +163,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         // A: List RoomDetails
         public List<BookRoomDetails> GetBookRoomDetails()
         {
-            return dbContext.BookRoomDetails.OrderByDescending(p=>p.BookRoomDetailsId).Include(p=>p.Room).ToList();
+            return dbContext.BookRoomDetails.OrderByDescending(p=>p.BookRoomDetailsId).Include(p=>p.Room).Include(p=>p.BookRoom).ToList();
+        }
+        public void CheckIn(BookRoomDetails bookRoomDetails)
+        {
+            dbContext.Update(bookRoomDetails);
+            dbContext.SaveChanges();
         }
         
         /* ------------------------------------- BookRoom ------------------------------------- */
@@ -213,6 +218,20 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void InsertMenu(Menu newMenu)
         {
             dbContext.Menus.Add(newMenu);
+            dbContext.SaveChanges();
+        }
+        public void DeleteMenu(int menuId)
+        {
+            dbContext.Menus.Remove(GetMenuById(menuId));
+            dbContext.SaveChanges();
+        }
+        public void DetailsMenu(int menuId)
+        {
+            dbContext.SaveChanges();
+        }
+        public void EditMenu(Menu menu)
+        {
+            dbContext.Menus.Update(menu);
             dbContext.SaveChanges();
         }
 

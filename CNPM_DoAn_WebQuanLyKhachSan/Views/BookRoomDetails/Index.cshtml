@@ -48,7 +48,7 @@
                 <div class="card-container1">
                    @foreach (var item1 in room)
                         {
-                            if (item.RoomTypeId == item1.Room.RoomTypeId)
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.StatusRented==0)
                             {
                                 <div class="col-3 p-0 m-0">
                                     <div class="card1-item">
@@ -99,16 +99,22 @@
          <!-- Main content -->
          <!--phòng đang thue-->
          <section class="book-room-details-tabs ren-content" id="RentRoom-content" >
+
+            @foreach (var item in rootypes)
+       {
             <div class="container1">
-                <h2 class="container-title1">Tuấn</h2>
+                <h2 class="container-title1">@item.Name</h2>
                 <div class="card-container1">
-                    <!-- Item -->
-					<div class="col-3 p-0 m-0">
+                   @foreach (var item1 in room)
+                        {
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.StatusRented==1)
+                            {
+                               	<div class="col-3 p-0 m-0">
 						<div class="card1-item">
                             <div class="card1">
                                 <div class="card-content1">
                                     <div class="card-content1-top">
-                                        <h3 class="card-title1">Ten Phong</h3>
+                                        <h3 class="card-title1">@item1.Room.RoomId</h3>
                                         <div class="show-menu">
                                             <i class="fa-solid fa-ellipsis-vertical"  ></i>
                                             <div class="more-menu" >
@@ -151,7 +157,7 @@
                                     <div class="card-content1-bottom ">
                                         <i class="fa-solid fa-clock fa-beat" style="color: #3b424f;"></i>
                                          <div class="hover-text">Thời Gian Thuê</div>
-                                        <h3 class="card-title1">2 ngày 3</h3>
+                                        <h3 class="card-title1">@item1.CheckOutDate</h3>
                                     </div>
                                       
                                     <div class="card-content1-bottom ">
@@ -162,7 +168,7 @@
                                     <div class="card-content1-bottom ">
                                         <i class="fa-regular fa-credit-card fa-beat" style="color: #3b424e;"></i>
                                          <div class="hover-text">Tiền trả trước</div>
-                                        <h3 class="card-title1">11110$</h3>
+                                        <h3 class="card-title1">@item1.BookRoom.PrePayment</h3>
                                     </div>
                                      <div class="card-content1-bottom ">
                                        <i class="fa-solid fa-sack-dollar " style="color: #3f4550;"></i>
@@ -174,15 +180,16 @@
                                          <div class="hover-text">Ghi chú</div>
                                         <h3 class="card-title1">11110$</h3>
                                     </div>
-                                    <!-- Thêm các thông tin khác của card 1 -->
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                  
-             
+                            }}
+                                                   
                 </div>
             </div>
+        }    
         </section>
         @* <!-- Main content -->
          <!--phòng cần dọn-->*@
