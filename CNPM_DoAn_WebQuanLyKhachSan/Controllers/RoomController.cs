@@ -13,10 +13,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			dBHelper = new DBHelper(context);
 			_hostEnvironment = hostEnvironment;
 		}
-		public IActionResult Index()
+		public IActionResult Index(int searchInt)
 		{
-			ViewData["PapeTitle"] = "Phòng";
-			ViewBag.room = dBHelper.GetRoom();
+			if (searchInt != null)
+				ViewBag.room = dBHelper.SearchRoom(searchInt);
+			else
+				ViewBag.room = dBHelper.GetRooms();
 			return View();
 		}
 		// M: Thêm loại phòng

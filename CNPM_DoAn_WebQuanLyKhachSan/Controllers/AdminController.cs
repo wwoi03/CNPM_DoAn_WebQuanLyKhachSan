@@ -31,7 +31,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         {
             if (HttpContext.Session.GetString("Username") == null)
             {
-                Staff checkStaff = dbHelper.GetStaffByUsername(staffVM.Username);
+                Staff checkStaff = dbHelper.GetStaffByUserName(staffVM.Username);
 
                 // kiểm tra tên đăng nhập đã có trong hệ thông
                 if (checkStaff != null)

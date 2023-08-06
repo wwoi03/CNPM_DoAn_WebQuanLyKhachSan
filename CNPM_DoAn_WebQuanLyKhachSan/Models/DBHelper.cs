@@ -68,10 +68,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Rooms.Update(room);
             dbContext.SaveChanges();
         }
+		public List<Room> SearchRoom(int searchInt)
+		{
+			return dbContext.Rooms.Where(p => p.RoomId==searchInt).ToList();
+		}
 
-        /* ------------------------------------- RoomType ------------------------------------- */
-        // M: Lấy danh sách sản phẩm
-        public List<RoomType> GetRoomType()
+		/* ------------------------------------- RoomType ------------------------------------- */
+		// M: Lấy danh sách sản phẩm
+		public List<RoomType> GetRoomType()
         {
             return dbContext.RoomTypes.OrderByDescending(p => p.RoomTypeId).ToList();
         }
@@ -104,10 +108,14 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.RoomTypes.Remove(GetRoomTypeById(roomTypeId));
             dbContext.SaveChanges();
         }
+		public List<RoomType> SearchRoomtype(String searchString)
+		{
+			return dbContext.RoomTypes.Where(p => p.Name.Contains(searchString)).OrderByDescending(p => p.RoomTypeId).ToList();
+		}
 
-        /* ------------------------------------- Customer ------------------------------------- */
-        // M: Lấy khách hàng
-        public Customer GetCustomerById(int? cardId)
+		/* ------------------------------------- Customer ------------------------------------- */
+		// M: Lấy khách hàng
+		public Customer GetCustomerById(int? cardId)
         {
             return dbContext.Customers.FirstOrDefault(p => p.CardId == cardId); 
         }
@@ -224,15 +232,54 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Menus.Update(menu);
             dbContext.SaveChanges();
         }
+		// M: Tìm kiếm sản phẩm
+		public List<Menu> SearchMenu(String searchString)
+		{
+			return dbContext.Menus.Where(p => p.Name.Contains(searchString)).OrderByDescending(p => p.MenuId).ToList();
+		}
 
-        /* ------------------------------------- Staff ------------------------------------- */
-        public Staff GetStaffByUsername(string username)
-        {
-            return dbContext.Staffs.Where(p => p.Username == username).FirstOrDefault();
-        }
 
-        //-----------------------------------Position-------------------------------------------//
-        public List<Position> GetPosition()
+		/* ------------------------------------- Staff ------------------------------------- */
+		public List<Staff> GetStaff()
+		{
+			return dbContext.Staffs.Include(p => p.Position).OrderByDescending(p => p.StaffId).ToList();
+		}
+
+		// M: Lấy loại phòng theo id
+		public Staff GetStaffByUserName(String staffUserName)
+		{
+            return dbContext.Staffs.Include(p=>p.Position).FirstOrDefault(p => p.Username == staffUserName);
+		}
+
+		// M: Thêm loại phòng
+		public void InsertStaff(Staff staff)
+		{
+			dbContext.Staffs.Add(staff);
+			dbContext.SaveChanges();
+		}
+		public void DetailsStaff(string staffUserName)
+		{
+			dbContext.SaveChanges();
+		}
+		public void EditStaff(Staff staff)
+		{
+			dbContext.Staffs.Update(staff);
+			dbContext.SaveChanges();
+		}
+
+		// M: Thêm loại phòng
+		public void DeleteStaff(string staffUserName)
+		{
+			dbContext.Staffs.Remove(GetStaffByUserName(staffUserName));
+			dbContext.SaveChanges();
+		}
+		public List<Staff> SearchStaff(String searchString)
+		{
+			return dbContext.Staffs.Where(p => p.Username.Contains(searchString)).OrderByDescending(p => p.StaffId).ToList();
+		}
+
+		//-----------------------------------Position-------------------------------------------//
+		public List<Position> GetPosition()
         { //aben
             return dbContext.Positions.OrderByDescending(p => p.PositionId).ToList();
         }

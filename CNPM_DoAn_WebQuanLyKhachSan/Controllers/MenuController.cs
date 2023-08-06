@@ -15,9 +15,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 			dBHelper = new DBHelper(context);
 			_hostEnvironment = hostEnvironment;
 		}
-		public IActionResult Index()
+		public IActionResult Index(string searchString)
 		{
-			ViewBag.menu = dBHelper.GetMenus();
+			if (searchString != null && searchString.Length > 0)
+				ViewBag.menu = dBHelper.SearchMenu(searchString);
+			else
+				ViewBag.menu = dBHelper.GetMenus();
 			return View();
 		}
 		public IActionResult Create()
@@ -138,6 +141,15 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 
 			dBHelper.EditMenu(menu);
 			return RedirectToAction("Index");
+		}
+		public IActionResult Search(String searchString)
+		{
+			ViewData["PageTitle"] = "List Product";
+			if (searchString != null && searchString.Length > 0)
+				ViewData["listProduct"] = dBHelper.SearchMenu(searchString);
+			else
+				ViewData["listProduct"] = dBHelper.GetMenus();
+			return View();
 		}
 	}
 }
