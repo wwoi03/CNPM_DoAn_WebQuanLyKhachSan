@@ -217,6 +217,18 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             return dbContext.Staffs.Where(p => p.Username == username).FirstOrDefault();
         }
 
+        // M: Lấy danh sách nhân viên
+        public List<Staff> GetStaffs()
+        {
+            return dbContext.Staffs.Include(p => p.Position).OrderByDescending(p => p.StaffId).ToList();
+        }
+
+        // M: Lấy dánh sách nhân viên theo tên
+        public List<Staff> GetStaffByName(string searchString)
+        {
+            return dbContext.Staffs.Where(p => p.Name.Contains(searchString)).Include(p => p.Position).OrderByDescending(p => p.StaffId).ToList();
+        }
+
         //-----------------------------------Position-------------------------------------------//
         public List<Position> GetPosition()
         { //aben

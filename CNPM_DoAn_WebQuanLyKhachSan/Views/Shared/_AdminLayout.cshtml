@@ -69,12 +69,12 @@
                     <i class="fa-solid fa-file-excel"></i>
 				    <span>Nhập excel</span>
 
-                    <form class="form-excel" enctype="multipart/form-data">
+                    <form class="form-excel" method="post" asp-action="ImportFileExcel" asp-controller="BookRoom" enctype="multipart/form-data">
 						<h1>Thêm excel</h1>
-						<input type="file" name="excelFile" accept=".xlsx, .xls"/>
+						<input type="file" name="excelFile" accept=".xlsx, .xls" />
 
 						<div class="form-excel-btn">
-							<input id="form-excel-input" value="Thêm" />
+							<input id="form-excel-input" type="submit" value="Thêm" />
                         </div>
                     </form>
                 </div>

@@ -2,6 +2,7 @@
 using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using System.Globalization;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 {
@@ -49,13 +50,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(BookRoomVM bookRoomVM,  string listRoomString, string nameCustomer, string phoneCustomer, int cardId, IFormFile excelFile)
+        public IActionResult Create(BookRoomVM bookRoomVM,  string listRoomString, string nameCustomer, string phoneCustomer, int cardId)
         {
-            if (excelFile != null && excelFile.Length >= 0)
-            {
-                //ImportFileExcel(excelFile);
-            }
-
             ViewBag.openAddBookRoom = true;
             string[] listRoomNum = listRoomString.Split(',');
 
@@ -226,6 +222,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         [HttpPost]
         public IActionResult ImportFileExcel(IFormFile excelFile)
         {
+            // tạo và quản lý một MemoryStream, một luồng bộ nhớ trong .NET.
             using (var stream = new MemoryStream())
             {
                 excelFile.CopyTo(stream);
@@ -245,8 +242,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                         string nameCustomer = worksheet.Cells[row, 1].Value.ToString() ?? string.Empty;
                         string phoneCustomer = worksheet.Cells[row, 2].Value.ToString() ?? string.Empty;
                         int cardId = int.Parse(worksheet.Cells[row, 3].Value.ToString() ?? string.Empty);
-                        DateTime checkInDate = DateTime.Parse(worksheet.Cells[row, 4].Value.ToString() ?? string.Empty);
-                        DateTime checkOutDate = DateTime.Parse(worksheet.Cells[row, 5].Value.ToString() ?? string.Empty);
+                        DateTime checkInDate = DateTime.ParseExact(worksheet.Cells[row, 4].Value.ToString() ?? string.Empty, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+                        DateTime checkOutDate = DateTime.ParseExact(worksheet.Cells[row, 5].Value.ToString() ?? string.Empty, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
                         double prepayment = double.Parse(worksheet.Cells[row, 6].Value.ToString() ?? string.Empty);
                         string note = worksheet.Cells[row, 7].Value?.ToString() ?? string.Empty;
                         string[] rooms = (worksheet.Cells[row, 8].Value.ToString() ?? string.Empty).Split('-');
@@ -259,7 +256,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                             {
                                 CardId = cardId,
                                 Name = nameCustomer,
-                                Phone = phoneCustomer,
+                                Phone = phoneCustomer
                             };
 
                             dBHelper.CreateCustomer(customer);
@@ -304,10 +301,8 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 
                 }
 
-                ViewBag.openAddBookRoom = true;
-                List<BookRoom> _bookRooms = dBHelper.GetBookRooms();
-                return Json(_bookRooms);
             }
+            return RedirectToAction("Index");
         }
     }
 }

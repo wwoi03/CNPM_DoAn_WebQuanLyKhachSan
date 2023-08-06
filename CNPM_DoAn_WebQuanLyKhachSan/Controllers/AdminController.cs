@@ -40,6 +40,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                     if (checkStaff.Password == staffVM.Password)
                     {
                         HttpContext.Session.SetString("Username", checkStaff.Username);
+                        HttpContext.Session.SetString("Name", checkStaff.Name);
                         HttpContext.Session.SetInt32("StaffId", checkStaff.StaffId);
 
                         return RedirectToAction("Index", "Admin");
@@ -51,6 +52,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
 
                 ViewBag.messageError = "Tên đăng nhập hoặc mật khẩu không chính xác!";
             }
+            return View();
+        }
+
+        // M: Đăng xuất
+        public IActionResult Logout()
+        {
             return View();
         }
 

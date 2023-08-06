@@ -26,20 +26,7 @@
 
 					FullCalendarLibrary(data);
 
-					// Bắt sự kiện click của các item trong navbar
-					$(".nav-container li").click(function () {
-						// Lấy id của item được click
-						var view = $(this).attr("id");
-
-						// Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
-						if (view === "month-view") {
-							calendar.changeView("dayGridMonth");
-						} else if (view === "week-view") {
-							calendar.changeView("dayGridWeek");
-						} else if (view === "day-view") {
-							calendar.changeView("listDay");
-						}
-					});
+					
 				},
 				error: function () {
 					alert("Đã xảy ra lỗi khi lấy thông tin");
@@ -50,7 +37,6 @@
 
 	// M: Fullcalendar
 	function FullCalendarLibrary(data) {
-		console.log(data);
 
 		// Ngày cho các sự kiện trên lịch
 		var date = new Date();
@@ -159,6 +145,41 @@
 					info.draggedEl.parentNode.removeChild(info.draggedEl);
 				}
 			},
+		});
+
+		var tabActive = document.querySelector(".nav-item.active");
+		var navLine = document.querySelector(".panel-navbar .nav-line");
+
+		// Chuyển line
+		function LineUpdate(tab) {
+			navLine.style.left = tab.offsetLeft + "px";
+			navLine.style.width = tab.offsetWidth + "px";
+		}
+
+		LineUpdate(tabActive);
+
+		$(".nav-container .nav-item").click(function () {
+			document.querySelector(".nav-item.active").classList.remove("active");
+
+			LineUpdate(this);
+
+			this.classList.add("active");
+		});
+
+
+		// Bắt sự kiện click của các item trong navbar
+		$(".nav-container li").click(function () {
+			// Lấy id của item được click
+			var view = $(this).attr("id");
+
+			// Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
+			if (view === "month-view") {
+				calendar.changeView("dayGridMonth");
+			} else if (view === "week-view") {
+				calendar.changeView("dayGridWeek");
+			} else if (view === "day-view") {
+				calendar.changeView("listDay");
+			}
 		});
 
 		// render giao diện calendar
@@ -522,10 +543,13 @@
 	}
 
 	// M: Import File Excel
-	function PostImportFileExcel() {
+	function PostImportFileExcel(file) {
+		var formData = new FormData();
+		formData.append('excelFile', file);
 		$.ajax({
 			type: "POST",
 			url: "../../BookRoom/ImportFileExcel",
+			data: formData,
 			success: function (data) {
 				FullCalendarLibrary(data);
 			},
@@ -628,6 +652,7 @@
 
 	// M: Xử lý khi bấm vào thêm file excel
 	function AddFileExcel() {
+		var formExcel = document.querySelector('.form-excel input');
 		var btnExcel = document.querySelector('.btn-page-excel');
 		var formExcelInput = document.getElementById('form-excel-input');
 
@@ -636,8 +661,7 @@
 		});
 
 		formExcelInput.addEventListener('click', function () {
-			console.log("dasda");
-			PostImportFileExcel();
+			//PostImportFileExcel(formExcel.files[0]);
 		});
 	}
 });
