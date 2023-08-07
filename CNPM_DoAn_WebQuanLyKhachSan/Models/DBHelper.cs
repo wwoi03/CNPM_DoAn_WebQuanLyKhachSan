@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 {
@@ -155,10 +156,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
         public BookRoomDetails GetBookRoomDetailsById(int bookRoomId)
         {
-            BookRoomDetails bookRoomDetailsList = (BookRoomDetails)dbContext.BookRoomDetails.Where(p => p.BookRoomDetailsId == bookRoomId);
-            return bookRoomDetailsList;
+            return dbContext.BookRoomDetails.Include(p=>p.Room).Include(p => p.BookRoom).FirstOrDefault(p => p.BookRoomDetailsId == bookRoomId);
         }
-
+       public MenuOrder GetMenuOrderByIDBookDetails(int idBookRoomDetails)
+        {
+            return (MenuOrder)dbContext.MenuOrders.Where(p => p.BookRoomDetailsId == idBookRoomDetails);
+        }
         public void CheckIn(BookRoomDetails bookRoomDetails)
         {
             dbContext.Update(bookRoomDetails);
@@ -205,9 +208,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         // M: Lấy BookRoom theo id
-        public BookRoom GetBookRoomById(int bookRoomId)
+        public BookRoom GetBookRoomById(int brdetaiId)
         {
-            return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).FirstOrDefault(p => p.BookRoomId == bookRoomId);
+            return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).FirstOrDefault(p => p.BookRoomId == brdetaiId);
         }
 
         /* ------------------------------------- Menu ------------------------------------- */
@@ -285,5 +288,27 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Positions.Update(position);
             dbContext.SaveChanges();
         }
+        //xuất bill
+        public void InsertBill(Bill bill)
+        {
+            dbContext.Bills.Add(bill);
+            dbContext.SaveChanges();
+        }
+
+        public Customer GetCustomer(int idcard)
+        {
+            return (Customer) dbContext.Customers.Where(p => p.CardId==idcard);
+                
+        }
+        public Bill GetBillById(int billid)
+        {
+            return (Bill)dbContext.Bills.Where(p => p.BillId == billid);
+        }
+        public void UpdateBill(Bill bill)
+        {
+            dbContext.Update(bill);
+            dbContext.SaveChanges();
+        }
+        
     }
 }

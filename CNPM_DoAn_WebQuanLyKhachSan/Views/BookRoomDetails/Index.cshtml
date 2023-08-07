@@ -1,9 +1,17 @@
-﻿﻿@{
+﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
+﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var rootypes = ViewBag.RoomType;
     var room  = ViewBag.BookRoom;
    
 }
+
+@model BookRoomDetailsVM
+<style>
+    button{
+        border:none;
+    }
+</style>
 <div class="main-container d-flex">
     <!-- Nội dung bên trái -->
     <div class="left-panel col-8 pl-0 pr-0">
@@ -48,7 +56,7 @@
                 <div class="card-container1">
                    @foreach (var item1 in room)
                         {
-                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.StatusRented==0)
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.Room.CleanRoom == 0 && item1.Room.Status == 1)
                             {
                                 <div class="col-3 p-0 m-0">
                                     <div class="card1-item">
@@ -59,18 +67,22 @@
                                                     <div class="show-menu">
                                                         <i class="fa-solid fa-ellipsis-vertical"  ></i>
                                                         <div class="more-menu" >
-                                                            <button id="dialog-bt checkin" onclick="openDialog()" data-menu-id="@item1.BookRoomDetailsId">
+                                                            <button  >
+                                                                <a  id="dialog-bt  checkin" asp-action="CheckIn" asp-route-BookRoomDetailsId="@item1.BookRoomDetailsId" asp-controller=BookRoomDetails  >
                                                                 <i class="fa-solid fa-key" style="color: #8d929a;"></i>
                                                                 <span >
                                                                     Nhận Phòng
                                                                 </span>                                         
-                                                            </button>                                             
-                                                            <button onclick="ClearRoom()" class="btclearRoom">
+                                                            </a>      
+                                                            </button>                                       
+                                                           <button>
+                                                                <a  asp-action="GetClearRoom" asp-route-Id="@item1.Room.RoomId" asp-controller=BookRoomDetails  class="btclearRoom">
                                                                 <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
                                                                 <span>
                                                                     Yêu cầu dọn phòng
                                                                 </span>    
-                                                            </button>
+                                                            </a>
+                                                           </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +119,7 @@
                 <div class="card-container1">
                    @foreach (var item1 in room)
                         {
-                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.StatusRented==1)
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.Room.Status == 2)
                             {
                                	<div class="col-3 p-0 m-0">
 						<div class="card1-item">
@@ -118,38 +130,38 @@
                                         <div class="show-menu">
                                             <i class="fa-solid fa-ellipsis-vertical"  ></i>
                                             <div class="more-menu" >
-                                                <button id="dialog-bt" >
+                                                <button>
+                                                    <a id="dialog-bt" >
                                                    <i class="fa-solid fa-marker" style="color: #5a6372;"></i>
                                                     <span  >
                                                         Chỉnh sửa
                                                     </span>                                         
-                                                </button>
-
-                                                <button onclick="AddMenu()">
-                                                    <i class="fa-solid fa-calendar-days" style="color: #637088"></i>
-                                                    <span  >
-                                                       Thêm menu
-                                                    </span>    
-                                                </button>
-
-                                                <button >
+                                                </a>
+                                                </button> 
+                                                <button>
+                                                    <a  >
                                                     <i class="fa-solid fa-rotate-left fa-spin fa-spin-reverse" style="color: #444850;"></i>
-                                                    <span>
+                                                    <span  class="click-checkout" data-checkout-id="@item1.BookRoomDetailsId">
                                                         Trả Phòng
                                                     </span>    
-                                                </button>                                              
+                                                </a>    
+                                                </button>                                          
                                                  <button>
+                                                     <a  asp-action="GetClearRoom" asp-route-id="@item1.Room.RoomId" asp-controller=BookRoomDetails>
                                                     <i class="fa-solid fa-tags fa-rotate-180" style="color: #7a8699;"></i>
                                                     <span>
                                                         Yêu cầu dọn phòng
                                                     </span>    
-                                                </button>
-                                                 <button onclick="openDialog()">
+                                                </a>
+                                                 </button>
+                                                 <button>
+                                                     <a asp-action="" asp-route-BookRoomDetailsId="@item1.BookRoomDetailsId" asp-controller=BookRoomDetails>
                                                     <i class="fa-solid fa-trash" style="color: #565c67;"></i>
                                                     <span>
                                                        Xóa
                                                     </span>    
-                                                </button>
+                                                </a>
+                                                 </button>
                                             </div>
                                         </div>
                                     </div>
@@ -194,10 +206,16 @@
         @* <!-- Main content -->
          <!--phòng cần dọn-->*@
           <section class="book-room-details-tabs ren-content" id="CleanRoom-content" >
+            @foreach (var item in rootypes)
+       {
             <div class="container1">
-                <h2 class="container-title1">Loại phòng</h2>
+                <h2 class="container-title1">@item.Name</h2>
                 <div class="card-container1">
-                    <!-- Item -->
+                   @foreach (var item1 in room)
+                        {
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.Room.CleanRoom == 2)
+                            {
+                                <!-- Item -->
 					<div class="col-3 p-0 m-0">
 						<div class="card1-item">
                             <div class="card1">
@@ -208,12 +226,14 @@
                                             <i class="fa-solid fa-ellipsis-vertical"  ></i>
 
                                             <div class="more-menu" >
-                                                <button id="dialog-bt" onclick="openDialog()">
+                                               <button>
+                                                    <a asp-action="GetClearRoomSucess" asp-route-id="@item1.Room.RoomId" asp-controller=BookRoomDetails id="dialog-bt">
                                                     <i class="fa-solid fa-check" style="color: #585b5f;"></i>
                                                     <span >
                                                         Đã Dọn
                                                     </span>                                         
-                                                </button>
+                                                </a>
+                                               </button>
                                             </div>
                                         </div>
                                     </div>
@@ -231,9 +251,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                                               
+                    </div>
+                            }}
+                                                   
                 </div>
             </div>
+        }       
         </section>
        @* <!-- Main content -->
          <!--lịch sử-->*@
@@ -291,8 +314,6 @@
 
     <!-- Nội dung bên phải -->
     <div class="right-panel col-4 pl-0 pr-0">     
-       
-                                 
     </div>
 </div>
 

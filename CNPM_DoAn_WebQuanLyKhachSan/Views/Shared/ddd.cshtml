@@ -1,0 +1,93 @@
+﻿<form id="form-book-room" method="post" action="../../BookRoom/Create">
+    <!-- Lưu đặt phòng -->
+    <div class="panel-save d-flex justify-content-between align-items-center">
+        <span>Thêm mới</span>
+
+        <div class="">
+            <input id="input-submit" type="submit" value="Lưu" />
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="panel-form">
+        <!-- Thông tin -->
+        <div class="panel-form-info">
+            <!-- Tên khách hàng -->
+            <div class="panel-form-item">
+                <h5 class="panel-form-title">Họ và tên khách hàng</h5>
+                <input class="panel-form-input" name="nameCustomer" type="text" />
+            </div>
+
+            <!-- Số điện thoại -->
+            <div class="panel-form-item">
+                <h5 class="panel-form-title">Số điện thoại</h5>
+                <input class="panel-form-input" name="phoneCustomer" type="number" />
+            </div>
+
+            <!-- CCCD -->
+            <div class="panel-form-item">
+                <h5 class="panel-form-title">Căn cước công dân</h5>
+                <input class="panel-form-input" name="cardId" type="number" />
+            </div>
+
+            <!-- Ngày -->
+            <div class="panel-form-item">
+                <div class="panel-form-height">
+                    <div class="panel-form-height-item">
+                        <h5 class="panel-form-title">Ngày nhận phòng</h5>
+                        <input class="panel-form-input" name="CheckInDate" type="datetime-local"
+                            value="${checkInDate != null ? checkInDate : ""}" />
+                    </div>
+
+                    <div class="panel-form-height-item">
+                        <h5 class="panel-form-title">Ngày trả phòng</h5>
+                        <input class="panel-form-input" name="CheckOutDate" type="datetime-local"
+                            value="${checkOutDate != null ? checkOutDate : ""}" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tiền trả trước -->
+            <div class="panel-form-item">
+                <h5 class="panel-form-title">Tiền trả trước</h5>
+                <input class="panel-form-input" type="number" name="PrePayment" id="form-input-money"
+                    placeholder="0.000 đ" />
+            </div>
+
+            <!-- Ghi chú -->
+            <div class="panel-form-item">
+                <h5 class="panel-form-title">Ghi chú</h5>
+                <input class="panel-form-input" type="text" name="Note" placeholder="" />
+            </div>
+        </div>
+
+        <!-- Phòng -->
+        <div class="panel-form-room">
+            <div class="panel-form-room-item">
+                <h5 class="panel-form-title">Thêm phòng</h5>
+
+                <div class="panel-form-add-room">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <p class="panel-form-room-btn">Thêm phòng</p>
+                    <input id="list-room-string" hidden name="listRoomString" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách phòng theo loại-->
+        <div class="panel-form-roomtype">`;
+
+            <div class="panel-form-roomtype-item">
+                <div class="panel-form-roomtype-title">${itemRT.name}</div>
+
+                <div class="panel-form-roomtype-render">
+                    <div class="d-flex">
+                        <div class="row p-0 container-fluid panel-form-roomtype-render-list">
+                            <div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

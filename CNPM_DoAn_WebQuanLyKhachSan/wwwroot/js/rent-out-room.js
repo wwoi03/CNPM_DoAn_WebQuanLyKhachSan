@@ -7,8 +7,8 @@
 		MoreMenu();
 		Navibar()
 		SetColorClean();
-		Checkin();
-
+		CheckIn();
+		ClickCheckOut();
 	}
 
 	// M: Xử lý chuyển tab
@@ -57,7 +57,7 @@
 			});
 		});
 	}
-	
+
 	function Navibar() {
 		const tabbar = document.querySelectorAll('.book-room-details-tabs');
 		const navItem = document.querySelectorAll('.nav-container .nav-item');
@@ -86,34 +86,100 @@
 	}
 	////thêm menu
 
+	function ClickCheckOut() {
+		var clickCheckout = document.querySelectorAll('.click-checkout');
 
-	//nhận phòng
-	function Checkin() {
-		// Tạo một đối tượng chứa dữ liệu bạn muốn gửi
-		var checkinButtons = document.querySelectorAll('.dialog-bt');
+		if (clickCheckout != null) {
+			clickCheckout.forEach((item, index) => {
+				item.addEventListener('click', function () {
+					console.log("dsa")
+					var id = $(this).data('checkout-id');
+					console.log(id+"pppppppp")
 
-		checkinButtons.forEach(function (button) {
-			button.addEventListener('click', function () {
-				var employeeId = $(this).data('menu-id');
-				document.getElementById("dialog").style.display = "none";
-				// Xử lý sự kiện ấn vào nút tại đây
-				$.ajax({
-					url: "../../BookRoomDetails/CheckIn?bookRoomDetailsId" + employeeId,
-					type: 'POST', // Sử dụng phương thức POST
-					data: requestData, // Gửi dữ liệu roomId bằng phương thức POST
-					success: function (response) {
-						console.log('Room status updated successfully:', response);
-						// Thực hiện các hành động khác sau khi cập nhật trạng thái phòng
-					},
-					error: function (error) {
-						console.error('Error updating room status:', error);
-					}
-				});
-			});
+					FormCheckOut(id);
+                })
+            })
+        }
+    }
+
+	function FormCheckOut(id) {
+		$.ajax({
+			type: "GET",
+			url: "../../BookRoomDetails/GetCheckOut?bookRoomDetailsId=" + id,
+			success: function (data) {
+				var customer = data.customer;
+				var bookRoom = data.bookRoom;
+				console.log(data);
+;				var html = `
+		<form id="form-book-room" method="post"  action="../../BookRoomDetails/PostCheckOut?bookRoomDetailsId=${bookRoom.bookRoomDetailsId}">
+			<!-- Lưu đặt phòng -->
+			<div class="panel-save d-flex justify-content-between align-items-center">
+				<span>Trả phòng</span>
+
+				<div class="">
+					<input id="input-submit" type="submit" value="Lưu" />
+				</div>
+			</div>
+
+			<!-- Form -->
+			<div class="panel-form">
+				<!-- Thông tin -->
+				<div class="panel-form-info">
+
+					<!-- Tên khách hàng -->
+					<div class="panel-form-item">
+						<h5 class="panel-form-title">Phòng</h5>
+						<input class="panel-form-input" name="nameCustomer" value="${bookRoom.room.roomId}" type="text" />
+					</div>
+
+					<!-- Tên khách hàng -->
+					<div class="panel-form-item">
+						<h5 class="panel-form-title">Họ và tên khách hàng</h5>
+						<input class="panel-form-input" name="nameCustomer" value="${customer.name}" type="text" />
+					</div>
+
+					<!-- Ngày -->
+					<div class="panel-form-item">
+						<div class="panel-form-height">
+							<div class="panel-form-height-item">
+								<h5 class="panel-form-title">Ngày nhận phòng</h5>
+								<input class="panel-form-input" name="CheckInDate"  value="${bookRoom.checkInDate}" type="datetime-local"
+									value="" />
+							</div>
+
+							<div class="panel-form-height-item">
+								<h5 class="panel-form-title">Ngày trả phòng</h5>
+								<input class="panel-form-input" name="CheckOutDate" value="${bookRoom.checkOutDate}" type="datetime-local"
+									value="" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Tiền trả trước -->
+					<div class="panel-form-item">
+						<h5 class="panel-form-title">Tổng tiền</h5>
+						<input class="panel-form-input" type="number"value="${bookRoom.bookRoom.prePayment}" name="PrePayment" id="form-input-money"
+							placeholder="0.000 đ" />
+					</div>
+
+					<!-- Ghi chú -->
+					<div class="panel-form-item">
+						<h5 class="panel-form-title">Ghi chú</h5>
+						<input class="panel-form-input" type="text" name="Note" placeholder="" />
+					</div>
+				</div>
+			</div>
+		</form >
+	`;
+				$(".right-panel").html(html);
+			},
+			error: function () {
+
+            }
 		});
-	}
+		
+    }
 	
-
 	
 	function SetColorClean() {
 		$.ajax({
@@ -134,7 +200,7 @@
 						//console.log(item.room.roomId);
 						//console.log(item.room.cleanRoom + "hehe");
 						if (item.room.cleanRoom == 0) {
-							
+
 							// Thay đổi thuộc tính class của thẻ <i> thành "fa-solid fa-xmark" và thiết lập màu
 							iconElement.className = 'fa-solid fa-xmark';
 							iconElement.style.color = '#ff0000';
@@ -142,7 +208,7 @@
 							// Thay đổi nội dung văn bản trong thẻ <h3>
 							h3Element.textContent = 'Chưa dọn phòng';
 							h3Element.style.color = 'red';
-						} else {
+						} else if (tem.room.cleanRoom = 1) {
 							// Thay đổi thuộc tính class của thẻ <i> thành "fa-solid fa-check" và thiết lập màu
 							iconElement.className = 'fa-solid fa-check fa-2xl';
 							iconElement.style.color = '#4fff0f';
@@ -150,7 +216,15 @@
 							// Thay đổi nội dung văn bản trong thẻ <h3>
 							h3Element.textContent = 'Đã dọn phòng';
 							h3Element.style.color = '#4fff0f';
-						}
+						} else {
+							// Thay đổi thuộc tính class của thẻ <i> thành "fa-solid fa-check" và thiết lập màu
+							iconElement.className = 'fa-solid fa-check fa-2xl';
+							iconElement.style.color = 'yellow';
+
+							// Thay đổi nội dung văn bản trong thẻ <h3>
+							h3Element.textContent = 'Đã dọn phòng';
+							h3Element.style.color = 'yellow';
+                        }
 					}
 					
 				});
@@ -246,4 +320,28 @@ function AddMenu() {
 			alert("Đã xảy ra lỗi khi lấy thông t");
 		}
 	});
+}
+
+function PostCheckIn(bookRoomDetailsId) {
+	$.ajax({
+		type: "POST",
+		url: "../../BookRoomDetails/CheckIn?bookRoomDetailsId=" + bookRoomDetailsId,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function () {
+
+        }
+	});
+}
+
+function CheckIn() {
+	var checkin = document.querySelector('checkin');
+
+	if (checkin != null) {
+		checkin.addEventListener('click', function () {
+			var employeeId = $(this).data('br-id');
+			PostCheckIn(employeeId);
+		});
+    }
 }
