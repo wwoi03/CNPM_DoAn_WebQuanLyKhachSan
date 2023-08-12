@@ -1,0 +1,90 @@
+﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
+@{
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	var listHistory = ViewBag.getListHistory;
+}
+@model HistoryVM
+
+
+
+
+
+
+
+
+<div class="main-container d-flex">
+	<!-- Nội dung bên trái -->
+	<div class="left-panel col-8 pl-0 pr-0">
+		<div class="content container-fluid">
+			<div class="page-header">
+				<div class="row align-items-center">
+					<div class="col">
+						<div class="">
+							<h4 class="card-title float-left mt-2" style="font-size: 24px">Lịch sử </h4>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-table">
+						<div class="card-body booking_card">
+							<div class="table-responsive">
+								<table class="datatable table table-stripped table table-hover table-center mb-0">
+									<thead>
+										<tr>
+											<th>Phòng</th>
+											<th>Thời gian bắt đầu</th>
+											<th>Thời gian kết thúc</th>
+											@*<th>Tên khách hàng</th>*@
+											<th>Tổng tiền thanh toán</th>
+											
+											@*<th class="text-right">Tổng tiền</th>
+											<th class="text-center">Chỉnh sửa</th>*@
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in listHistory)
+										{
+											<tr>
+												<td>@item.BookRoomDetails.RoomID</td>
+												<td>@item.CheckInDate</td>
+												<td>@item.CheckOutDate</td>
+											@*	<td>@item.BookRoomDetails.Name</td>*@
+												
+												<td>@item.TotalPriceBill</td>
+										
+												
+												<td>
+													<a data-history-id="@item.BillId" class="btn btn-primary btn-sm history-details">
+														<i class="fas fa-folder"></i>
+														Chi tiết
+													</a>
+
+													<a data-history-id="@item.BillId" class="btn btn-info btn-sm history-edit">
+														<i class="fas fa-pencil-alt"></i>
+														Chỉnh sửa
+													</a>
+
+													
+												</td>
+											</tr>
+										}
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Nội dung bên phải -->
+	<div class="right-panel col-4 pl-0 pr-0">
+	</div>
+</div>
+
+<script src="~/js/home.js"></script>

@@ -94,13 +94,13 @@
 				item.addEventListener('click', function () {
 					console.log("dsa")
 					var id = $(this).data('checkout-id');
-					console.log(id+"pppppppp")
+					console.log(id + "pppppppp")
 
 					FormCheckOut(id);
-                })
-            })
-        }
-    }
+				})
+			})
+		}
+	}
 
 	function FormCheckOut(id) {
 		$.ajax({
@@ -110,7 +110,7 @@
 				var customer = data.customer;
 				var bookRoom = data.bookRoom;
 				console.log(data);
-;				var html = `
+				; var html = `
 		<form id="form-book-room" method="post"  action="../../BookRoomDetails/PostCheckOut?bookRoomDetailsId=${bookRoom.bookRoomDetailsId}">
 			<!-- Lưu đặt phòng -->
 			<div class="panel-save d-flex justify-content-between align-items-center">
@@ -165,7 +165,7 @@
 					<!-- Ghi chú -->
 					<div class="panel-form-item">
 						<h5 class="panel-form-title">Ghi chú</h5>
-						<input class="panel-form-input" type="text" name="Note" value="${bookRoom.No}" placeholder="" />
+						<input class="panel-form-input" type="text" name="Note" placeholder="" />
 					</div>
 				</div>
 			</div>
@@ -175,12 +175,12 @@
 			},
 			error: function () {
 
-            }
+			}
 		});
-		
-    }
-	
-	
+
+	}
+
+
 	function SetColorClean() {
 		$.ajax({
 			type: "GET",
@@ -190,7 +190,7 @@
 
 				// Lặp qua mỗi phần tử chứa dữ liệu
 				data.forEach(function (item) {
-					
+
 					var cleanRoomElement = document.querySelector('.clean-room[data-room-id="' + item.room.roomId + '"]');
 
 					if (cleanRoomElement) {
@@ -224,9 +224,9 @@
 							// Thay đổi nội dung văn bản trong thẻ <h3>
 							h3Element.textContent = 'Đã dọn phòng';
 							h3Element.style.color = 'yellow';
-                        }
+						}
 					}
-					
+
 				});
 			},
 			error: function () {
@@ -331,7 +331,7 @@ function PostCheckIn(bookRoomDetailsId) {
 		},
 		error: function () {
 
-        }
+		}
 	});
 }
 
@@ -343,5 +343,5 @@ function CheckIn() {
 			var employeeId = $(this).data('br-id');
 			PostCheckIn(employeeId);
 		});
-    }
+	}
 }

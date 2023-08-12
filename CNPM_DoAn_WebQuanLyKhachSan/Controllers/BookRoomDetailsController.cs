@@ -19,7 +19,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             ViewBag.BookRoom = dBHelper.GetBookRoomDetails();
             return View();
         }
-      
+
         // M: Hiển thị phòng cần dọn
         [HttpGet]
         public IActionResult CleanRoom()
@@ -49,7 +49,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult CheckIn(int bookRoomDetailsId)
         {
             BookRoomDetails bookRoomDetails = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
-            bookRoomDetails.Room.Status = 2; 
+            bookRoomDetails.Room.Status = 2;
             dBHelper.UpdateBookRoomDetails(bookRoomDetails);
             dBHelper.UpdateRoom(bookRoomDetails.Room);
             return RedirectToAction("Index");
@@ -69,10 +69,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         [HttpGet]
         public IActionResult GetCheckOut(int bookRoomDetailsId)
         {
-            
+
             BookRoomDetails _bookRoom = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
             Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
-            
             var data = new
             {
                 bookRoom = _bookRoom,
@@ -93,21 +92,21 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
             RoomType price = dBHelper.GetRoomTypeById(_bookRoom.Room.RoomTypeId);
             Console.WriteLine(price.Price);
-            Payment payment = dBHelper.GetPaymentById();
+            // Payment payment = dBHelper.GetPaymentById();
             Bill bill = new Bill()
             {
                 BillId = bookRoomDetailsId,
-                PaymentId=payment.PaymentId,
+                PaymentId = 1,
                 PriceRoom = price.Price,
-                TotalPriceMenu=0,
-                TotalPriceBill=0,           
-                Note="note",
+                TotalPriceMenu = 0,
+                TotalPriceBill = 0,
+                Note = "note",
             };
-            
+            _bookRoom.Room.Status = 0;
+            dBHelper.UpdateRoom(_bookRoom.Room);
+
             dBHelper.InsertBill(bill);
-
             return RedirectToAction("Index");
-
         }
     }
 }

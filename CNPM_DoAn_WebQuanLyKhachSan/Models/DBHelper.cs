@@ -39,7 +39,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
 
         public List<Room> GetRoom()
         { //aben
-            return dbContext.Rooms.OrderByDescending(p => p.RoomId).ToList();
+            return dbContext.Rooms.OrderByDescending(p => p.RoomId).Include(p => p.RoomType).ToList();
         }
 
         // M: Thêm  phòng
@@ -106,6 +106,12 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.SaveChanges();
         }
 
+        public List<RoomType> SearchRoomtype(String searchString)
+        {
+            return dbContext.RoomTypes.Where(p => p.Name.Contains(searchString)).OrderByDescending(p => p.RoomTypeId).ToList();
+        }
+
+
         /* ------------------------------------- Customer ------------------------------------- */
         // M: Lấy khách hàng
         public Customer GetCustomerById(int? cardId)
@@ -128,6 +134,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         /* ------------------------------------- BookRoomDetails ------------------------------------- */
+        public BookRoomDetails GetBookRoomDetailsById(int bookRoomId)
+        {
+            return dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).FirstOrDefault(p => p.BookRoomDetailsId == bookRoomId);
+        }
         // M: Thêm mới chi tiết đặt phòng
         public void CreateBookRoomDetails(BookRoomDetails newBookRoomDetails)
         {
@@ -173,12 +183,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.BookRoomDetails.Remove(deleteBookRoomDetails);
             dbContext.SaveChanges();
         }
-        // A: List RoomDetails
-        public List<BookRoomDetails> GetBookRoomDetails()
-        {
-            return dbContext.BookRoomDetails.OrderByDescending(p=>p.BookRoomDetailsId).Include(p=>p.Room).Include(p=>p.BookRoom).ToList();
-        }
-    
+
+
+
         /* ------------------------------------- BookRoom ------------------------------------- */
         // M: Lấy danh sách đặt phòng
         public List<BookRoom> GetBookRooms()
@@ -212,6 +219,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         {
             return dbContext.BookRooms.Include(p => p.Staff).Include(p => p.Customer).FirstOrDefault(p => p.BookRoomId == brdetaiId);
         }
+        //
+       
+
 
         /* ------------------------------------- Menu ------------------------------------- */
         public Menu GetMenuById(int menuId)
@@ -242,11 +252,29 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Menus.Update(menu);
             dbContext.SaveChanges();
         }
+        // M: Tìm kiếm sản phẩm
+        public List<Menu> SearchMenu(String searchString)
+        {
+            return dbContext.Menus.Where(p => p.Name.Contains(searchString)).OrderByDescending(p => p.MenuId).ToList();
+        }
+
 
         /* ------------------------------------- Staff ------------------------------------- */
         public Staff GetStaffByUsername(string username)
         {
             return dbContext.Staffs.Where(p => p.Username == username).FirstOrDefault();
+        }
+
+        // M: Lấy danh sách nhân viên
+        public List<Staff> GetStaffs()
+        {
+            return dbContext.Staffs.Include(p => p.Position).OrderByDescending(p => p.StaffId).ToList();
+        }
+
+        // M: Lấy dánh sách nhân viên theo tên
+        public List<Staff> GetStaffByName(string searchString)
+        {
+            return dbContext.Staffs.Where(p => p.Name.Contains(searchString)).Include(p => p.Position).OrderByDescending(p => p.StaffId).ToList();
         }
 
         //-----------------------------------Position-------------------------------------------//
@@ -309,10 +337,57 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Update(bill);
             dbContext.SaveChanges();
         }
-        public Payment GetPaymentById()
+
+        /* ------------------------------------- History ------------------------------------- */
+        //M: lay danh sach lich su
+        public List<Bill> GetBills()
         {
-            return (Payment)dbContext.Payments.Where(p => p.PaymentId == 1);
+            return dbContext.Bills.ToList();
         }
-        
+        public void EditHistory(Bill history)
+        {
+            dbContext.Bills.Update(history);
+            dbContext.SaveChanges();
+        }
+        public Bill GetBillByID(int id)
+        {
+            return dbContext.Bills.FirstOrDefault(p => p.BillId == id);
+        }
+        public void DeleteHistory(int id)
+        {
+            dbContext.Bills.Remove(GetBillByID(id));
+            dbContext.SaveChanges();
+        }
+
+        public List<BookRoomDetails> GetBookRoomDetails()
+        {
+            return dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).ToList();
+        }
+        public BookRoom GetBookRoomByID(int id)
+        {
+            return dbContext.BookRooms.Include(p => p.Customer).Where(p => p.BookRoomId == id).FirstOrDefault();
+
+        }
+        public void EditBill(Bill bill)
+        {
+            dbContext.Bills.Update(bill);
+            dbContext.SaveChanges();
+        }
+        public void EditBookRoomDetail(BookRoomDetails bookRoomDetails)
+        {
+            dbContext.BookRoomDetails.Update(bookRoomDetails);
+            dbContext.SaveChanges();
+        }
+        public void EditCustomer(Customer customer)
+        {
+            dbContext.Customers.Update(customer);
+            dbContext.SaveChanges();
+        }
+
+        public void InsertBill(Bill bill)
+        {
+            dbContext.Bills.Add(bill);
+            dbContext.SaveChanges();
+        }
     }
 }

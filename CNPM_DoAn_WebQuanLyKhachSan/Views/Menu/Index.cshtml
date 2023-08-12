@@ -1,4 +1,4 @@
-﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
+﻿﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
 @{
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 	var itemmenu = ViewBag.menu;
@@ -14,15 +14,15 @@
 				<div class="row align-items-center">
 					<div class="col">
 						<div class="">
-							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả loại phòng</h4>
-							<a class="btn btn-primary float-right veiwbutton" id="menu-create">Thêm loại phòng</a>
+							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả Menu</h4>
+							<a class="btn btn-primary float-right veiwbutton" id="menu-create">Thêm Menu</a>
 						</div>
 					</div>
 				</div>
 				<div class="row align-items-center" style="margin-top: 20px;">
 					<div class="col">
-						<form style="position: relative">
-							<input type="text" class="form-control" placeholder="Search here">
+						<form style="position: relative" asp-controller="Menu" asp-action="Index">
+							<input type="text" class="form-control" placeholder="Search here" name="searchString">
 							<button class="btn" type="submit" style="position: absolute; top: 0; right: 0"><i class="fas fa-search"></i></button>
 						</form>
 					</div>

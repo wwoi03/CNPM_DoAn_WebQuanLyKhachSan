@@ -17,7 +17,6 @@
 
 	// Create Menu
 	function CreateMenu() {
-		console.log("Quan");
 		var menuCreate = document.getElementById('menu-create')
 		if (menuCreate != null) {
 			// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
@@ -96,7 +95,7 @@
 		var menuDelete = document.querySelectorAll('.menu-delete')
 		if (menuDelete != null) {
 			// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
-			menuDelete.forEach((ele, index) => {
+			menuDelete.forEach((ele, index) => { 
 				ele.addEventListener('click', function (e) {
 					var employeeId = $(this).data('menu-id');
 

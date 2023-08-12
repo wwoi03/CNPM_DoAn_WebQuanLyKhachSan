@@ -1,4 +1,4 @@
-﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
+﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var rootypes = ViewBag.RoomType;
@@ -119,7 +119,7 @@
                 <div class="card-container1">
                    @foreach (var item1 in room)
                         {
-                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.Room.Status == 2)
+                            if (item.RoomTypeId == item1.Room.RoomTypeId && item1.Room.Status == 2 && item1.StatusRented != 1)
                             {
                                	<div class="col-3 p-0 m-0">
 						<div class="card1-item">
@@ -131,12 +131,7 @@
                                             <i class="fa-solid fa-ellipsis-vertical"  ></i>
                                             <div class="more-menu" >
                                                 <button>
-                                                    <a id="dialog-bt" >
-                                                   <i class="fa-solid fa-marker" style="color: #5a6372;"></i>
-                                                    <span  >
-                                                        Chỉnh sửa
-                                                    </span>                                         
-                                                </a>
+                                                   
                                                 </button> 
                                                 <button>
                                                     <a  >
@@ -154,14 +149,7 @@
                                                     </span>    
                                                 </a>
                                                  </button>
-                                                 <button>
-                                                     <a asp-action="" asp-route-BookRoomDetailsId="@item1.BookRoomDetailsId" asp-controller=BookRoomDetails>
-                                                    <i class="fa-solid fa-trash" style="color: #565c67;"></i>
-                                                    <span>
-                                                       Xóa
-                                                    </span>    
-                                                </a>
-                                                 </button>
+                                                 
                                             </div>
                                         </div>
                                     </div>
@@ -181,16 +169,11 @@
                                         <i class="fa-regular fa-credit-card fa-beat" style="color: #3b424e;"></i>
                                          <div class="hover-text">Tiền trả trước</div>
                                         <h3 class="card-title1">@item1.BookRoom.PrePayment</h3>
-                                    </div>
-                                     <div class="card-content1-bottom ">
-                                       <i class="fa-solid fa-sack-dollar " style="color: #3f4550;"></i>
-                                        <div class="hover-text">Tổng tiền</div>
-                                        <h3 class="card-title1">11110$</h3>
-                                    </div>
+                                   </div>                                
                                     <div class="card-content1-bottom ">
                                         <i class="fa-solid fa-note-sticky" style="color: #5e6673;"></i>
                                          <div class="hover-text">Ghi chú</div>
-                                        <h3 class="card-title1">11110$</h3>
+                                        <h3 class="card-title1">ghi chú</h3>
                                     </div>
                                     
                                 </div>
