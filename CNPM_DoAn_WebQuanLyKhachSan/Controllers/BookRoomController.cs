@@ -127,7 +127,18 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             string[] listRoomNum = listRoomString.Split(',');
 
             // Kiểm tra khách hàng đã có từ trước
-            
+            if (dBHelper.GetCustomerById(cardId) == null) // chưa có khách hàng
+            {
+                // Thêm mới khách hàng
+                Customer customer = new Customer()
+                {
+                    CardId = cardId,
+                    Name = nameCustomer,
+                    Phone = phoneCustomer,
+                };
+
+                dBHelper.CreateCustomer(customer);
+            }
 
             // Tạo đơn đặt phòng
             BookRoom bookRoom = new BookRoom()
@@ -230,8 +241,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
                 // Thiết lập LicenseContext cho thư viện EPPlus
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+                //Tạo một đối tượng ExcelPackage để đọc dữ liệu từ stream, tức là tập tin Excel bạn đã sao chép vào MemoryStream.
                 using (var package = new ExcelPackage(stream))
                 {
+                    // Lấy ra worksheet đầu tiên từ tập tin Excel
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                     int rowCount = worksheet.Dimension.Rows;
 

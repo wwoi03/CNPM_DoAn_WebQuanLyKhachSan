@@ -1,7 +1,6 @@
-﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
+﻿﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel
 @{
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
-	var roomTypes = ViewBag.roomTypes;
 }
 @model RoomTypeVM
 
@@ -16,6 +15,14 @@
 							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả loại phòng</h4> 
 							<a class="btn btn-primary float-right veiwbutton" id="roomType-create">Thêm loại phòng</a>
 						</div>
+					</div>
+				</div>
+				<div class="row align-items-center" style="margin-top: 20px;">
+					<div class="col">
+						<form style="position: relative">
+							<input id="search-input" type="text" class="form-control" placeholder="Search here" name="searchString">
+							<p id="submit-button" class="btn" style="position: absolute; top: 0; right: 0"><i class="fas fa-search"></i></p>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -35,36 +42,9 @@
 											<th style="width: 39%">Chức năng</th>
 										</tr>
 									</thead>
-									<tbody>
-										@foreach (var item in roomTypes)
-										{
-											<tr>
-												<td>@item.RoomTypeId</td>
-												<td>@item.Name</td>
-												<td>@item.Price</td>
-												<td>@item.BedNumber</td>
-												<td>
-													<img src="/images/@item.Image" style="width: 100%">
-												</td>
-												<td>
-													<a data-room-type-id="@item.RoomTypeId" class="btn btn-primary btn-sm roomType-details">
-														<i class="fas fa-pencil-alt"></i>
-														Chi Tiết
-													</a>
 
-													<a data-room-type-id="@item.RoomTypeId" class="btn btn-info btn-sm roomType-edit">
-														<i class="fas fa-pencil-alt"></i>
-														Chỉnh sửa
-													</a>
-
-													<a data-room-type-id="@item.RoomTypeId" class="btn btn-danger btn-sm roomType-delete"  >
-
-														<i class="fas fa-pencil-alt"></i>
-														Xóa
-													</a>
-												</td>
-											</tr>
-										}
+									<tbody class="tbody-share">
+										
 									</tbody>
 								</table>
 							</div>

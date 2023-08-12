@@ -1,4 +1,5 @@
 ﻿using CNPM_DoAn_WebQuanLyKhachSan.Models;
+using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
@@ -26,7 +27,20 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         // M: Tạo nhân viên
         public IActionResult Create()
         {
-            return Json("dsdf");
+            ViewData["PapeTitle"] = "Nhân viên";
+
+            return Json("");
+        }
+
+        [HttpPost]
+        public IActionResult Create(StaffVM staffVM)
+        {
+            Staff staff = new Staff()
+            {
+
+            };
+
+            return Json("");
         }
 
         public IActionResult Edit()

@@ -1,232 +1,232 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-	/* --------------------------------- Main --------------------------------- */
-	Main();
+    /* --------------------------------- Main --------------------------------- */
+    Main();
 
-	// Main
-	function Main() {
-		BookRoom();
-	}
-
-	// M: Xử lý các chức năng của BookRoom
-	function BookRoom() {
-		RenderUIIndex();
-		GetCreateBookRoom();
-		AddFileExcel();
-	}
-
-	// M: hiển thị giao diện
-	function RenderUIIndex() {
-		var calendarEl = document.getElementById('calendar');
-
-		if (calendarEl != null) {
-			$.ajax({
-				type: "GET",
-				url: "../../BookRoom/GetDataIndex",
-				success: function (data) {
-
-					FullCalendarLibrary(data);
-
-					
-				},
-				error: function () {
-					alert("Đã xảy ra lỗi khi lấy thông tin");
-				}
-			});
-		}
-	}
-
-	// M: Fullcalendar
-	function FullCalendarLibrary(data) {
-
-		// Ngày cho các sự kiện trên lịch
-		var date = new Date();
-		var d = date.getDate(),
-			m = date.getMonth(),
-			y = date.getFullYear();
-
-		var Calendar = FullCalendar.Calendar;
-		var Draggable = FullCalendar.Draggable;
-
-		var containerEl = document.getElementById("external-events");
-		var checkbox = document.getElementById("drop-remove");
-		var calendarEl = document.getElementById("calendar");
-
-		// Sự kiện trên lịch
-		var events = [
-			/*{
-				id: 101,
-				title: "Phòng 101 - Đào Công Tuấn",
-				start: new Date(y, m, 17, 10, 20),
-				end: new Date(y, m, 19, 22, 30),
-				backgroundColor: "#42A5F5",
-				textColor: "#fff",
-				allDay: false,
-			},*/
-
-		];
-
-		function addEvent(_id, _tittle, _start, _end) {
-			var checkInDate = new Date(_start);
-			var checkOutDate = new Date(_end);
-			checkOutDate.setDate(checkOutDate.getDate());
-
-			var newEvent = {
-				id: _id,
-				title: _tittle,
-				start: checkInDate,
-				end: checkOutDate,
-				allDay: false,
-				backgroundColor: "#42A5F5 !important",
-				textColor: "#fff"
-			};
-
-			return newEvent;
-		};
-
-		data.forEach(function (item) {
-			events.push(addEvent(item.bookRoomId, item.customer.name, item.checkInDate, item.checkOutDate));
-		});
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			headerToolbar: {
-				left: "prev,next today",
-				right: "title",
-				// right: 'dayGridMonth,timeGridWeek,timeGridDay'
-			},
-
-			themeSystem: "bootstrap",
-
-			locale: "vi",
-
-			events: events,
-
-			editable: true,
-
-			droppable: true,
-
-			// xử lý sự kiện khi bấm vào từng date
-			dateClick: function (info) {
-				// lấy ngày
-				var infoDate = info.date;
-
-				var newDate = new Date();
-				newDate.setFullYear(infoDate.getFullYear());
-				newDate.setMonth(infoDate.getMonth());
-				newDate.setDate(infoDate.getDate());
-
-				var date = setDateTime(newDate);
-
-				// sử dụng ajax để gọi đến action bên controller
-				$.ajax({
-					type: "GET",
-					url: "../../BookRoom/Create",
-					success: function (data) {
-						console.log("dada");
-						var roomTypes = data.roomTypes;
-						var rooms = data.rooms;
-
-						RenderFormBookRoom(date, roomTypes, rooms);
-					},
-					error: function () {
-						alert("Không thể lấy được thông tin");
-					}
-				});
-			},
-
-			// Xử sự kiện khi bấm vào từng event
-			eventClick: function (info) {
-				// Lấy thông tin về sự kiện được chọn
-				var eventId = info.event.id;
-				GetEditBookRoom(eventId);
-			},
-
-			drop: function (info) {
-				if (checkbox.checked) {
-					info.draggedEl.parentNode.removeChild(info.draggedEl);
-				}
-			},
-		});
-
-		var tabActive = document.querySelector(".nav-item.active");
-		var navLine = document.querySelector(".panel-navbar .nav-line");
-
-		// Chuyển line
-		function LineUpdate(tab) {
-			navLine.style.left = tab.offsetLeft + "px";
-			navLine.style.width = tab.offsetWidth + "px";
-		}
-
-		LineUpdate(tabActive);
-
-		$(".nav-container .nav-item").click(function () {
-			document.querySelector(".nav-item.active").classList.remove("active");
-
-			LineUpdate(this);
-
-			this.classList.add("active");
-		});
-
-
-		// Bắt sự kiện click của các item trong navbar
-		$(".nav-container li").click(function () {
-			// Lấy id của item được click
-			var view = $(this).attr("id");
-
-			// Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
-			if (view === "month-view") {
-				calendar.changeView("dayGridMonth");
-			} else if (view === "week-view") {
-				calendar.changeView("dayGridWeek");
-			} else if (view === "day-view") {
-				calendar.changeView("listDay");
-			}
-		});
-
-		// render giao diện calendar
-		calendar.render();
+    // Main
+    function Main() {
+        BookRoom();
     }
 
-	// M: Create BookRoom
-	function GetCreateBookRoom() {
-		var bookRoomCreate = document.querySelector('.btn-page')
-		if (bookRoomCreate != null) {
-			// Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
-			bookRoomCreate.addEventListener('click', function (e) {
-				// Gọi Action GetEmployee bằng AJAX
-				$.ajax({
-					type: "GET",
-					url: "../../BookRoom/Create", // Đường dẫn tới Action GetEmployee
-					//data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
-					success: function (data) {
-						var roomTypes = data.roomTypes;
-						var rooms = data.rooms;
+    // M: Xử lý các chức năng của BookRoom
+    function BookRoom() {
+        RenderUIIndex();
+        GetCreateBookRoom();
+        AddFileExcel();
+    }
 
-						RenderFormBookRoom('', roomTypes, rooms);
-					},
-					error: function () {
-						alert("Đã xảy ra lỗi khi lấy thông tin");
-					}
-				});
-			});
-		}
-	}
+    // M: hiển thị giao diện
+    function RenderUIIndex() {
+        var calendarEl = document.getElementById('calendar');
 
-	// M: Edit BookRoom
-	function GetEditBookRoom(bookRoomId) {
-		var listRoom = [];
+        if (calendarEl != null) {
+            $.ajax({
+                type: "GET",
+                url: "../../BookRoom/GetDataIndex",
+                success: function (data) {
 
-		// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-		$.ajax({
-			type: "GET",
-			url: "../../BookRoom/Edit?bookRoomId=" + bookRoomId, //
-			success: function (data) {
-				var bookRoom = data.bookRoom;
-				var bookRoomDetails = data.bookRoomDetails;
-				var roomTypes = data.roomTypes;
-				var rooms = data.rooms;
+                    FullCalendarLibrary(data);
 
-				var employeeDetailsHtml =
-					`
+
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi khi lấy thông tin");
+                }
+            });
+        }
+    }
+
+    // M: Fullcalendar
+    function FullCalendarLibrary(data) {
+
+        // Ngày cho các sự kiện trên lịch
+        var date = new Date();
+        var d = date.getDate(),
+            m = date.getMonth(),
+            y = date.getFullYear();
+
+        var Calendar = FullCalendar.Calendar;
+        var Draggable = FullCalendar.Draggable;
+
+        var containerEl = document.getElementById("external-events");
+        var checkbox = document.getElementById("drop-remove");
+        var calendarEl = document.getElementById("calendar");
+
+        // Sự kiện trên lịch
+        var events = [
+            /*{
+                id: 101,
+                title: "Phòng 101 - Đào Công Tuấn",
+                start: new Date(y, m, 17, 10, 20),
+                end: new Date(y, m, 19, 22, 30),
+                backgroundColor: "#42A5F5",
+                textColor: "#fff",
+                allDay: false,
+            },*/
+
+        ];
+
+        function addEvent(_id, _tittle, _start, _end) {
+            var checkInDate = new Date(_start);
+            var checkOutDate = new Date(_end);
+            checkOutDate.setDate(checkOutDate.getDate());
+
+            var newEvent = {
+                id: _id,
+                title: _tittle,
+                start: checkInDate,
+                end: checkOutDate,
+                allDay: false,
+                backgroundColor: "#42A5F5 !important",
+                textColor: "#fff"
+            };
+
+            return newEvent;
+        };
+
+        data.forEach(function (item) {
+            events.push(addEvent(item.bookRoomId, item.customer.name, item.checkInDate, item.checkOutDate));
+        });
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: "prev,next today",
+                right: "title",
+                // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+
+            themeSystem: "bootstrap",
+
+            locale: "vi",
+
+            events: events,
+
+            editable: true,
+
+            droppable: true,
+
+            // xử lý sự kiện khi bấm vào từng date
+            dateClick: function (info) {
+                // lấy ngày
+                var infoDate = info.date;
+
+                var newDate = new Date();
+                newDate.setFullYear(infoDate.getFullYear());
+                newDate.setMonth(infoDate.getMonth());
+                newDate.setDate(infoDate.getDate());
+
+                var date = setDateTime(newDate);
+
+                // sử dụng ajax để gọi đến action bên controller
+                $.ajax({
+                    type: "GET",
+                    url: "../../BookRoom/Create",
+                    success: function (data) {
+                        console.log("dada");
+                        var roomTypes = data.roomTypes;
+                        var rooms = data.rooms;
+
+                        RenderFormBookRoom(date, roomTypes, rooms);
+                    },
+                    error: function () {
+                        alert("Không thể lấy được thông tin");
+                    }
+                });
+            },
+
+            // Xử sự kiện khi bấm vào từng event
+            eventClick: function (info) {
+                // Lấy thông tin về sự kiện được chọn
+                var eventId = info.event.id;
+                GetEditBookRoom(eventId);
+            },
+
+            drop: function (info) {
+                if (checkbox.checked) {
+                    info.draggedEl.parentNode.removeChild(info.draggedEl);
+                }
+            },
+        });
+
+        var tabActive = document.querySelector(".nav-item.active");
+        var navLine = document.querySelector(".panel-navbar .nav-line");
+
+        // Chuyển line
+        function LineUpdate(tab) {
+            navLine.style.left = tab.offsetLeft + "px";
+            navLine.style.width = tab.offsetWidth + "px";
+        }
+
+        LineUpdate(tabActive);
+
+        $(".nav-container .nav-item").click(function () {
+            document.querySelector(".nav-item.active").classList.remove("active");
+
+            LineUpdate(this);
+
+            this.classList.add("active");
+        });
+
+
+        // Bắt sự kiện click của các item trong navbar
+        $(".nav-container li").click(function () {
+            // Lấy id của item được click
+            var view = $(this).attr("id");
+
+            // Thay đổi hiển thị của FullCalendar tùy theo trạng thái mới
+            if (view === "month-view") {
+                calendar.changeView("dayGridMonth");
+            } else if (view === "week-view") {
+                calendar.changeView("dayGridWeek");
+            } else if (view === "day-view") {
+                calendar.changeView("listDay");
+            }
+        });
+
+        // render giao diện calendar
+        calendar.render();
+    }
+
+    // M: Create BookRoom
+    function GetCreateBookRoom() {
+        var bookRoomCreate = document.querySelector('.btn-page')
+        if (bookRoomCreate != null) {
+            // Lắng nghe sự kiện khi người dùng bấm chỉnh sửa một nhân viên
+            bookRoomCreate.addEventListener('click', function (e) {
+                // Gọi Action GetEmployee bằng AJAX
+                $.ajax({
+                    type: "GET",
+                    url: "../../BookRoom/Create", // Đường dẫn tới Action GetEmployee
+                    //data: { id: employeeId }, // Truyền tham số id cho Action GetEmployee
+                    success: function (data) {
+                        var roomTypes = data.roomTypes;
+                        var rooms = data.rooms;
+
+                        RenderFormBookRoom('', roomTypes, rooms);
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi khi lấy thông tin");
+                    }
+                });
+            });
+        }
+    }
+
+    // M: Edit BookRoom
+    function GetEditBookRoom(bookRoomId) {
+        var listRoom = [];
+
+        // Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+        $.ajax({
+            type: "GET",
+            url: "../../BookRoom/Edit?bookRoomId=" + bookRoomId, //
+            success: function (data) {
+                var bookRoom = data.bookRoom;
+                var bookRoomDetails = data.bookRoomDetails;
+                var roomTypes = data.roomTypes;
+                var rooms = data.rooms;
+
+                var employeeDetailsHtml =
+                    `
 					<form id="form-book-room" method="post" action="../../BookRoom/Edit">
 						<!-- Lưu đặt phòng -->
 						<div class="panel-save d-flex justify-content-between align-items-center">
@@ -304,10 +304,10 @@
 							<!-- Danh sách phòng theo loại-->
 							<div class="panel-form-roomtype">`;
 
-				roomTypes.forEach(function (itemRT, index) {
-					// Tên loại phòng
-					employeeDetailsHtml +=
-						`
+                roomTypes.forEach(function (itemRT, index) {
+                    // Tên loại phòng
+                    employeeDetailsHtml +=
+                        `
 						<div class="panel-form-roomtype-item">
 							<div class="panel-form-roomtype-title">${itemRT.name}</div>
 
@@ -316,52 +316,52 @@
 									<div class="row p-0 container-fluid panel-form-roomtype-render-list">
 					`;
 
-					var nextItemHtml = ``;
+                    var nextItemHtml = ``;
 
-					// Phòng
-					rooms.forEach(function (itemR, index) {
-						if (itemR.roomTypeId == itemRT.roomTypeId) {
-							var checkCount = 0;
-							bookRoomDetails.forEach(function (itemBRD, index) {
-								if (itemR.roomId == itemBRD.room.roomId) {
-									nextItemHtml +=
-										`
+                    // Phòng
+                    rooms.forEach(function (itemR, index) {
+                        if (itemR.roomTypeId == itemRT.roomTypeId) {
+                            var checkCount = 0;
+                            bookRoomDetails.forEach(function (itemBRD, index) {
+                                if (itemR.roomId == itemBRD.room.roomId) {
+                                    nextItemHtml +=
+                                        `
 										<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item active">
 											${itemR.roomId}
 										</div>
 									`;
-									listRoom.push(String(itemR.roomId));
-									checkCount++;
-									console.log(listRoom);
-									return;
-								}
-							})
+                                    listRoom.push(String(itemR.roomId));
+                                    checkCount++;
+                                    console.log(listRoom);
+                                    return;
+                                }
+                            })
 
-							// Kiểm tra nếu phòng
-							if (checkCount == 0) {
-								nextItemHtml +=
-									`
+                            // Kiểm tra nếu phòng
+                            if (checkCount == 0) {
+                                nextItemHtml +=
+                                    `
 									<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
 										${itemR.roomId}
 									</div>
 								`;
-							}
-						}
-					})
+                            }
+                        }
+                    })
 
-					employeeDetailsHtml += nextItemHtml;
+                    employeeDetailsHtml += nextItemHtml;
 
-					employeeDetailsHtml +=
-						`
+                    employeeDetailsHtml +=
+                        `
 							</div>
 						</div>
 					</div> 
 				</div>
 					`;
-				})
+                })
 
-				employeeDetailsHtml +=
-					`</div>
+                employeeDetailsHtml +=
+                    `</div>
 				</div>
 
 				<div class="panel-cancel-room">
@@ -369,33 +369,33 @@
 				</div>
 			</form>`;
 
-				// render giao diện
-				$(".right-panel").html(employeeDetailsHtml);
+                // render giao diện
+                $(".right-panel").html(employeeDetailsHtml);
 
 
-				document.getElementById('book-room-delete').addEventListener('click', function () {
-					OpenOverlay(bookRoom.bookRoomId);
-				});
+                document.getElementById('book-room-delete').addEventListener('click', function () {
+                    OpenOverlay(bookRoom.bookRoomId);
+                });
 
-				// xử lý các sự kiện
-				AddBookRoomDetails();
-				AddRoom(listRoom);
-			}
-		});
-	}
+                // xử lý các sự kiện
+                AddBookRoomDetails();
+                AddRoom(listRoom);
+            }
+        });
+    }
 
-	// M: Render UI BookRoom
-	function RenderFormBookRoom(date, roomTypes, rooms) {
-		// ngày nhận phòng, trả phòng
-		var checkInDate = date;
-		var checkOutDate = setDateTime(NextDay(date));
+    // M: Render UI BookRoom
+    function RenderFormBookRoom(date, roomTypes, rooms) {
+        // ngày nhận phòng, trả phòng
+        var checkInDate = date;
+        var checkOutDate = setDateTime(NextDay(date));
 
-		// lưu danh sách phòng khách hàng đặt
-		var listRoom = [];
+        // lưu danh sách phòng khách hàng đặt
+        var listRoom = [];
 
-		// Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
-		var employeeDetailsHtml =
-			`
+        // Hiển thị khung chỉnh sửa với dữ liệu của nhân viên
+        var employeeDetailsHtml =
+            `
 			<form id="form-book-room" method="post" action="../../BookRoom/Create">
 				<!-- Lưu đặt phòng -->
 				<div class="panel-save d-flex justify-content-between align-items-center">
@@ -472,10 +472,10 @@
 					<!-- Danh sách phòng theo loại-->
 					<div class="panel-form-roomtype">`;
 
-		roomTypes.forEach(function (itemRT, index) {
-			// Tên loại phòng
-			employeeDetailsHtml +=
-				`
+        roomTypes.forEach(function (itemRT, index) {
+            // Tên loại phòng
+            employeeDetailsHtml +=
+                `
 				<div class="panel-form-roomtype-item">
 					<div class="panel-form-roomtype-title">${itemRT.name}</div>
 
@@ -484,184 +484,184 @@
 							<div class="row p-0 container-fluid panel-form-roomtype-render-list">
 			`;
 
-			var nextItemHtml = ``;
+            var nextItemHtml = ``;
 
-			// Phòng
-			rooms.forEach(function (itemR, index) {
-				if (itemRT.roomTypeId == itemR.roomTypeId) {
-					nextItemHtml +=
-						`
+            // Phòng
+            rooms.forEach(function (itemR, index) {
+                if (itemRT.roomTypeId == itemR.roomTypeId) {
+                    nextItemHtml +=
+                        `
 						<div value="${itemR.roomId}" class="col-2 panel-form-roomtype-render-item">
 							${itemR.roomId}
 						</div>
 					`;
-				}
-			});
+                }
+            });
 
-			employeeDetailsHtml += nextItemHtml;
+            employeeDetailsHtml += nextItemHtml;
 
-			employeeDetailsHtml +=
-				`
+            employeeDetailsHtml +=
+                `
 					</div>
 				</div>
 			</div> 
 		</div>
 		`;
-		})
+        })
 
-		employeeDetailsHtml +=
-			`
+        employeeDetailsHtml +=
+            `
 				</div>
 			</div>
 		</form>
 		`;
 
-		// render giao diện
-		$(".right-panel").html(employeeDetailsHtml);
+        // render giao diện
+        $(".right-panel").html(employeeDetailsHtml);
 
-		// thực hiện sự kiện khi submit
-		CheckSubmitForm(document.getElementById('input-submit'));
+        // thực hiện sự kiện khi submit
+        CheckSubmitForm(document.getElementById('input-submit'));
 
-		// xử lý các sự kiện
-		AddBookRoomDetails();
-		AddRoom(listRoom);
-	}
+        // xử lý các sự kiện
+        AddBookRoomDetails();
+        AddRoom(listRoom);
+    }
 
-	// M: Delete BookRoom
-	function PostDeleteBookRoom(bookRoomId) {
-		$.ajax({
-			type: "POST",
-			url: "../../BookRoom/Delete?bookRoomId=" + bookRoomId,
-			success: function (data) {
-				FullCalendarLibrary(data);
-				ClearPanelRight();
-			},
-			error: function () {
+    // M: Delete BookRoom
+    function PostDeleteBookRoom(bookRoomId) {
+        $.ajax({
+            type: "POST",
+            url: "../../BookRoom/Delete?bookRoomId=" + bookRoomId,
+            success: function (data) {
+                FullCalendarLibrary(data);
+                ClearPanelRight();
+            },
+            error: function () {
 
             }
-		});
-	}
+        });
+    }
 
-	// M: Import File Excel
-	function PostImportFileExcel(file) {
-		var formData = new FormData();
-		formData.append('excelFile', file);
-		$.ajax({
-			type: "POST",
-			url: "../../BookRoom/ImportFileExcel",
-			data: formData,
-			success: function (data) {
-				FullCalendarLibrary(data);
-			},
-			error: function () {
-				alert("Không truy cập vào được thông tin");
+    // M: Import File Excel
+    function PostImportFileExcel(file) {
+        var formData = new FormData();
+        formData.append('excelFile', file);
+        $.ajax({
+            type: "POST",
+            url: "../../BookRoom/ImportFileExcel",
+            data: formData,
+            success: function (data) {
+                FullCalendarLibrary(data);
+            },
+            error: function () {
+                alert("Không truy cập vào được thông tin");
             }
         })
     }
 
-	/* ------------------------------- Xử lý các sự kiện ------------------------------- */
-	// M: Mở xác nhận hủy phòng
-	function OpenOverlay(bookRoomId) {
-		var panelOverlay = document.querySelector('.panel-overlay');
-		var deleteComfirm = document.getElementById('delete-confirm');
-		var deleteCancel = document.getElementById('delete-cancel');
+    /* ------------------------------- Xử lý các sự kiện ------------------------------- */
+    // M: Mở xác nhận hủy phòng
+    function OpenOverlay(bookRoomId) {
+        var panelOverlay = document.querySelector('.panel-overlay');
+        var deleteComfirm = document.getElementById('delete-confirm');
+        var deleteCancel = document.getElementById('delete-cancel');
 
-		panelOverlay.classList.add('active');
+        panelOverlay.classList.add('active');
 
-		deleteComfirm.addEventListener('click', function () {
-			PostDeleteBookRoom(bookRoomId);
-			panelOverlay.classList.remove('active');
-		});
+        deleteComfirm.addEventListener('click', function () {
+            PostDeleteBookRoom(bookRoomId);
+            panelOverlay.classList.remove('active');
+        });
 
-		deleteCancel.addEventListener('click', function () {
-			panelOverlay.classList.remove('active');
-		});
+        deleteCancel.addEventListener('click', function () {
+            panelOverlay.classList.remove('active');
+        });
     }
 
-	// M: Xử lý khi bấm vào nút thêm phòng
-	function AddBookRoomDetails() {
-		var addRoom = document.querySelector('.panel-form-add-room');
-		var panelFormRoomType = document.querySelector('.panel-form-roomtype');
+    // M: Xử lý khi bấm vào nút thêm phòng
+    function AddBookRoomDetails() {
+        var addRoom = document.querySelector('.panel-form-add-room');
+        var panelFormRoomType = document.querySelector('.panel-form-roomtype');
 
-		if (addRoom != null) {
-			addRoom.addEventListener('click', function () {
-				panelFormRoomType.classList.toggle('active');
-			});
-		}
-	}
-
-	// M: Xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
-	function AddRoom(listRoom) {
-		var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
-		var listRoomString = document.getElementById('list-room-string');
-
-		// duyệt từng roomItem
-		roomItem.forEach((item, index) => {
-			item.addEventListener('click', function (e) {
-				if (item.classList.contains('active')) {
-					item.classList.remove('active');
-					listRoom.splice(listRoom.indexOf(item.getAttribute('value')), 1);
-				} else {
-					item.classList.add('active');
-					listRoom.push(item.getAttribute('value'));
-				}
-				console.log(listRoom);
-
-				listRoomString.setAttribute('value', listRoom.join(','));
-			});
-		});
-
-	}
-
-	// M: Hàm tính ngày tiếp theo
-	function NextDay(date) {
-		var nextDay = new Date(date);
-		nextDay.setDate(nextDay.getDate() + 1);
-
-		return nextDay;
-	}
-
-	// M: Hàm định dạng ngày giờ
-	function setDateTime(date) {
-		// Lấy thời gian hiện tại
-		const currentDate = new Date(date);
-
-		const year = currentDate.getFullYear();
-		const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-		const day = String(currentDate.getDate()).padStart(2, '0');
-		const hours = String(currentDate.getHours()).padStart(2, '0');
-		const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-
-		// Gán giá trị vào input
-		const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
-
-		return formattedDate;
-	}
-
-	// M: Kiểm tra khi có sự kiện submit
-	function CheckSubmitForm(input) {
-		input.addEventListener('submit', function () {
-			ClearPanelRight();
-		});
+        if (addRoom != null) {
+            addRoom.addEventListener('click', function () {
+                panelFormRoomType.classList.toggle('active');
+            });
+        }
     }
 
-	// M: Xóa giao diện panel-right
-	function ClearPanelRight() {
-		$(".right-panel").html("");
-	};
+    // M: Xử lý sự kiện khi bấm vào một phòng để thêm vào danh sách đặt phòng
+    function AddRoom(listRoom) {
+        var roomItem = document.querySelectorAll('.panel-form-roomtype-render-item');
+        var listRoomString = document.getElementById('list-room-string');
 
-	// M: Xử lý khi bấm vào thêm file excel
-	function AddFileExcel() {
-		var formExcel = document.querySelector('.form-excel input');
-		var btnExcel = document.querySelector('.btn-page-excel');
-		var formExcelInput = document.getElementById('form-excel-input');
+        // duyệt từng roomItem
+        roomItem.forEach((item, index) => {
+            item.addEventListener('click', function (e) {
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    listRoom.splice(listRoom.indexOf(item.getAttribute('value')), 1);
+                } else {
+                    item.classList.add('active');
+                    listRoom.push(item.getAttribute('value'));
+                }
+                console.log(listRoom);
 
-		btnExcel.addEventListener('click', function () {
-			btnExcel.classList.toggle('active');
-		});
+                listRoomString.setAttribute('value', listRoom.join(','));
+            });
+        });
 
-		formExcelInput.addEventListener('click', function () {
-			//PostImportFileExcel(formExcel.files[0]);
-		});
-	}
+    }
+
+    // M: Hàm tính ngày tiếp theo
+    function NextDay(date) {
+        var nextDay = new Date(date);
+        nextDay.setDate(nextDay.getDate() + 1);
+
+        return nextDay;
+    }
+
+    // M: Hàm định dạng ngày giờ
+    function setDateTime(date) {
+        // Lấy thời gian hiện tại
+        const currentDate = new Date(date);
+
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+        // Gán giá trị vào input
+        const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+        return formattedDate;
+    }
+
+    // M: Kiểm tra khi có sự kiện submit
+    function CheckSubmitForm(input) {
+        input.addEventListener('submit', function () {
+            ClearPanelRight();
+        });
+    }
+
+    // M: Xóa giao diện panel-right
+    function ClearPanelRight() {
+        $(".right-panel").html("");
+    };
+
+    // M: Xử lý khi bấm vào thêm file excel
+    function AddFileExcel() {
+        var formExcel = document.querySelector('.form-excel input');
+        var btnExcel = document.querySelector('.btn-page-excel');
+        var formExcelInput = document.getElementById('form-excel-input');
+
+        btnExcel.addEventListener('click', function () {
+            btnExcel.classList.toggle('active');
+        });
+
+        formExcelInput.addEventListener('click', function () {
+            //PostImportFileExcel(formExcel.files[0]);
+        });
+    }
 });

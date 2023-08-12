@@ -15,8 +15,97 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult Index()
         {
             ViewBag.RoomType = dBHelper.GetRoomType();
-            ViewBag.Room = dBHelper.GetRoom();
+            ViewBag.BookRoom = dBHelper.GetBookRoomDetails();
             return View();
+        }
+
+        // M: Hiển thị phòng cần dọn
+        [HttpGet]
+        public IActionResult CleanRoom()
+        {
+            return Json(dBHelper.GetBookRoomDetails());
+        }
+
+        // Phòng cần dọn
+        public IActionResult GetClearRoom(int id)
+        {
+            Room room = dBHelper.GetRoomById(id);
+            room.CleanRoom = 2;
+            dBHelper.UpdateRoom(room);
+            return RedirectToAction("Index");
+        }
+
+        // Trả về phòng dọn
+        public IActionResult GetClearRoomSucess(int id)
+        {
+            Room room = dBHelper.GetRoomById(id);
+            room.CleanRoom = 0;
+            dBHelper.EditRoom(room);
+            return RedirectToAction("Index");
+        }
+
+        // Nhận phòng
+        public IActionResult CheckIn(int bookRoomDetailsId)
+        {
+            BookRoomDetails bookRoomDetails = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
+            bookRoomDetails.Room.Status = 2;
+            dBHelper.UpdateBookRoomDetails(bookRoomDetails);
+            dBHelper.UpdateRoom(bookRoomDetails.Room);
+            return RedirectToAction("Index");
+        }
+        public IActionResult CheckOut(int bookRoomDetailsId)
+        {
+            BookRoomDetails bookRoomDetails = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
+
+            return Json(bookRoomDetails);
+        }
+        public IActionResult Delete(int id)
+        {
+            BookRoomDetails bookRoomDetails1 = dBHelper.GetBookRoomDetailsById(id);
+            dBHelper.DeleteBookRoomDetails(bookRoomDetails1);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult GetCheckOut(int bookRoomDetailsId)
+        {
+
+            BookRoomDetails _bookRoom = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
+            Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
+            var data = new
+            {
+                bookRoom = _bookRoom,
+                customer = _customer,
+            };
+            return Json(data);
+
+        }
+
+        [HttpPost]
+        public IActionResult PostCheckOut(int bookRoomDetailsId)
+        {
+
+            BookRoomDetails _bookRoom = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
+            _bookRoom.StatusRented = 1;
+            dBHelper.UpdateBookRoomDetails(_bookRoom);
+
+            Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
+            RoomType price = dBHelper.GetRoomTypeById(_bookRoom.Room.RoomTypeId);
+            Console.WriteLine(price.Price);
+            // Payment payment = dBHelper.GetPaymentById();
+            Bill bill = new Bill()
+            {
+                BillId = bookRoomDetailsId,
+                PaymentId = 1,
+                PriceRoom = price.Price,
+                TotalPriceMenu = 0,
+                TotalPriceBill = 0,
+                Note = "note",
+            };
+            _bookRoom.Room.Status = 0;
+            dBHelper.UpdateRoom(_bookRoom.Room);
+
+            dBHelper.InsertBill(bill);
+            return RedirectToAction("Index");
         }
     }
 }

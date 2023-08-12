@@ -1,7 +1,10 @@
-﻿@{
+﻿﻿﻿@using CNPM_DoAn_WebQuanLyKhachSan.Models.ViewModel;
+@{
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 	var itemmenu = ViewBag.menu;
 }
+
+@model MenuVM
 
 <div class="main-container d-flex">
 	<!-- Nội dung bên trái -->
@@ -11,9 +14,17 @@
 				<div class="row align-items-center">
 					<div class="col">
 						<div class="">
-							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả loại phòng</h4>
-							<a class="btn btn-primary float-right veiwbutton" id="menu-create">Thêm loại phòng</a>
+							<h4 class="card-title float-left mt-2" style="font-size: 24px">Tất cả Menu</h4>
+							<a class="btn btn-primary float-right veiwbutton" id="menu-create">Thêm Menu</a>
 						</div>
+					</div>
+				</div>
+				<div class="row align-items-center" style="margin-top: 20px;">
+					<div class="col">
+						<form style="position: relative" asp-controller="Menu" asp-action="Index">
+							<input type="text" class="form-control" placeholder="Search here" name="searchString">
+							<button class="btn" type="submit" style="position: absolute; top: 0; right: 0"><i class="fas fa-search"></i></button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -45,26 +56,26 @@
 												<td>@item.SalePrice</td>
 												<td>@item.Quantity</td>
 												<td>
-													<img src="/images/@item.Image" style ="width: 100%">
+													<img src="/images/@item.Image" style="width: 100%">
 												</td>
 												<td>
-													<a class="btn btn-primary btn-sm menu-details" id="menu-details" style="width: 100px">
-														<i class="fas fa-folder"></i>
+													<a data-menu-id="@item.MenuId" class="btn btn-primary btn-sm menu-details">
+														<i class="fas fa-pencil-alt"></i>
 														Chi tiết
 													</a>
 
-													<a class="btn btn-info btn-sm menu-edit" style="width: 100px">
+													<a data-menu-id="@item.MenuId" class="btn btn-info btn-sm menu-edit">
 														<i class="fas fa-pencil-alt"></i>
 														Chỉnh sửa
 													</a>
-													<a class="btn btn-danger btn-sm menu-delete " id="menu-delete" style="width: 100px">
+													<a data-menu-id="@item.MenuId" class="btn btn-danger btn-sm menu-delete">
 														<i class="fas fa-pencil-alt"></i>
 														Xóa
 													</a>
 												</td>
 											</tr>
 										}
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -76,142 +87,140 @@
 	</div>
 	@*<!-- Them -->
 	<div class="right-panel-create col-4 pl-0 pr-0" >
-		<!-- Lưu đặt phòng -->
-		<div class="panel-save d-flex justify-content-between align-items-center">
-			<span>Thêm mới</span>
+	<!-- Lưu đặt phòng -->
+	<div class="panel-save d-flex justify-content-between align-items-center">
+	<span>Thêm mới</span>
 
-			<div class="">
-				<input class="panel-save-submit" type="submit" value="Lưu" />
-			</div>
-		</div>
+	<div class="">
+	<input class="panel-save-submit" type="submit" value="Lưu" />
+	</div>
+	</div>
 
-		<!-- Form -->
-		<form class="panel-form">
-			<!-- Thông tin -->
-			<div class="panel-form-info">
-				<!-- Mã dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Mã dịch vụ</h5>
-					<input class="panel-form-input" type="text" value="" readonly />
-				</div>
+	<!-- Form -->
+	<form class="panel-form">
+	<!-- Thông tin -->
+	<div class="panel-form-info">
+	<!-- Mã dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Mã dịch vụ</h5>
+	<input class="panel-form-input" type="text" value="" readonly />
+	</div>
 
 
-				<!-- Tên dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tên</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+	<!-- Tên dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Tên</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
 
-				<!-- Giá dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Giá</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+	<!-- Giá dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Giá</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
 
-				<!-- Số lượng -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số lượng</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
-			</div>
-		</form>
+	<!-- Số lượng -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Số lượng</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
+	</div>
+	</form>
 	</div>*@
 	@*<!-- Xóa -->
 	<div class="right-panel-delete col-4 pl-0 pr-0">
-		<!-- Lưu đặt phòng -->
-		<div class="panel-save d-flex justify-content-between align-items-center">
-			<span>Xóa</span>
+	<!-- Lưu đặt phòng -->
+	<div class="panel-save d-flex justify-content-between align-items-center">
+	<span>Xóa</span>
 
-			<div class="">
-				<input class="panel-save-submit" type="submit" value="Lưu" />
-			</div>
-		</div>
+	<div class="">
+	<input class="panel-save-submit" type="submit" value="Lưu" />
+	</div>
+	</div>
 
-		<!-- Form -->
-		<form class="panel-form">
-			<!-- Thông tin -->
-			<div class="panel-form-info">
-				<!-- Mã dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Mã dịch vụ</h5>
-					<input class="panel-form-input" type="text" value="1" readonly />
-				</div>
+	<!-- Form -->
+	<form class="panel-form">
+	<!-- Thông tin -->
+	<div class="panel-form-info">
+	<!-- Mã dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Mã dịch vụ</h5>
+	<input class="panel-form-input" type="text" value="1" readonly />
+	</div>
 
 
-				<!-- Tên dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tên</h5>
-					<input class="panel-form-input" type="text" value="Phòng siêu Vip" readonly />
-				</div>
+	<!-- Tên dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Tên</h5>
+	<input class="panel-form-input" type="text" value="Phòng siêu Vip" readonly />
+	</div>
 
-				<!-- Giá dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Giá</h5>
-					<input class="panel-form-input" type="text" value="1.000.000đ" readonly />
-				</div>
+	<!-- Giá dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Giá</h5>
+	<input class="panel-form-input" type="text" value="1.000.000đ" readonly />
+	</div>
 
-				<!-- Số lượng -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số lượng</h5>
-					<input class="panel-form-input" type="text" value="2" readonly />
-				</div>
-				<div>
-					<div class="" style="text-align:right">
-						<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
-					</div>
-				</div>
-		</form>
+	<!-- Số lượng -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Số lượng</h5>
+	<input class="panel-form-input" type="text" value="2" readonly />
+	</div>
+	<div>
+	<div class="" style="text-align:right">
+	<a class="btn btn-danger btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+	</div>
+	</div>
+	</form>
 	</div>
 	<!-- Chỉnh sửa -->
 	<div class="right-panel-edit col-4 pl-0 pr-0">
-		<!-- Lưu đặt phòng -->
-		<div class="panel-save d-flex justify-content-between align-items-center">
-			<span>Chỉnh sửa</span>
+	<!-- Lưu đặt phòng -->
+	<div class="panel-save d-flex justify-content-between align-items-center">
+	<span>Chỉnh sửa</span>
 
-			<div class="">
-				<input class="panel-save-submit" type="submit" value="Lưu" />
-			</div>
-		</div>
+	<div class="">
+	<input class="panel-save-submit" type="submit" value="Lưu" />
+	</div>
+	</div>
 
-		<!-- Form -->
-		<form class="panel-form">
-			<div class="panel-form-info">
-				<!-- Mã dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Mã dịch vụ</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+	<!-- Form -->
+	<form class="panel-form">
+	<div class="panel-form-info">
+	<!-- Mã dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Mã dịch vụ</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
 
 
-				<!-- Tên dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Tên</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+	<!-- Tên dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Tên</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
 
-				<!-- Giá dịch vụ -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Giá</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
+	<!-- Giá dịch vụ -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Giá</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
 
-				<!-- Số lượng -->
-				<div class="panel-form-item">
-					<h5 class="panel-form-title">Số lượng</h5>
-					<input class="panel-form-input" type="text" value="" />
-				</div>
-			</div>
-			<div>
-				<div class="" style="text-align:center">
-					<a class="btn btn-info btn-sm" asp-controller="" style="margin-right:50px" asp-action="">Lưu</a>
-					<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
-				</div>
-			</div>
-		</form>
+	<!-- Số lượng -->
+	<div class="panel-form-item">
+	<h5 class="panel-form-title">Số lượng</h5>
+	<input class="panel-form-input" type="text" value="" />
+	</div>
+	</div>
+	<div>
+	<div class="" style="text-align:center">
+	<a class="btn btn-info btn-sm" asp-controller="" style="margin-right:50px" asp-action="">Lưu</a>
+	<a class="btn btn-info btn-sm" asp-controller="" asp-action="">Hủy bỏ</a>
+	</div>
+	</div>
+	</form>
 	</div>*@
 	<div class="right-panel col-4 pl-0 pr-0">
-
 	</div>
 </div>
-
 <script src="~/js/menu.js"></script>

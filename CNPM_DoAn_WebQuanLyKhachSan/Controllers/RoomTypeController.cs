@@ -8,23 +8,35 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
     {
         DBHelper dBHelper;
         private readonly IWebHostEnvironment _hostEnvironment;
+
         public RoomTypeController(DatabaseContext context, IWebHostEnvironment hostEnvironment)
         {
             dBHelper = new DBHelper(context);
             _hostEnvironment = hostEnvironment;
         }
+
         public IActionResult Index()
         {
-            ViewData["PapeTitle"] = "Loại phòng";
-            ViewBag.roomTypes = dBHelper.GetRoomType();
             return View();
+        }
+
+        // M: Danh sách loại phòng
+        public IActionResult RoomTypes(string searchString)
+        {
+            List<RoomType> roomTypes;
+            if (searchString != null && searchString.Length > 0)
+                roomTypes = dBHelper.SearchRoomtype(searchString);
+            else
+                roomTypes = dBHelper.GetRoomType();
+
+            return Json(roomTypes);
         }
 
         // M: Thêm loại phòng
         public IActionResult Create()
         {
             ViewData["PapeTitle"] = "Loại phòng";
-            return Json("aaa");
+            return Json("");
         }
 
         [HttpPost]
@@ -86,7 +98,9 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         public IActionResult DeleteById(int roomTypeId)
         {
             dBHelper.DeleteRoomType(roomTypeId);
-            return RedirectToAction("Index");
+
+            List<RoomType> roomTypes = dBHelper.GetRoomType();
+            return Json(roomTypes);
         }
         [HttpGet]
         public IActionResult Details(int roomTypeId)
