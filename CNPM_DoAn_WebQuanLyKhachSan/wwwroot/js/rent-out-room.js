@@ -165,7 +165,7 @@
 					<!-- Ghi chú -->
 					<div class="panel-form-item">
 						<h5 class="panel-form-title">Ghi chú</h5>
-						<input class="panel-form-input" type="text" name="Note" placeholder="" />
+						<input class="panel-form-input" type="text" name="Note" value="${bookRoom.No}" placeholder="" />
 					</div>
 				</div>
 			</div>

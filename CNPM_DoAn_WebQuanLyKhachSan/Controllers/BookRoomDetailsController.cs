@@ -72,6 +72,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
             
             BookRoomDetails _bookRoom = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
             Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
+            
             var data = new
             {
                 bookRoom = _bookRoom,
@@ -86,17 +87,21 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Controllers
         {
 
             BookRoomDetails _bookRoom = dBHelper.GetBookRoomDetailsById(bookRoomDetailsId);
-            _bookRoom.StatusRented = 2;
+            _bookRoom.StatusRented = 1;
             dBHelper.UpdateBookRoomDetails(_bookRoom);
 
             Customer _customer = dBHelper.GetCustomerById(_bookRoom.BookRoom.CardId);
+            RoomType price = dBHelper.GetRoomTypeById(_bookRoom.Room.RoomTypeId);
+            Console.WriteLine(price.Price);
+            Payment payment = dBHelper.GetPaymentById();
             Bill bill = new Bill()
             {
                 BillId = bookRoomDetailsId,
-                PriceRoom = _bookRoom.Room.RoomType.Price,
+                PaymentId=payment.PaymentId,
+                PriceRoom = price.Price,
                 TotalPriceMenu=0,
                 TotalPriceBill=0,           
-                Note="0",
+                Note="note",
             };
             
             dBHelper.InsertBill(bill);

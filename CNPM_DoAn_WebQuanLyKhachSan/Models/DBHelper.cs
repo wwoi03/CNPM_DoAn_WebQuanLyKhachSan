@@ -309,6 +309,10 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
             dbContext.Update(bill);
             dbContext.SaveChanges();
         }
+        public Payment GetPaymentById()
+        {
+            return (Payment)dbContext.Payments.Where(p => p.PaymentId == 1);
+        }
         
     }
 }
