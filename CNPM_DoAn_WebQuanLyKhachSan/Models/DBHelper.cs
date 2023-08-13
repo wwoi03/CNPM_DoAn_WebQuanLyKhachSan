@@ -134,10 +134,7 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         }
 
         /* ------------------------------------- BookRoomDetails ------------------------------------- */
-        public BookRoomDetails GetBookRoomDetailsById(int bookRoomId)
-        {
-            return dbContext.BookRoomDetails.Include(p => p.Room).Include(p => p.BookRoom).FirstOrDefault(p => p.BookRoomDetailsId == bookRoomId);
-        }
+ 
         // M: Thêm mới chi tiết đặt phòng
         public void CreateBookRoomDetails(BookRoomDetails newBookRoomDetails)
         {
@@ -381,12 +378,6 @@ namespace CNPM_DoAn_WebQuanLyKhachSan.Models
         public void EditCustomer(Customer customer)
         {
             dbContext.Customers.Update(customer);
-            dbContext.SaveChanges();
-        }
-
-        public void InsertBill(Bill bill)
-        {
-            dbContext.Bills.Add(bill);
             dbContext.SaveChanges();
         }
     }
